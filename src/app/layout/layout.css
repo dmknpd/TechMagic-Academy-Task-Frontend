@@ -13,7 +13,7 @@ mat-sidenav {
 }
 
 mat-sidenav-content {
-  background-color: #e8eaf1;
+  background-color: var(--secondary-color);
   display: flex;
 
   padding: 100px;

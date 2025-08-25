@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --accent-color: #5932ea;
+  --accent-color-hover: #6c49f0;
   --main-color: #fff;
+  --secondary-color: #e8eaf1;
 }
 
 * {
