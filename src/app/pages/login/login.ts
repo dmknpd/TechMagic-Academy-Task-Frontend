@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.services';
+import { LoginData } from '../../types/auth';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [
     MatCardModule,
     MatFormFieldModule,
@@ -43,6 +45,17 @@ export class Login {
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
+  globalError = signal<string | null>(null);
+
+  private setServerErrors(errors: Record<string, string[]>) {
+    for (const field in errors) {
+      const control = this.loginForm.get(field);
+      if (control) {
+        control.setErrors({ serverError: errors[field][0] });
+      }
+    }
+  }
+
   onLogin() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -50,14 +63,21 @@ export class Login {
     }
 
     const formValue = this.loginForm.value;
-    this.auth.login(formValue).subscribe({
+    this.auth.login(formValue as LoginData).subscribe({
       next: (response) => {
         console.log(response);
-
+        this.globalError.set(null);
         // this.router.navigateByUrl('/dashboard');
       },
       error: (error) => {
-        console.log(error.error.errors);
+        if (error.error?.errors) {
+          this.setServerErrors(error.error.errors);
+        }
+
+        if (error.error?.message) {
+          this.globalError.set(error.error.message);
+        }
+        console.log(error);
       },
     });
   }
