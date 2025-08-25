@@ -8,7 +8,7 @@
 
 .login-card {
   width: 450px;
-  padding: 30px;
+  padding: 25px;
   text-align: center;
   border-radius: 8px;
   background-color: #fff;
@@ -28,6 +28,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .full-width-input {
@@ -58,4 +59,9 @@
 
 .btn:hover {
   background-color: var(--accent-color-hover);
+}
+
+mat-error {
+  margin-top: 5px;
+  color: rgb(243, 33, 33);
 }

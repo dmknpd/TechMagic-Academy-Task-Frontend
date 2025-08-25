@@ -4,15 +4,27 @@
       <mat-card-title class="title">Login</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form class="login-form">
+      <form (submit)="onLogin()" [formGroup]="loginForm" class="login-form">
         <mat-form-field class="full-width-input">
           <mat-label>Email</mat-label>
-          <input type="email" placeholder="myemail@mail.com" matInput />
+          <input type="email" formControlName="email" placeholder="myemail@mail.com" matInput />
+
+          @if (loginForm.controls['email'].hasError('required')) {
+          <mat-error>Email is required</mat-error>
+          } @else if (loginForm.controls['email'].hasError('email')) {
+          <mat-error>Enter correct Email</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide() ? 'password' : 'text'" />
+          <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" />
+          @if (loginForm.controls['password'].hasError('required')) {
+          <mat-error>Password is required</mat-error>
+          }@else if (loginForm.controls['password'].hasError('minlength')) {
+          <mat-error>Enter correct Email</mat-error>
+          }
+
           <button
             type="button"
             matIconButton
@@ -24,10 +36,9 @@
             <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
+
+        <button type="submit" class="btn">Login</button>
       </form>
     </mat-card-content>
-    <mat-card-actions>
-      <button class="btn">Login</button>
-    </mat-card-actions>
   </mat-card>
 </div>

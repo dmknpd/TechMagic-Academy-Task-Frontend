@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
@@ -10,4 +10,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 })
 export class Layout {
   opened = true;
+
+  router = inject(Router);
+
+  onLogout() {
+    this.router.navigateByUrl('/login');
+  }
 }
