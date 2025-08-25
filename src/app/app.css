@@ -1,0 +1,10 @@
+.main {
+  background-color: var(--main-color);
+
+  padding: 24px;
+  background: #fff;
+  border-radius: 8px;
+  min-height: 360px;
+
+  flex: 1;
+}
