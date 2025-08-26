@@ -3,14 +3,15 @@ import { Login } from './pages/login/login';
 import { Layout } from './layout/layout';
 import { Test } from './test/test';
 import { authGuard } from './guard/auth-guard';
+import { noAuthGuard } from './guard/noAuth-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'login', component: Login },
+  { path: 'login', component: Login, canActivate: [noAuthGuard] },
   {
     path: '',
     component: Layout,
     canActivate: [authGuard],
-    children: [{ path: 'dashboard', component: Test }],
+    children: [{ path: '', component: Test }],
   },
 ];

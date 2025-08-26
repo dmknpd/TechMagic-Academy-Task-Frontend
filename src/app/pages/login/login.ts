@@ -61,7 +61,7 @@ export class Login {
       next: (response) => {
         if (response.success) {
           this.globalError.set(null);
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/');
         } else {
           if (response.errors) this.setServerErrors(response.errors);
           if (response.message) this.globalError.set(response.message);
