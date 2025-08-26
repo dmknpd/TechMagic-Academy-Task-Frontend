@@ -21,24 +21,6 @@ const cloneRequestWithToken = (
     : req.clone({ withCredentials: true });
 };
 
-const handleTokenRefresh = (
-  auth: AuthService,
-  req: HttpRequest<unknown>,
-  next: HttpHandlerFn,
-  originalError: HttpErrorResponse
-): Observable<HttpEvent<unknown>> => {
-  return auth.refreshToken().pipe(
-    switchMap((res) => {
-      if (res.success && res.data?.accessToken) {
-        auth.setAccessToken(res.data.accessToken);
-        const retryReq = cloneRequestWithToken(req, res.data.accessToken);
-        return next(retryReq);
-      }
-      return throwError(() => originalError);
-    })
-  );
-};
-
 export const jwtInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
@@ -51,7 +33,13 @@ export const jwtInterceptor: HttpInterceptorFn = (
   return next(clonedReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401 && !auth.isTokenRefreshing()) {
-        return handleTokenRefresh(auth, req, next, error);
+        return auth.refreshToken().pipe(
+          switchMap(() => {
+            const retryReq = cloneRequestWithToken(req, auth.getAccessToken());
+            return next(retryReq);
+          }),
+          catchError(() => throwError(() => error))
+        );
       }
       return throwError(() => error);
     })

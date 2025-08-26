@@ -7,9 +7,9 @@ export interface RegisterData extends LoginData {
   confirmPassword: string;
 }
 
-export interface ApiResponse {
+export interface ApiResponse<T = any> {
   success: boolean;
   message?: string;
-  data?: { accessToken: string };
+  data?: T;
   errors?: Record<string, string[]>;
 }

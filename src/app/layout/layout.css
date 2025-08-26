@@ -32,6 +32,9 @@ mat-sidenav-content {
 }
 
 nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
 }
 
@@ -40,7 +43,6 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 100%;
 }
 
 .list_item {
@@ -48,15 +50,20 @@ nav {
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
-}
+  width: 200px;
 
-.list_item:last-child {
-  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
 }
 
 .list_item:hover {
   background-color: var(--accent-color);
   color: #fff;
+}
+
+.email {
+  color: var(--text-main);
 }
 
 .main {

@@ -1,24 +1,31 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+
 import { ClientService } from '../services/client.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [MatSidenavModule, RouterOutlet],
+  imports: [MatSidenavModule, MatIconModule, RouterOutlet],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
 export class Layout {
-  opened = true;
-
   auth = inject(AuthService);
   client = inject(ClientService);
   router = inject(Router);
 
+  opened = true;
+
+  userEmail: string | null = null;
+
   constructor() {
     this.fetchAllClients();
+    effect(() => {
+      this.userEmail = this.auth.getUserEmail();
+    });
   }
 
   fetchAllClients() {
