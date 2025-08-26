@@ -31,27 +31,21 @@ import { LoginData } from '../../types/auth';
   styleUrl: './login.css',
 })
 export class Login {
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
-
   auth = inject(AuthService);
   router = inject(Router);
+
+  globalError = signal<string | null>(null);
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
-  globalError = signal<string | null>(null);
-
   private setServerErrors(errors: Record<string, string[]>) {
     for (const field in errors) {
       const control = this.loginForm.get(field);
       if (control) {
-        control.setErrors({ serverError: errors[field][0] });
+        control.setErrors({ serverError: errors[field] });
       }
     }
   }
@@ -65,20 +59,33 @@ export class Login {
     const formValue = this.loginForm.value;
     this.auth.login(formValue as LoginData).subscribe({
       next: (response) => {
-        console.log(response);
-        this.globalError.set(null);
-        // this.router.navigateByUrl('/dashboard');
+        console.log('next', response);
+        if (response.success) {
+          this.globalError.set(null);
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          if (response.errors) this.setServerErrors(response.errors);
+          if (response.message) this.globalError.set(response.message);
+        }
       },
-      error: (error) => {
-        if (error.error?.errors) {
-          this.setServerErrors(error.error.errors);
-        }
+      error: (err) => {
+        console.error('error', err);
 
-        if (error.error?.message) {
-          this.globalError.set(error.error.message);
+        if (err.error) {
+          if (err.error.errors) {
+            this.setServerErrors(err.error.errors);
+          } else if (err.error.message) {
+            this.globalError.set(err.error.message);
+            return;
+          }
         }
-        console.log(error);
       },
     });
+  }
+
+  hide = signal(true);
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 }

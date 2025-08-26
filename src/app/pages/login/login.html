@@ -16,8 +16,8 @@
           <mat-error>Email is required</mat-error>
           } @else if (loginForm.controls['email'].hasError('email')) {
           <mat-error>Enter correct Email</mat-error>
-          } @else if (loginForm.controls['email'].hasError('serverError')) {
-          <mat-error>{{ loginForm.controls['email'].getError('serverError') }}</mat-error>
+          } @for (error of loginForm.controls['email'].getError('serverError') ; track error){
+          <mat-error>{{ error }}!!</mat-error>
           }
         </mat-form-field>
 
@@ -26,10 +26,6 @@
           <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" />
           @if (loginForm.controls['password'].hasError('required')) {
           <mat-error>Password is required</mat-error>
-          } @else if (loginForm.controls['password'].hasError('minlength')) {
-          <mat-error>Enter correct Email</mat-error>
-          } @else if (loginForm.controls['password'].hasError('serverError')) {
-          <mat-error>{{ loginForm.controls['password'].getError('serverError') }}</mat-error>
           }
 
           <button
