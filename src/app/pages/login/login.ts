@@ -11,7 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 
-import { AuthService } from '../../services/auth.services';
+import { AuthService } from '../../services/auth.service';
 import { LoginData } from '../../types/auth';
 
 @Component({
@@ -59,7 +59,6 @@ export class Login {
     const formValue = this.loginForm.value;
     this.auth.login(formValue as LoginData).subscribe({
       next: (response) => {
-        console.log('next', response);
         if (response.success) {
           this.globalError.set(null);
           this.router.navigateByUrl('/dashboard');

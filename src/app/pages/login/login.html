@@ -17,7 +17,7 @@
           } @else if (loginForm.controls['email'].hasError('email')) {
           <mat-error>Enter correct Email</mat-error>
           } @for (error of loginForm.controls['email'].getError('serverError') ; track error){
-          <mat-error>{{ error }}!!</mat-error>
+          <mat-error>{{ error }}</mat-error>
           }
         </mat-form-field>
 
