@@ -4,10 +4,10 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-welcome',
   imports: [],
-  templateUrl: './welcome.html',
-  styleUrl: './welcome.css',
+  templateUrl: './welcome.component.html',
+  styleUrl: './welcome.component.css',
 })
-export class Welcome {
+export class WelcomeComponent {
   auth = inject(AuthService);
 
   userEmail = this.auth.getUserEmail();

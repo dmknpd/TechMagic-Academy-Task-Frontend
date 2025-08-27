@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
-  imports: [MatSidenavModule, MatIconModule],
+  imports: [MatSidenavModule, MatIconModule, RouterModule],
   templateUrl: './sidenav.html',
   styleUrl: './sidenav.css',
 })

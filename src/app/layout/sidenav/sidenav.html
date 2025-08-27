@@ -2,18 +2,32 @@
   <h1 class="logo">Traveler Tour</h1>
   <nav>
     <ul class="list">
-      <li class="list_item"><span>New Sale</span> <mat-icon>keyboard_arrow_right</mat-icon></li>
       <li class="list_item">
-        <span>Client List</span>
-        <mat-icon>keyboard_arrow_right</mat-icon>
+        <a [routerLink]="['/new-sale']" class="link"
+          ><span>New Sale</span> <mat-icon>keyboard_arrow_right</mat-icon></a
+        >
       </li>
-      <li class="list_item"><span>Tours</span> <mat-icon>keyboard_arrow_right</mat-icon></li>
-      <li class="list_item"><span>Hotels</span> <mat-icon>keyboard_arrow_right</mat-icon></li>
+      <li class="list_item">
+        <a [routerLink]="['/']" class="link">
+          <span>Client List</span>
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </a>
+      </li>
+      <li class="list_item">
+        <a [routerLink]="['/']" class="link">
+          <span>Tours</span> <mat-icon>keyboard_arrow_right</mat-icon></a
+        >
+      </li>
+      <li class="list_item">
+        <a [routerLink]="['/']" class="link">
+          <span>Hotels</span> <mat-icon>keyboard_arrow_right</mat-icon></a
+        >
+      </li>
     </ul>
 
     <ul class="list">
       <li class="list_item email">{{ userEmail }}</li>
-      <li (click)="onLogout()" class="list_item">
+      <li (click)="onLogout()" class="list_item logout">
         <span>Logout</span> <mat-icon>logout</mat-icon>
       </li>
     </ul>

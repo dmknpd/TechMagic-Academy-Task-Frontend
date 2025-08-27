@@ -24,16 +24,25 @@ nav {
   gap: 10px;
 }
 
+.link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout {
+  color: var(--text-secondary);
+  display: flex;
+  justify-content: space-between;
+}
+
 .list_item {
   font-size: 18px;
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
   width: 200px;
-
-  display: flex;
-  justify-content: space-between;
-  color: var(--text-secondary);
 }
 
 .list_item:hover {
