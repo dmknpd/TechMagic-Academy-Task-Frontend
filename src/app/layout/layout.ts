@@ -19,13 +19,11 @@ export class Layout {
 
   opened = true;
 
-  userEmail: string | null = null;
+  isWelcomePage = true;
+  userEmail = this.auth.getUserEmail();
 
   constructor() {
     this.fetchAllClients();
-    effect(() => {
-      this.userEmail = this.auth.getUserEmail();
-    });
   }
 
   fetchAllClients() {
