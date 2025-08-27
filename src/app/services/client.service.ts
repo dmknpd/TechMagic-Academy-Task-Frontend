@@ -12,6 +12,10 @@ const BASE_URL = `${environment.backendHost}/api/clients`;
 export class ClientService {
   private http = inject(HttpClient);
 
+  searchByPhone(phone: string): Observable<any> {
+    return this.http.get(`${BASE_URL}/search?${phone}`);
+  }
+
   getAllClients(): Observable<any> {
     return this.http.get(`${BASE_URL}/`);
   }

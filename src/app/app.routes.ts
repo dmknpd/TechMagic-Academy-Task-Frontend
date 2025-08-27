@@ -5,8 +5,8 @@ import { Layout } from './layout/layout';
 import { authGuard } from './guard/auth.guard';
 import { noAuthGuard } from './guard/noAuth.guard';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { ClientComponent } from './components/sales/client.component/client.component';
-import { ItineraryComponent } from './components/sales/itinerary.component/itinerary.component';
+import { ClientComponent } from './components/tour/client.component/client.component';
+import { ItineraryComponent } from './components/tour/itinerary.component/itinerary.component';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -17,7 +17,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: WelcomeComponent },
       {
-        path: 'new-sale',
+        path: 'new-tour',
         children: [
           { path: '', redirectTo: 'client', pathMatch: 'full' },
           { path: 'client', component: ClientComponent },
