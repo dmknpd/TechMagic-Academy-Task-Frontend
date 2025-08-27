@@ -19,53 +19,6 @@ mat-sidenav-content {
   padding: 100px;
 }
 
-.sidebar_content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
-  height: 100%;
-}
-
-.logo {
-  cursor: pointer;
-}
-
-nav {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.list_item {
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 200px;
-
-  display: flex;
-  justify-content: space-between;
-  color: var(--text-secondary);
-}
-
-.list_item:hover {
-  background-color: var(--accent-color);
-  color: #fff;
-}
-
-.email {
-  color: var(--text-main);
-}
-
 .main {
   background-color: var(--main-color);
 

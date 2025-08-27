@@ -6,7 +6,6 @@ import { noAuthGuard } from './guard/noAuth.guard';
 import { Welcome } from './components/welcome/welcome';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
   {
     path: '',
@@ -14,4 +13,5 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [{ path: '', component: Welcome }],
   },
+  { path: '**', redirectTo: '' },
 ];

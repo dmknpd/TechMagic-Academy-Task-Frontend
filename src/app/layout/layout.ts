@@ -1,14 +1,15 @@
-import { Component, effect, inject, signal } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ClientService } from '../services/client.service';
 import { AuthService } from '../services/auth.service';
+import { Sidenav } from './sidenav/sidenav';
 
 @Component({
   selector: 'app-layout',
-  imports: [MatSidenavModule, MatIconModule, RouterOutlet],
+  imports: [MatSidenavModule, MatIconModule, RouterOutlet, Sidenav],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
@@ -19,29 +20,22 @@ export class Layout {
 
   opened = true;
 
-  isWelcomePage = true;
-  userEmail = this.auth.getUserEmail();
+  isWelcomePage = false;
 
   constructor() {
     this.fetchAllClients();
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isWelcomePage = event.urlAfterRedirects === '/';
+      }
+    });
   }
 
   fetchAllClients() {
     this.client.getAllClients().subscribe({
       next: (response) => {
         console.log(response);
-      },
-      error: (error) => {
-        console.log('error: ', error);
-      },
-    });
-  }
-
-  onLogout() {
-    this.auth.logout().subscribe({
-      next: (response) => {
-        console.log(response);
-        this.router.navigateByUrl('/login');
       },
       error: (error) => {
         console.log('error: ', error);
