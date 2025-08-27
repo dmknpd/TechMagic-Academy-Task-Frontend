@@ -7,5 +7,9 @@
     <main class="main" [class.welcome]="isWelcomePage">
       <router-outlet />
     </main>
+
+    @if(isTourPages){
+    <app-info-sidebar />
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

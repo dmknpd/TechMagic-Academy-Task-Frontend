@@ -8,6 +8,7 @@
 
 .logo {
   cursor: pointer;
+  color: var(--text-main);
 }
 
 nav {
@@ -47,7 +48,11 @@ nav {
 
 .list_item:hover {
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--main-color);
+}
+
+.list_item:hover .link {
+  color: var(--main-color);
 }
 
 .email {

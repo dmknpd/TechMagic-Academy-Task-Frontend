@@ -14,23 +14,21 @@ mat-sidenav {
 
 mat-sidenav-content {
   background-color: var(--secondary-color);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: space-between;
+}
 
-  padding: 100px;
+.mat-drawer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .main {
   background-color: var(--main-color);
 
-  padding: 24px;
+  padding: 50px;
   background: #fff;
   border-radius: 8px;
-  min-height: 360px;
-
-  flex: 1;
+  margin: 0 auto;
 }
 
 .welcome {
