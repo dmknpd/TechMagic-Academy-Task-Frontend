@@ -1,13 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { catchError, of } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, filter, of, switchMap } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 import { ClientService } from '../../../services/client.service';
+import { Client } from '../../../types/client';
 
 @Component({
   selector: 'app-client',
@@ -19,44 +27,47 @@ import { ClientService } from '../../../services/client.service';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    RouterModule,
   ],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',
 })
 export class ClientComponent {
-  private fb = inject(FormBuilder);
-  private clientService = inject(ClientService);
+  private client = inject(ClientService);
 
-  clientForm = this.fb.group({
-    phone: ['', [Validators.required, Validators.pattern(/^\d{12}$/)]],
+  clientForm = new FormGroup({
+    phone: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.pattern(/^\d{12}$/)],
+    }),
   });
 
-  hintMessage: string | null = null;
+  clientData: Client | null = null;
+  notFound = false;
 
-  onSearch() {
-    if (this.clientForm.invalid) {
-      this.hintMessage = null;
-      this.clientForm.markAllAsTouched();
-      return;
-    }
-    const phone = this.clientForm.value.phone;
+  constructor() {
+    this.clientForm.controls['phone'].valueChanges
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged(),
+        filter(() => this.clientForm.valid),
+        switchMap((phone) =>
+          this.client.searchByPhone(phone).pipe(
+            catchError(() => {
+              return of(null);
+            })
+          )
+        )
+      )
+      .subscribe((response) => {
+        this.clientData = null;
+        this.notFound = false;
 
-    if (phone) {
-      this.clientService
-        .searchByPhone(phone)
-        .pipe(catchError(() => of(null)))
-        .subscribe((response) => {
-          if (!response?.success || !response?.data) {
-            this.hintMessage = 'Client not found, you can create a new one';
-          } else {
-            const client = response.data;
-            console.log(client);
-            this.hintMessage =
-              client.firstName && client.lastName
-                ? `Client found: ${client.firstName} ${client.lastName}`
-                : 'Client found, but name is missing';
-          }
-        });
-    }
+        if (response && response.success && response.data) {
+          this.clientData = response.data;
+        } else {
+          this.notFound = true;
+        }
+      });
   }
 }

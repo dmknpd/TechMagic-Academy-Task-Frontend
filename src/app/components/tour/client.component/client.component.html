@@ -1,24 +1,35 @@
 <div class="client-search">
   <mat-card class="client-card">
-    <mat-card-header>
+    <mat-card-header class="header">
       <mat-card-title class="title">Find Client</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form class="client-form" [formGroup]="clientForm" (ngSubmit)="onSearch()">
+      <form class="client-form" [formGroup]="clientForm">
         <mat-form-field class="full-width-input">
           <mat-label>Phone</mat-label>
           <input formControlName="phone" matInput placeholder="380501234567" />
-          @if(clientForm.controls['phone'].hasError('required')){
-          <mat-error> Phone is required </mat-error>
-          } @if(clientForm.controls['phone'].hasError('pattern')){
-          <mat-error> Enter valid phone (12 digits) </mat-error>
-          } @if(hintMessage){
-          <mat-hint>{{ hintMessage }}</mat-hint>
+          @if(clientForm.controls['phone'].hasError('required') &&
+          clientForm.controls['phone'].touched) {
+          <mat-error>Phone is required</mat-error>
+          } @if(clientForm.controls['phone'].hasError('pattern') &&
+          clientForm.controls['phone'].dirty) {
+          <mat-error>Enter valid phone (12 digits)</mat-error>
           }
         </mat-form-field>
-
-        <button class="btn" type="submit">Search</button>
       </form>
+      @if(notFound){
+      <div class="not_found">
+        <div>Client not found</div>
+        <a [routerLink]="['/new-tour/client/create']" class="link">
+          <div class="btn">Create new Client</div>
+        </a>
+      </div>
+      }@if(!notFound && clientData) {
+      <div class="client-data">
+        <div>{{ clientData.phone }}</div>
+        <div>{{ clientData.lastName }} {{ clientData.firstName }} {{ clientData.middleName }}</div>
+      </div>
+      }
     </mat-card-content>
   </mat-card>
 </div>
