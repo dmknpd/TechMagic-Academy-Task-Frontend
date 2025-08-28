@@ -1,8 +1,24 @@
-<div>
-  <mat-card class="login-card">
+<div class="client-search">
+  <mat-card class="client-card">
     <mat-card-header>
-      <mat-card-title class="title">Client</mat-card-title>
+      <mat-card-title class="title">Find Client</mat-card-title>
     </mat-card-header>
-    <mat-card-content> </mat-card-content>
+    <mat-card-content>
+      <form class="client-form" [formGroup]="clientForm" (ngSubmit)="onSearch()">
+        <mat-form-field class="full-width-input">
+          <mat-label>Phone</mat-label>
+          <input formControlName="phone" matInput placeholder="380501234567" />
+          @if(clientForm.controls['phone'].hasError('required')){
+          <mat-error> Phone is required </mat-error>
+          } @if(clientForm.controls['phone'].hasError('pattern')){
+          <mat-error> Enter valid phone (12 digits) </mat-error>
+          } @if(hintMessage){
+          <mat-hint>{{ hintMessage }}</mat-hint>
+          }
+        </mat-form-field>
+
+        <button class="btn" type="submit">Search</button>
+      </form>
+    </mat-card-content>
   </mat-card>
 </div>

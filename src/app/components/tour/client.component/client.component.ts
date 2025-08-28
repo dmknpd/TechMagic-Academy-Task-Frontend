@@ -1,11 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { catchError, of } from 'rxjs';
 
 import { ClientService } from '../../../services/client.service';
 
@@ -14,55 +14,48 @@ import { ClientService } from '../../../services/client.service';
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatSnackBarModule,
   ],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',
 })
 export class ClientComponent {
+  private fb = inject(FormBuilder);
   private clientService = inject(ClientService);
-  private snackBar = inject(MatSnackBar);
 
-  phone = '';
-  client = signal<any | null>(null);
-  notFound = signal(false);
+  clientForm = this.fb.group({
+    phone: ['', [Validators.required, Validators.pattern(/^\d{12}$/)]],
+  });
+
+  hintMessage: string | null = null;
 
   onSearch() {
-    if (!this.phone) return;
+    if (this.clientForm.invalid) {
+      this.hintMessage = null;
+      this.clientForm.markAllAsTouched();
+      return;
+    }
+    const phone = this.clientForm.value.phone;
 
-    this.clientService.searchByPhone(this.phone).subscribe({
-      next: (res) => {
-        if (res) {
-          this.client.set(res);
-          this.notFound.set(false);
-        } else {
-          this.client.set(null);
-          this.notFound.set(true);
-        }
-      },
-      error: () => {
-        this.client.set(null);
-        this.notFound.set(true);
-      },
-    });
-  }
-
-  onCreateClient() {
-    const data = { phone: this.phone };
-    this.clientService.create(data).subscribe({
-      next: (res) => {
-        this.client.set(res);
-        this.notFound.set(false);
-        this.snackBar.open('Клиент создан!', 'OK', { duration: 3000 });
-      },
-      error: () => {
-        this.snackBar.open('Ошибка при создании клиента', 'OK', { duration: 3000 });
-      },
-    });
+    if (phone) {
+      this.clientService
+        .searchByPhone(phone)
+        .pipe(catchError(() => of(null)))
+        .subscribe((response) => {
+          if (!response?.success || !response?.data) {
+            this.hintMessage = 'Client not found, you can create a new one';
+          } else {
+            const client = response.data;
+            this.hintMessage =
+              client.firstName && client.lastName
+                ? `Client found: ${client.firstName} ${client.lastName}`
+                : 'Client found, but name is missing';
+          }
+        });
+    }
   }
 }

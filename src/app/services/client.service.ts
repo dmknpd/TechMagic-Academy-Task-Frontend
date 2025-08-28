@@ -13,7 +13,7 @@ export class ClientService {
   private http = inject(HttpClient);
 
   searchByPhone(phone: string): Observable<any> {
-    return this.http.get(`${BASE_URL}/search?${phone}`);
+    return this.http.get(`${BASE_URL}/search?phone=${phone}`);
   }
 
   getAllClients(): Observable<any> {
