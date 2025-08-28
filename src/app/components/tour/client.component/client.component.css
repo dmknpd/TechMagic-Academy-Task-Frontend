@@ -37,3 +37,8 @@ input::placeholder {
 .full-width-input input::placeholder {
   color: #9e9e9e;
 }
+
+mat-error {
+  margin-top: 5px;
+  color: rgb(243, 33, 33);
+}

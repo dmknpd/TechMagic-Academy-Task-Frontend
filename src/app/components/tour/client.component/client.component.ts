@@ -50,6 +50,7 @@ export class ClientComponent {
             this.hintMessage = 'Client not found, you can create a new one';
           } else {
             const client = response.data;
+            console.log(client);
             this.hintMessage =
               client.firstName && client.lastName
                 ? `Client found: ${client.firstName} ${client.lastName}`

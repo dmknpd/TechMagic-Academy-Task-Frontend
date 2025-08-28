@@ -1,0 +1,32 @@
+.title {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: 10px 30px;
+}
+
+.row:hover {
+  background-color: var(--accent-color);
+  color: var(--main-color);
+}
+
+td {
+  font-weight: 500;
+  padding: 10px 30px;
+}
+
+mat-card-footer {
+  border-top: 1px solid rgb(207, 208, 211);
+  padding: 10px 46px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}

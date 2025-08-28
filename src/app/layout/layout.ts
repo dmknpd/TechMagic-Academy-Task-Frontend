@@ -16,7 +16,6 @@ import { InfoSidebarComponent } from '../components/tour/info-sidebar.component/
 })
 export class Layout {
   auth = inject(AuthService);
-  client = inject(ClientService);
   router = inject(Router);
 
   opened = true;
@@ -25,24 +24,11 @@ export class Layout {
   isTourPages = false;
 
   constructor() {
-    this.fetchAllClients();
-
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.isWelcomePage = event.urlAfterRedirects === '/';
         this.isTourPages = event.urlAfterRedirects.startsWith('/new-tour');
       }
-    });
-  }
-
-  fetchAllClients() {
-    this.client.getAllClients().subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.log('error: ', error);
-      },
     });
   }
 }

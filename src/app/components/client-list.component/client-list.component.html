@@ -1,1 +1,57 @@
-<p>client-list.component works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><h3 class="title">All Clients</h3></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="clients" class="table">
+      <!-- Last Name -->
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef>Last Name</th>
+        <td mat-cell *matCellDef="let client">{{ client.lastName }}</td>
+      </ng-container>
+
+      <!-- First Name -->
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef>First Name</th>
+        <td mat-cell *matCellDef="let client">{{ client.firstName }}</td>
+      </ng-container>
+
+      <!-- Middle Name -->
+      <ng-container matColumnDef="middleName">
+        <th mat-header-cell *matHeaderCellDef>Middle Name</th>
+        <td mat-cell *matCellDef="let client">{{ client.middleName }}</td>
+      </ng-container>
+
+      <!-- Phone -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let client">{{ client.phone }}</td>
+      </ng-container>
+
+      <!-- Email -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let client">{{ client.email }}</td>
+      </ng-container>
+
+      <!-- Country -->
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef>Country</th>
+        <td mat-cell *matCellDef="let client">{{ client.address.country }}</td>
+      </ng-container>
+
+      <!-- City -->
+      <ng-container matColumnDef="city">
+        <th mat-header-cell *matHeaderCellDef>City</th>
+        <td mat-cell *matCellDef="let client">{{ client.address.city }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <p>Total: {{ clients.length }}</p>
+  </mat-card-footer>
+</mat-card>
