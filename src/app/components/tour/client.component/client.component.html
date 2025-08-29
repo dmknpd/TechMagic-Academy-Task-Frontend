@@ -4,15 +4,13 @@
       <mat-card-title class="title">Find Client</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form class="client-form" [formGroup]="clientForm">
+      <form class="client-form">
         <mat-form-field class="full-width-input">
           <mat-label>Phone</mat-label>
-          <input formControlName="phone" matInput placeholder="380501234567" />
-          @if(clientForm.controls['phone'].hasError('required') &&
-          clientForm.controls['phone'].touched) {
+          <input matInput [formControl]="phoneControl" matInput placeholder="380501234567" />
+          @if(phoneControl.hasError('required')) {
           <mat-error>Phone is required</mat-error>
-          } @if(clientForm.controls['phone'].hasError('pattern') &&
-          clientForm.controls['phone'].dirty) {
+          } @if(phoneControl.hasError('pattern')) {
           <mat-error>Enter valid phone (12 digits)</mat-error>
           }
         </mat-form-field>
@@ -20,14 +18,16 @@
       @if(notFound){
       <div class="not_found">
         <div>Client not found</div>
-        <a [routerLink]="['/new-tour/client/create']" class="link">
-          <div class="btn">Create new Client</div>
+        <a [routerLink]="['/new-tour/client/create']">
+          <button matButton="filled">Create new Client</button>
         </a>
       </div>
       }@if(!notFound && clientData) {
       <div class="client-data">
         <div>{{ clientData.phone }}</div>
-        <div>{{ clientData.lastName }} {{ clientData.firstName }} {{ clientData.middleName }}</div>
+        <div class="client-name">
+          {{ clientData.lastName }} {{ clientData.firstName }} {{ clientData.middleName }}
+        </div>
       </div>
       }
     </mat-card-content>

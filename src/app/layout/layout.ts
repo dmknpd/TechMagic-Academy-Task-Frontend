@@ -20,13 +20,11 @@ export class Layout {
 
   opened = true;
 
-  isWelcomePage = false;
   isTourPages = false;
 
   constructor() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isWelcomePage = event.urlAfterRedirects === '/';
         this.isTourPages = event.urlAfterRedirects.startsWith('/new-tour');
       }
     });

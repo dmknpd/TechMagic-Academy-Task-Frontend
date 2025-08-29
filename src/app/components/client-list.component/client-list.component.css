@@ -1,3 +1,12 @@
+mat-card {
+  padding: 20px;
+  margin: 0 auto;
+  background-color: var(--main-color);
+
+  max-width: fit-content;
+  overflow-x: auto;
+}
+
 .title {
   margin-bottom: 10px;
   margin-left: 10px;
@@ -6,6 +15,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  background-color: var(--main-color);
 }
 
 th {
@@ -25,8 +35,11 @@ td {
 }
 
 mat-card-footer {
-  border-top: 1px solid rgb(207, 208, 211);
   padding: 10px 46px;
   font-size: 14px;
   color: var(--text-secondary);
+}
+
+mat-divider {
+  border-top-color: #74777f;
 }

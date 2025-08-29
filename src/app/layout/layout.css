@@ -14,27 +14,22 @@ mat-sidenav {
 
 mat-sidenav-content {
   background-color: var(--secondary-color);
-}
-
-.mat-drawer-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.main {
-  background-color: var(--main-color);
-
-  padding: 20px;
-  background: #fff;
-  border-radius: 8px;
-  margin: 0 auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.welcome {
-  background-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* .mat-drawer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+.main {
+  width: 100%;
+  padding: 20px;
+
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 }

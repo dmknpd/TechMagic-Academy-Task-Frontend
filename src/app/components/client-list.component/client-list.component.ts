@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { Client } from '../../types/client';
 import { of } from 'rxjs';
@@ -11,7 +12,7 @@ import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'app-client-list.component',
-  imports: [CommonModule, MatTableModule, MatCardModule],
+  imports: [CommonModule, MatTableModule, MatCardModule, MatDividerModule],
   templateUrl: './client-list.component.html',
   styleUrl: './client-list.component.css',
 })

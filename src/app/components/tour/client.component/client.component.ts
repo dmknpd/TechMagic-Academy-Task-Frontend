@@ -9,13 +9,13 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { catchError, debounceTime, distinctUntilChanged, filter, of, switchMap } from 'rxjs';
 import { RouterModule } from '@angular/router';
 
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../types/client';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-client',
@@ -25,8 +25,8 @@ import { Client } from '../../../types/client';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatCardModule,
+    MatButtonModule,
     RouterModule,
   ],
   templateUrl: './client.component.html',
@@ -35,29 +35,21 @@ import { Client } from '../../../types/client';
 export class ClientComponent {
   private client = inject(ClientService);
 
-  clientForm = new FormGroup({
-    phone: new FormControl('', {
-      nonNullable: true,
-      validators: [Validators.required, Validators.pattern(/^\d{12}$/)],
-    }),
+  phoneControl = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required, Validators.pattern(/^\d{12}$/)],
   });
 
   clientData: Client | null = null;
   notFound = false;
 
   constructor() {
-    this.clientForm.controls['phone'].valueChanges
+    this.phoneControl.valueChanges
       .pipe(
         debounceTime(1000),
         distinctUntilChanged(),
-        filter(() => this.clientForm.valid),
-        switchMap((phone) =>
-          this.client.searchByPhone(phone).pipe(
-            catchError(() => {
-              return of(null);
-            })
-          )
-        )
+        filter(() => this.phoneControl.valid),
+        switchMap((phone) => this.client.searchByPhone(phone).pipe(catchError(() => of(null))))
       )
       .subscribe((response) => {
         this.clientData = null;
