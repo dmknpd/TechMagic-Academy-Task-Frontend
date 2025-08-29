@@ -3,7 +3,6 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 
-import { ClientService } from '../services/client.service';
 import { AuthService } from '../services/auth.service';
 import { Sidenav } from './sidenav/sidenav';
 import { InfoSidebarComponent } from '../components/tour/info-sidebar.component/info-sidebar.component';

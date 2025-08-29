@@ -13,6 +13,8 @@ import { Validators } from '@angular/forms';
 
 import { AuthService } from '../../services/auth.service';
 import { LoginData } from '../../types/auth';
+import { InputComponent } from '../../components/input.component/input.component';
+import { FormErrorsService } from '../../services/form-errors.service';
 
 @Component({
   selector: 'app-login',
@@ -26,13 +28,15 @@ import { LoginData } from '../../types/auth';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
+    InputComponent,
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-  auth = inject(AuthService);
-  router = inject(Router);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+  private formErrors = inject(FormErrorsService);
 
   globalError = signal<string | null>(null);
 
@@ -41,16 +45,10 @@ export class Login {
     password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
-  private setServerErrors(errors: Record<string, string[]>) {
-    for (const field in errors) {
-      const control = this.loginForm.get(field);
-      if (control) {
-        control.setErrors({ serverError: errors[field] });
-      }
-    }
-  }
-
   onLogin() {
+    this.formErrors.clearFormErrors(this.loginForm.controls);
+    this.globalError.set(null);
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
@@ -62,29 +60,18 @@ export class Login {
         if (response.success) {
           this.globalError.set(null);
           this.router.navigateByUrl('/');
-        } else {
-          if (response.errors) this.setServerErrors(response.errors);
-          if (response.message) this.globalError.set(response.message);
         }
       },
       error: (err) => {
         console.error('error', err);
 
-        if (err.error) {
-          if (err.error.errors) {
-            this.setServerErrors(err.error.errors);
-          } else if (err.error.message) {
-            this.globalError.set(err.error.message);
-            return;
-          }
+        if (err.error.errors) {
+          this.formErrors.setFormErrors(this.loginForm.controls, err.error.errors);
+        } else if (err.error.message) {
+          this.globalError.set(err.error.message);
+          return;
         }
       },
     });
-  }
-
-  hide = signal(true);
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
   }
 }

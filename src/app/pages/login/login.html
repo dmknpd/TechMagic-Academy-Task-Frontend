@@ -8,39 +8,21 @@
         @if (globalError()) {
         <mat-error class="global-error">{{ globalError() }}</mat-error>
         }
-        <mat-form-field class="full-width-input">
-          <mat-label>Email</mat-label>
-          <input type="email" formControlName="email" placeholder="myemail@mail.com" matInput />
+        <app-input
+          [control]="loginForm.controls['email']"
+          label="Email"
+          type="email"
+          placeholder="myemail@mail.com"
+        ></app-input>
 
-          @if (loginForm.controls['email'].hasError('required')) {
-          <mat-error>Email is required</mat-error>
-          } @else if (loginForm.controls['email'].hasError('email')) {
-          <mat-error>Enter correct Email</mat-error>
-          } @for (error of loginForm.controls['email'].getError('serverError') ; track error){
-          <mat-error>{{ error }}</mat-error>
-          }
-        </mat-form-field>
+        <app-input
+          [control]="loginForm.controls['password']"
+          label="Password"
+          type="password"
+          [isPasswordField]="true"
+        ></app-input>
 
-        <mat-form-field>
-          <mat-label>Password</mat-label>
-          <input formControlName="password" matInput [type]="hide() ? 'password' : 'text'" />
-          @if (loginForm.controls['password'].hasError('required')) {
-          <mat-error>Password is required</mat-error>
-          }
-
-          <button
-            type="button"
-            matIconButton
-            matSuffix
-            (click)="clickEvent($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide()"
-          >
-            <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-        </mat-form-field>
-
-        <button matButton="filled">Login</button>
+        <button type="submit" matButton="filled">Login</button>
       </form>
     </mat-card-content>
   </mat-card>
