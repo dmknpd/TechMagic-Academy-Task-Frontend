@@ -5,7 +5,14 @@
     </mat-card-header>
     <mat-card-content>
       <form class="client-form">
-        <mat-form-field class="full-width-input">
+        <app-input
+          [control]="phoneControl"
+          label="Phone"
+          type="text"
+          placeholder="380501234567"
+        ></app-input>
+
+        <!-- <mat-form-field class="full-width-input">
           <mat-label>Phone</mat-label>
           <input matInput [formControl]="phoneControl" matInput placeholder="380501234567" />
           @if(phoneControl.hasError('required')) {
@@ -13,7 +20,7 @@
           } @if(phoneControl.hasError('pattern')) {
           <mat-error>Enter valid phone (12 digits)</mat-error>
           }
-        </mat-form-field>
+        </mat-form-field> -->
       </form>
       @if(notFound){
       <div class="not_found">

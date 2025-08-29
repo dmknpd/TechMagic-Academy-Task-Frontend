@@ -10,12 +10,13 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { catchError, debounceTime, distinctUntilChanged, filter, of, switchMap } from 'rxjs';
 import { RouterModule } from '@angular/router';
 
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../types/client';
-import { MatButtonModule } from '@angular/material/button';
+import { InputComponent } from '../../input.component/input.component';
 
 @Component({
   selector: 'app-client',
@@ -28,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatButtonModule,
     RouterModule,
+    InputComponent,
   ],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',

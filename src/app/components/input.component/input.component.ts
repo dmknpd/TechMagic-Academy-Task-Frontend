@@ -48,6 +48,8 @@ export class InputComponent {
         return `${this.label} must be at most ${error.requiredLength} characters`;
       case 'email':
         return `Enter a valid email`;
+      case 'pattern':
+        return `Enter valid ${this.label}`;
       case 'serverError':
         return Array.isArray(error) ? error.join(', ') : String(error);
       default:
