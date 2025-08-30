@@ -6,12 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { Client } from '../../../types/client';
-import { ClientService } from '../../../services/client.service';
-import { InputComponent } from '../../input.component/input.component';
+import { Client } from '../../../../types/client';
+import { ClientService } from '../../../../services/client.service';
+import { InputComponent } from '../../../input.component/input.component';
 
 @Component({
-  selector: 'app-create-client.component',
+  selector: 'app-create-client',
   imports: [
     MatCardModule,
     MatFormFieldModule,

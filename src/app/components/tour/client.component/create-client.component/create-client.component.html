@@ -1,0 +1,20 @@
+<div class="create-client-card">
+  <div class="header">
+    <h3 class="title">Create New Client</h3>
+  </div>
+  <div>
+    <form (submit)="onLogin()" [formGroup]="clientForm" class="create-client-form">
+      @if (globalError()) {
+      <mat-error class="global-error">{{ globalError() }}</mat-error>
+      }
+
+      <app-input
+        [control]="clientForm.controls['firstName']"
+        label="First Name"
+        placeholder="John"
+      ></app-input>
+
+      <button matButton="filled">Create</button>
+    </form>
+  </div>
+</div>

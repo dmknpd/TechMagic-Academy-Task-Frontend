@@ -1,42 +1,10 @@
-<div class="client-search">
-  <mat-card class="client-card">
-    <mat-card-header class="header">
-      <mat-card-title class="title">Find Client</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form class="client-form">
-        <app-input
-          [control]="phoneControl"
-          label="Phone"
-          type="text"
-          placeholder="380501234567"
-        ></app-input>
-
-        <!-- <mat-form-field class="full-width-input">
-          <mat-label>Phone</mat-label>
-          <input matInput [formControl]="phoneControl" matInput placeholder="380501234567" />
-          @if(phoneControl.hasError('required')) {
-          <mat-error>Phone is required</mat-error>
-          } @if(phoneControl.hasError('pattern')) {
-          <mat-error>Enter valid phone (12 digits)</mat-error>
-          }
-        </mat-form-field> -->
-      </form>
-      @if(notFound){
-      <div class="not_found">
-        <div>Client not found</div>
-        <a [routerLink]="['/new-tour/client/create']">
-          <button matButton="filled">Create new Client</button>
-        </a>
-      </div>
-      }@if(!notFound && clientData) {
-      <div class="client-data">
-        <div>{{ clientData.phone }}</div>
-        <div class="client-name">
-          {{ clientData.lastName }} {{ clientData.firstName }} {{ clientData.middleName }}
-        </div>
-      </div>
-      }
-    </mat-card-content>
-  </mat-card>
+<div class="client">
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Find Client">
+      <app-find-client />
+    </mat-tab>
+    <mat-tab label="Create Client">
+      <app-create-client />
+    </mat-tab>
+  </mat-tab-group>
 </div>

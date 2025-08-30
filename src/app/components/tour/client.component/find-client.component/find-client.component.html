@@ -1,0 +1,30 @@
+<div class="client-card">
+  <div class="header">
+    <h3 class="title">Find Client</h3>
+  </div>
+  <div>
+    <form class="client-form">
+      <app-input
+        [control]="phoneControl"
+        label="Phone"
+        type="text"
+        placeholder="380501234567"
+      ></app-input>
+    </form>
+    @if(notFound){
+    <div class="not_found">
+      <div>Client not found</div>
+      <a [routerLink]="['/new-tour/client/create']">
+        <button matButton="filled">Create new Client</button>
+      </a>
+    </div>
+    }@if(!notFound && clientData) {
+    <div class="client-data">
+      <div>{{ clientData.phone }}</div>
+      <div class="client-name">
+        {{ clientData.lastName }} {{ clientData.firstName }} {{ clientData.middleName }}
+      </div>
+    </div>
+    }
+  </div>
+</div>

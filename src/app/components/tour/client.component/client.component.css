@@ -1,75 +1,25 @@
-.client-search {
+.client {
   max-width: 500px;
   min-width: 100px;
   margin: 0 auto;
 }
 
-.client-card {
-  padding: 20px;
-  background-color: var(--main-color);
-}
-
-form {
-  margin-bottom: 10px;
-}
-
-.header {
+.example-small-box,
+.example-large-box {
   display: flex;
+  align-items: center;
   justify-content: center;
+  margin: 16px;
+  padding: 16px;
+  border-radius: 8px;
 }
 
-.title {
-  font-size: 24px;
-  font-weight: 500;
-  display: flex;
-  margin-bottom: 20px;
+.example-small-box {
+  height: 100px;
+  width: 100px;
 }
 
-.full-width-input {
-  width: 100%;
-}
-
-.client-data {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  border-bottom: 1px solid var(--accent-color);
-
-  padding: 10px;
-  cursor: pointer;
-}
-
-.client-data:hover {
-  background-color: var(--accent-color);
-  color: var(--main-color);
-  border-radius: 10px;
-}
-
-.not_found {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 0 10px;
-}
-
-.link {
-  text-decoration: none;
-  color: var(--text-main);
-}
-
-.btn {
-  padding: 10px 20px;
-  background-color: var(--accent-color);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: var(--accent-color-hover);
+.example-large-box {
+  height: 300px;
+  width: 300px;
 }

@@ -1,0 +1,71 @@
+.client-card {
+  margin-top: 10px;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: var(--main-color);
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.client-data {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 2px solid var(--accent-color);
+
+  padding: 10px;
+  cursor: pointer;
+}
+
+.client-data:hover {
+  background-color: var(--accent-color);
+  color: var(--main-color);
+  border-radius: 10px;
+}
+
+.not_found {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--accent-color-hover);
+}
