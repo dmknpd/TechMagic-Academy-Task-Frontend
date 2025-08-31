@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { ApiResponse } from '../types/auth';
+import { ApiResponse } from '../types/res';
 import { Client } from '../types/client';
 
 const BASE_URL = `${environment.backendHost}/api/clients`;

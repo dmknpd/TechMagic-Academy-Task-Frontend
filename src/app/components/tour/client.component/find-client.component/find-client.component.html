@@ -11,18 +11,16 @@
         placeholder="380501234567"
       ></app-input>
     </form>
-    @if(notFound){
+    @if(notFound()){
     <div class="not_found">
       <div>Client not found</div>
-      <a [routerLink]="['/new-tour/client/create']">
-        <button matButton="filled">Create new Client</button>
-      </a>
+      <button matButton="filled" (click)="goToCreateClient()">Create new Client</button>
     </div>
-    }@if(!notFound && clientData) {
+    }@else if(clientData()) {
     <div class="client-data">
-      <div>{{ clientData.phone }}</div>
+      <div>{{ clientData()?.phone }}</div>
       <div class="client-name">
-        {{ clientData.lastName }} {{ clientData.firstName }} {{ clientData.middleName }}
+        {{ clientData()?.lastName }} {{ clientData()?.firstName }} {{ clientData()?.middleName }}
       </div>
     </div>
     }

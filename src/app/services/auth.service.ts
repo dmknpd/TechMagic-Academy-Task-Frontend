@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 
 import { environment } from '../../environments/environment';
 import { LoginData, RegisterData } from '../types/auth';
-import { ApiResponse } from '../types/auth';
+import { ApiResponse } from '../types/res';
 
 const BASE_URL = `${environment.backendHost}/api/auth`;
 
