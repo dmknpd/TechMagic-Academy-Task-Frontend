@@ -1,7 +1,6 @@
 interface Address {
   country: string;
   city: string;
-  street: string;
 }
 
 export interface Client {
@@ -15,4 +14,13 @@ export interface Client {
   sellerId: string;
   createdAt: string;
   __v: number;
+}
+
+export interface ClientFormData {
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  phone: string;
+  email: string;
+  address: Address;
 }

@@ -30,3 +30,7 @@ form {
   display: flex;
   justify-content: space-between;
 }
+
+.first_btn {
+  margin-left: auto;
+}

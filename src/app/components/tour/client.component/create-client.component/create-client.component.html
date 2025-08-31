@@ -27,6 +27,7 @@
 
           <div class="stepper-buttons">
             <button
+              class="first_btn"
               mat-button
               matStepperNext
               (click)="clientFormName.markAllAsTouched()"
@@ -39,39 +40,7 @@
         </form>
       </mat-step>
 
-      <!-- Step 2: Contacts -->
-      <mat-step [stepControl]="clientFormContacts">
-        <form [formGroup]="clientFormContacts">
-          <ng-template matStepLabel>Contacts</ng-template>
-
-          <app-input
-            [control]="clientFormContacts.controls['phone']"
-            label="Phone"
-            placeholder="+380501234567"
-          ></app-input>
-          <app-input
-            [control]="clientFormContacts.controls['email']"
-            label="Email"
-            placeholder="myemail@mail.com"
-            type="email"
-          ></app-input>
-
-          <div class="stepper-buttons">
-            <button mat-button matStepperPrevious matButton="tonal">Back</button>
-            <button
-              mat-button
-              matStepperNext
-              (click)="clientFormContacts.markAllAsTouched()"
-              [disabled]="clientFormContacts.invalid"
-              matButton="filled"
-            >
-              Next
-            </button>
-          </div>
-        </form>
-      </mat-step>
-
-      <!-- Step 3: Address -->
+      <!-- Step 2: Address -->
       <mat-step [stepControl]="clientFormAddress">
         <form [formGroup]="clientFormAddress">
           <ng-template matStepLabel>Address</ng-template>
@@ -90,10 +59,46 @@
           <div class="stepper-buttons">
             <button mat-button matStepperPrevious matButton="tonal">Back</button>
             <button
+              mat-button
+              matStepperNext
+              (click)="clientFormAddress.markAllAsTouched()"
+              [disabled]="clientFormAddress.invalid"
+              matButton="filled"
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- Step 3: Contacts -->
+      <mat-step [stepControl]="clientFormContacts">
+        <form [formGroup]="clientFormContacts">
+          <ng-template matStepLabel>Contacts</ng-template>
+
+          @if (globalError()) {
+          <mat-error class="global-error">{{ globalError() }}</mat-error>
+          }
+
+          <app-input
+            [control]="clientFormContacts.controls['phone']"
+            label="Phone"
+            placeholder="380501234567"
+          ></app-input>
+          <app-input
+            [control]="clientFormContacts.controls['email']"
+            label="Email"
+            placeholder="myemail@mail.com"
+            type="email"
+          ></app-input>
+
+          <div class="stepper-buttons">
+            <button mat-button matStepperPrevious matButton="tonal">Back</button>
+            <button
               mat-raised-button
               color="primary"
               (click)="onCreate()"
-              [disabled]="clientFormAddress.invalid"
+              [disabled]="clientFormContacts.invalid"
               matButton="filled"
             >
               Create

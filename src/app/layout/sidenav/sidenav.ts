@@ -19,7 +19,6 @@ export class Sidenav {
   onLogout() {
     this.auth.logout().subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigateByUrl('/login');
       },
       error: (error) => {

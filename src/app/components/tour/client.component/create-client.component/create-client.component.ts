@@ -9,7 +9,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 import { ClientService } from '../../../../services/client.service';
 import { FormErrorsService } from '../../../../services/form-errors.service';
-import { Client } from '../../../../types/client';
+import { ClientFormData } from '../../../../types/client';
 import { InputComponent } from '../../../input.component/input.component';
 
 @Component({
@@ -52,14 +52,14 @@ export class CreateClientComponent {
     ]),
   });
 
-  clientFormContacts = new FormGroup({
-    phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{12}$/)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-  });
-
   clientFormAddress = new FormGroup({
     country: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
+  });
+
+  clientFormContacts = new FormGroup({
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{12}$/)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   onCreate() {
@@ -77,13 +77,24 @@ export class CreateClientComponent {
       return;
     }
 
-    const formValue = combinedForm.value as Client;
+    const formValue: ClientFormData = {
+      firstName: this.clientFormName.value.firstName || '',
+      lastName: this.clientFormName.value.lastName || '',
+      middleName: this.clientFormName.value.middleName || '',
+      phone: this.clientFormContacts.value.phone || '',
+      email: this.clientFormContacts.value.email || '',
+      address: {
+        country: this.clientFormAddress.value.country || '',
+        city: this.clientFormAddress.value.city || '',
+      },
+    };
 
     this.client.create(formValue).subscribe({
       next: (response) => {
         if (response.success) {
+          console.log(response);
           this.globalError.set(null);
-          // this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/new-tour/itinerary');
         }
       },
       error: (err) => {
