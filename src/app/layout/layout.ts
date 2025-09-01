@@ -9,7 +9,15 @@ import { TourInfoSidebarComponent } from '../components/tour/tour-info-sidebar.c
 
 @Component({
   selector: 'app-layout',
-  imports: [MatSidenavModule, MatIconModule, RouterOutlet, Sidenav, TourInfoSidebarComponent],
+  imports: [
+    MatSidenavModule,
+    MatIconModule,
+    MatIconModule,
+    RouterOutlet,
+    MatSidenavModule,
+    Sidenav,
+    TourInfoSidebarComponent,
+  ],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
@@ -17,7 +25,7 @@ export class Layout {
   auth = inject(AuthService);
   router = inject(Router);
 
-  opened = true;
+  isOpen = true;
 
   isTourPages = false;
 

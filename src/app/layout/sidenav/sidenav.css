@@ -4,6 +4,8 @@
   align-items: center;
   gap: 50px;
   height: 100%;
+
+  position: relative;
 }
 
 .logo {

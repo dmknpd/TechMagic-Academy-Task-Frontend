@@ -1,15 +1,26 @@
-<mat-sidenav-container>
-  <mat-sidenav [opened]="opened" mode="side">
-    <app-sidenav />
-  </mat-sidenav>
+<div class="container">
+  <button
+    matIconButton
+    class="btn"
+    [class.closed]="!isOpen"
+    (click)="snav.toggle(); isOpen = !isOpen"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
 
-  <mat-sidenav-content>
-    <main class="main">
-      <router-outlet />
-    </main>
+  <mat-sidenav-container>
+    <mat-sidenav #snav [opened]="isOpen" mode="side">
+      <app-sidenav />
+    </mat-sidenav>
 
-    @if(isTourPages){
-    <app-tour-info-sidebar />
-    }
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <mat-sidenav-content>
+      <main class="main">
+        <router-outlet />
+      </main>
+
+      @if(isTourPages){
+      <app-tour-info-sidebar class="side" />
+      }
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
