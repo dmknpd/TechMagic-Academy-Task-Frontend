@@ -6,11 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { catchError, debounceTime, distinctUntilChanged, filter, map, of, switchMap } from 'rxjs';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { ClientService } from '../../../../services/client.service';
 import { InputComponent } from '../../../input.component/input.component';
+import { TourService } from '../../../../services/tour.service';
+import { Client } from '../../../../types/client';
 
 @Component({
   selector: 'app-find-client',
@@ -30,6 +32,8 @@ import { InputComponent } from '../../../input.component/input.component';
 })
 export class FindClientComponent {
   private client = inject(ClientService);
+  private tour = inject(TourService);
+  private router = inject(Router);
 
   @Output() switchTab = new EventEmitter<void>();
 
@@ -71,5 +75,13 @@ export class FindClientComponent {
 
       this.notFound.set(!client);
     });
+  }
+
+  selectClient() {
+    const client = this.clientData();
+    if (client) {
+      this.tour.setClient(client);
+      this.router.navigateByUrl('/new-tour/itinerary');
+    }
   }
 }

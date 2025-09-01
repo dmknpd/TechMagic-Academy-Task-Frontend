@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -9,11 +9,11 @@ const BASE_URL = `${environment.backendHost}/api/tour`;
 
 @Injectable({ providedIn: 'root' })
 export class TourService {
-  private client: Client | null = null;
+  private client = signal<Client | null>(null);
   // private itinerary: Itinerary | null = null;
 
-  setClient(client: Client) {
-    this.client = client;
+  setClient(client: Client): void {
+    this.client.set(client);
   }
 
   getClient() {

@@ -10,4 +10,6 @@ import { TourService } from '../../../services/tour.service';
 })
 export class TourInfoSidebarComponent {
   private tour = inject(TourService);
+
+  clientData = this.tour.getClient();
 }

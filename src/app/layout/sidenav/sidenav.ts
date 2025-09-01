@@ -11,8 +11,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './sidenav.css',
 })
 export class Sidenav {
-  auth = inject(AuthService);
-  router = inject(Router);
+  private auth = inject(AuthService);
+  private router = inject(Router);
 
   userEmail = this.auth.getUserEmail();
 

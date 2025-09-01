@@ -16,10 +16,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
-  padding: 20px 0;
-  height: 100%;
-  width: 100%;
 }
 
 .info_block {
@@ -28,6 +24,7 @@
   align-items: center;
   width: 100%;
   gap: 20px;
+  margin: 10px 0;
 }
 
 .title {
@@ -47,36 +44,35 @@
 
 .field_block {
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   gap: 10px;
 }
 
 .custom-form-field {
-  width: 100%;
+  flex: 1;
+  min-width: 40%;
 }
 
-.custom-form-field label {
+label {
   display: block;
   font-size: 14px;
   color: #757575;
   margin-bottom: 4px;
 }
 
-.custom-form-field .field-value {
+.field-value {
   padding: 12px 8px 8px;
   font-size: 14px;
   border-bottom: 1px solid #ccc;
   color: #212121;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .custom-form-field.disabled .field-value {
   color: #9e9e9e;
   background-color: #f5f5f5;
   border-bottom: 1px solid #bdbdbd;
-}
-
-.half-field {
-  width: calc(50% - 5px);
 }

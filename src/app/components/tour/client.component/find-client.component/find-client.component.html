@@ -8,6 +8,7 @@
         [control]="phoneControl"
         label="Phone"
         type="text"
+        [isPhoneField]="true"
         placeholder="380501234567"
       ></app-input>
     </form>
@@ -17,7 +18,7 @@
       <button matButton="filled" (click)="goToCreateClient()">Create new Client</button>
     </div>
     }@else if(clientData()) {
-    <div class="client-data">
+    <div class="client-data" (click)="selectClient()">
       <div>{{ clientData()?.phone }}</div>
       <div class="client-name">
         {{ clientData()?.lastName }} {{ clientData()?.firstName }} {{ clientData()?.middleName }}

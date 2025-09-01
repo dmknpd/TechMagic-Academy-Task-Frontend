@@ -5,42 +5,48 @@
     <div class="info_block">
       <h3 class="title">Client Info</h3>
       <div class="field_block">
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.firstName }}">
           <label>First Name</label>
-          <div class="field-value">Mykola</div>
+          <div class="field-value">{{ clientData()?.firstName ?? 'Null' }}</div>
         </div>
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.lastName }}">
           <label>Last Name</label>
-          <div class="field-value">Bandera</div>
+          <div class="field-value">{{ clientData()?.lastName ?? 'Null' }}</div>
         </div>
       </div>
 
       <div class="field_block">
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.middleName }}">
           <label>Middle Name</label>
-          <div class="field-value half-field">Ivanovych</div>
+          <div class="field-value half-field">
+            {{ clientData()?.middleName ?? 'Null' }}
+          </div>
         </div>
       </div>
 
       <div class="field_block">
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.address?.country }}">
           <label>Country</label>
-          <div class="field-value">Ukraine</div>
+          <div class="field-value">{{ clientData()?.address?.country ?? 'Null' }}</div>
         </div>
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.address?.city }}">
           <label>City</label>
-          <div class="field-value">Kyiv</div>
+          <div class="field-value">
+            {{ clientData()?.address?.city ?? 'Null' }}
+          </div>
         </div>
       </div>
 
       <div class="field_block">
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.phone }}">
           <label>Phone</label>
-          <div class="field-value">+380505432312</div>
+          <div class="field-value">
+            {{ clientData()?.phone ? `+${clientData()?.phone}` : 'Null' }}
+          </div>
         </div>
-        <div class="custom-form-field disabled">
+        <div class="custom-form-field disabled" title="{{ clientData()?.email }}">
           <label>Email</label>
-          <div class="field-value">jor@mail.com</div>
+          <div class="field-value">{{ clientData()?.email ?? 'Null' }}</div>
         </div>
       </div>
     </div>
@@ -50,22 +56,22 @@
       <div class="field_block">
         <div class="custom-form-field disabled">
           <label>Country</label>
-          <div class="field-value">Brazil</div>
+          <div class="field-value">Null</div>
         </div>
         <div class="custom-form-field disabled">
           <label>Hotel</label>
-          <div class="field-value">Reddyson 5</div>
+          <div class="field-value">Null</div>
         </div>
       </div>
 
       <div class="field_block">
         <div class="custom-form-field disabled">
           <label>Price</label>
-          <div class="field-value">200$</div>
+          <div class="field-value">Null</div>
         </div>
         <div class="custom-form-field disabled">
           <label>Duration (week)</label>
-          <div class="field-value">4</div>
+          <div class="field-value">Null</div>
         </div>
       </div>
     </div>
@@ -75,18 +81,18 @@
       <div class="field_block">
         <div class="custom-form-field disabled">
           <label>Start Date</label>
-          <div class="field-value">01.09.2025</div>
+          <div class="field-value">Null</div>
         </div>
         <div class="custom-form-field disabled">
           <label>Quantity (person)</label>
-          <div class="field-value">2</div>
+          <div class="field-value">Null</div>
         </div>
       </div>
 
       <div class="field_block">
         <div class="custom-form-field disabled">
           <label>Discount</label>
-          <div class="field-value">5%</div>
+          <div class="field-value">Null</div>
         </div>
       </div>
     </div>
