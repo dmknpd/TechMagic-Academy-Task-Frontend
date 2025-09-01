@@ -4,6 +4,9 @@ mat-card {
   background-color: var(--main-color);
 
   max-width: fit-content;
+}
+
+mat-card-content {
   overflow-x: auto;
 }
 
