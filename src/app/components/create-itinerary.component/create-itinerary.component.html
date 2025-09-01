@@ -21,16 +21,23 @@
         ></app-input>
 
         <app-input
-          [control]="itineraryForm.controls['duration']"
-          label="Duration"
+          [control]="itineraryForm.controls['url']"
+          label="Image Url"
           type="number"
-          placeholder="temperate"
+          placeholder="https://image.com/picture.jpg"
         ></app-input>
 
         <app-input
           [control]="itineraryForm.controls['hotel']"
           label="Hotel"
           placeholder="Hotel Ukraine"
+        ></app-input>
+
+        <app-input
+          [control]="itineraryForm.controls['duration']"
+          label="Duration"
+          type="number"
+          placeholder="temperate"
         ></app-input>
 
         <app-input

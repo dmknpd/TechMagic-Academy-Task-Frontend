@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { FormErrorsService } from '../../../../services/form-errors.service';
-import { ItineraryService } from '../../../../services/itinerary.service';
-import { ItineraryFormData } from '../../../../types/itinerary';
+import { FormErrorsService } from '../../services/form-errors.service';
+import { ItineraryService } from '../../services/itinerary.service';
+import { ItineraryFormData } from '../../types/itinerary';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { InputComponent } from '../../../input.component/input.component';
+import { InputComponent } from '../input.component/input.component';
 
 @Component({
   selector: 'app-create-itinerary.component',
@@ -32,9 +32,13 @@ export class CreateItineraryComponent {
   itineraryForm = new FormGroup({
     country: new FormControl('', [Validators.required]),
     climate: new FormControl('', [Validators.required]),
-    duration: new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+    duration: new FormControl(0, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
     hotel: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+    price: new FormControl(0, [Validators.required, Validators.min(1)]),
+    url: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*(\?.*)?(#.*)?$/i),
+    ]),
   });
 
   onItineraryCreate() {

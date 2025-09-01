@@ -5,6 +5,7 @@ export interface Itinerary {
   duration: number;
   hotel: string;
   price: number;
+  url: string;
   createdAt: string;
   __v: number;
 }
@@ -15,4 +16,5 @@ export interface ItineraryFormData {
   duration: number;
   hotel: string;
   price: number;
+  url: string;
 }

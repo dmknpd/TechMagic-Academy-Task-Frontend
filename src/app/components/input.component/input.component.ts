@@ -47,6 +47,10 @@ export class InputComponent {
         return `${this.label} must be at least ${error.requiredLength} characters`;
       case 'maxlength':
         return `${this.label} must be at most ${error.requiredLength} characters`;
+      case 'min':
+        return `Enter a valid number greater than ${error.min}`;
+      case 'max':
+        return `Enter a valid number smaller than ${error.max}`;
       case 'email':
         return `Enter a valid email`;
       case 'pattern':
