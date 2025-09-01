@@ -11,6 +11,7 @@ import { ClientService } from '../../../../services/client.service';
 import { FormErrorsService } from '../../../../services/form-errors.service';
 import { ClientFormData } from '../../../../types/client';
 import { InputComponent } from '../../../input.component/input.component';
+import { TourService } from '../../../../services/tour.service';
 
 @Component({
   selector: 'app-create-client',
@@ -29,6 +30,7 @@ import { InputComponent } from '../../../input.component/input.component';
 })
 export class CreateClientComponent {
   private client = inject(ClientService);
+  private tour = inject(TourService);
   private router = inject(Router);
   private formErrors = inject(FormErrorsService);
 
@@ -91,9 +93,9 @@ export class CreateClientComponent {
 
     this.client.create(formValue).subscribe({
       next: (response) => {
-        if (response.success) {
-          console.log(response);
+        if (response.success && response.data) {
           this.globalError.set(null);
+          this.tour.setClient(response.data);
           this.router.navigateByUrl('/new-tour/itinerary');
         }
       },

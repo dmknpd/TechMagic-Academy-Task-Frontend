@@ -22,7 +22,7 @@ export class ClientService {
     return this.http.get<ApiResponse<Client[]>>(`${BASE_URL}/`);
   }
 
-  create(data: any): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(`${BASE_URL}/create`, data);
+  create(data: any): Observable<ApiResponse<Client>> {
+    return this.http.post<ApiResponse<Client>>(`${BASE_URL}/create`, data);
   }
 }

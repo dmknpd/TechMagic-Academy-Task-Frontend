@@ -5,11 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AuthService } from '../services/auth.service';
 import { Sidenav } from './sidenav/sidenav';
-import { InfoSidebarComponent } from '../components/tour/info-sidebar.component/info-sidebar.component';
+import { TourInfoSidebarComponent } from '../components/tour/tour-info-sidebar.component/tour-info-sidebar.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [MatSidenavModule, MatIconModule, RouterOutlet, Sidenav, InfoSidebarComponent],
+  imports: [MatSidenavModule, MatIconModule, RouterOutlet, Sidenav, TourInfoSidebarComponent],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
