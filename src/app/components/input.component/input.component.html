@@ -1,6 +1,8 @@
 <mat-form-field class="full-width-input" appearance="fill">
   <mat-label>{{ label }}</mat-label>
-
+  @if(isPhoneField){
+  <span matTextPrefix>+&nbsp;</span>
+  }
   <input matInput [type]="type" [placeholder]="placeholder" [formControl]="control" />
 
   @for(key of errorKeys() ; track $index){

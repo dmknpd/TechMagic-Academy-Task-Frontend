@@ -25,6 +25,7 @@ export class InputComponent {
   @Input() placeholder = '';
   @Input() type: 'text' | 'email' | 'password' = 'text';
   @Input() isPasswordField = false;
+  @Input() isPhoneField = false;
 
   hidePassword = true;
 
