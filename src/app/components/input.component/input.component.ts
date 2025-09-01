@@ -23,7 +23,7 @@ export class InputComponent {
   @Input() control!: FormControl;
   @Input() label = '';
   @Input() placeholder = '';
-  @Input() type: 'text' | 'email' | 'password' = 'text';
+  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
   @Input() isPasswordField = false;
   @Input() isPhoneField = false;
 

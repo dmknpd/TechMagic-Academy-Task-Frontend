@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { ApiResponse } from '../types/res';
-import { Client } from '../types/client';
+import { Client, ClientFormData } from '../types/client';
 
 const BASE_URL = `${environment.backendHost}/api/clients`;
 
@@ -22,7 +22,7 @@ export class ClientService {
     return this.http.get<ApiResponse<Client[]>>(`${BASE_URL}/`);
   }
 
-  create(data: any): Observable<ApiResponse<Client>> {
+  create(data: ClientFormData): Observable<ApiResponse<Client>> {
     return this.http.post<ApiResponse<Client>>(`${BASE_URL}/create`, data);
   }
 }

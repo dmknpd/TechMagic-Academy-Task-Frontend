@@ -26,7 +26,6 @@ export class Layout {
   router = inject(Router);
 
   isOpen = true;
-
   isTourPages = false;
 
   constructor() {

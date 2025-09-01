@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './sidenav.css',
 })
 export class Sidenav {
+  @Input() isOpen = true;
+
   private auth = inject(AuthService);
   private router = inject(Router);
 

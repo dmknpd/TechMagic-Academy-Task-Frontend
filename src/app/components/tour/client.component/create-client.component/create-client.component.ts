@@ -80,16 +80,10 @@ export class CreateClientComponent {
     }
 
     const formValue: ClientFormData = {
-      firstName: this.clientFormName.value.firstName || '',
-      lastName: this.clientFormName.value.lastName || '',
-      middleName: this.clientFormName.value.middleName || '',
-      phone: this.clientFormContacts.value.phone || '',
-      email: this.clientFormContacts.value.email || '',
-      address: {
-        country: this.clientFormAddress.value.country || '',
-        city: this.clientFormAddress.value.city || '',
-      },
-    };
+      ...this.clientFormName.value,
+      ...this.clientFormContacts.value,
+      address: this.clientFormAddress.value,
+    } as ClientFormData;
 
     this.client.create(formValue).subscribe({
       next: (response) => {

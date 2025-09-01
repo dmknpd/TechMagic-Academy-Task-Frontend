@@ -14,14 +14,17 @@ mat-sidenav-container {
   height: 100vh;
 }
 
-mat-sidenav {
+.sidenav {
   border-radius: 0px;
-  width: 250px;
+  width: 0;
   background-color: #fff;
   box-shadow: 1px 0 10px rgba(0, 0, 0, 0.1);
 
   padding: 20px;
-  height: 100vh;
+}
+
+.sidenav.open {
+  width: 250px;
 }
 
 mat-sidenav-content {

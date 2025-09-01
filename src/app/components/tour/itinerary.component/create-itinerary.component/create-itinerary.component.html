@@ -1,0 +1,47 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title class="title">Create Itinerary</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="onItineraryCreate()" [formGroup]="itineraryForm" class="login-form">
+        @if (globalError()) {
+        <mat-error class="global-error">{{ globalError() }}</mat-error>
+        }
+        <app-input
+          [control]="itineraryForm.controls['country']"
+          label="Country"
+          placeholder="Ukraine"
+        ></app-input>
+
+        <app-input
+          [control]="itineraryForm.controls['climate']"
+          label="Climate"
+          placeholder="temperate"
+        ></app-input>
+
+        <app-input
+          [control]="itineraryForm.controls['duration']"
+          label="Duration"
+          type="number"
+          placeholder="temperate"
+        ></app-input>
+
+        <app-input
+          [control]="itineraryForm.controls['hotel']"
+          label="Hotel"
+          placeholder="Hotel Ukraine"
+        ></app-input>
+
+        <app-input
+          [control]="itineraryForm.controls['price']"
+          label="Price"
+          type="number"
+          placeholder="100"
+        ></app-input>
+
+        <button type="submit" matButton="filled">Create</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
