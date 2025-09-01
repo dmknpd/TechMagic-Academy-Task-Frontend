@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { InputComponent } from '../input.component/input.component';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-create-itinerary.component',
@@ -17,6 +18,7 @@ import { InputComponent } from '../input.component/input.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatStepperModule,
     ReactiveFormsModule,
     InputComponent,
   ],
@@ -28,40 +30,74 @@ export class CreateItineraryComponent {
   private formErrors = inject(FormErrorsService);
 
   globalError = signal<string | null>(null);
+  message = signal<string | null>(null);
 
-  itineraryForm = new FormGroup({
+  // itineraryForm = new FormGroup({
+  //   country: new FormControl('', [Validators.required]),
+  //   climate: new FormControl('', [Validators.required]),
+  //   hotel: new FormControl('', [Validators.required]),
+  //   url: new FormControl('', [
+  //     Validators.required,
+  //     Validators.pattern(/^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*(\?.*)?(#.*)?$/i),
+  //   ]),
+  //   duration: new FormControl(0, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
+  //   price: new FormControl(0, [Validators.required, Validators.min(1)]),
+  // });
+
+  itineraryFormCountry = new FormGroup({
     country: new FormControl('', [Validators.required]),
     climate: new FormControl('', [Validators.required]),
-    duration: new FormControl(0, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
-    hotel: new FormControl('', [Validators.required]),
-    price: new FormControl(0, [Validators.required, Validators.min(1)]),
-    url: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*(\?.*)?(#.*)?$/i),
-    ]),
   });
 
-  onItineraryCreate() {
-    this.formErrors.clearFormErrors(this.itineraryForm.controls);
-    this.globalError.set(null);
+  itineraryFormHotel = new FormGroup({
+    hotel: new FormControl('', [Validators.required]),
+    url: new FormControl('', [Validators.required]),
+  });
 
-    if (this.itineraryForm.invalid) {
-      this.itineraryForm.markAllAsTouched();
+  itineraryFormPrice = new FormGroup({
+    duration: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(3)]),
+    price: new FormControl(0, [Validators.required, Validators.min(1)]),
+  });
+
+  onItineraryCreate(stepper: MatStepper) {
+    const combinedForm = new FormGroup({
+      ...this.itineraryFormCountry.controls,
+      ...this.itineraryFormHotel.controls,
+      ...this.itineraryFormPrice.controls,
+    });
+
+    this.formErrors.clearFormErrors(combinedForm.controls);
+    this.globalError.set(null);
+    if (combinedForm.invalid) {
+      combinedForm.markAllAsTouched();
       return;
     }
+    const formValue: ItineraryFormData = {
+      ...this.itineraryFormCountry.value,
+      ...this.itineraryFormHotel.value,
+      ...this.itineraryFormPrice.value,
+    } as ItineraryFormData;
 
-    const formValue: ItineraryFormData = this.itineraryForm.value as ItineraryFormData;
     this.itinerary.create(formValue).subscribe({
       next: (response) => {
         if (response.success) {
           this.globalError.set(null);
+
+          this.itineraryFormCountry.reset();
+          this.itineraryFormHotel.reset();
+          this.itineraryFormPrice.reset();
+
+          stepper.reset();
+
+          this.message.set(response.message!);
+
+          console.log(response);
         }
       },
       error: (err) => {
         console.error('error', err);
-
         if (err.error.errors) {
-          this.formErrors.setFormErrors(this.itineraryForm.controls, err.error.errors);
+          this.formErrors.setFormErrors(combinedForm.controls, err.error.errors);
         } else if (err.error.message) {
           this.globalError.set(err.error.message);
           return;
