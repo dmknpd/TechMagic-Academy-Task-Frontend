@@ -12,12 +12,12 @@ const BASE_URL = `${environment.backendHost}/api/itineraries`;
 export class ItineraryService {
   private http = inject(HttpClient);
 
-  getAll(): Observable<Itinerary[]> {
-    return this.http.get<Itinerary[]>(BASE_URL);
+  getAll(): Observable<ApiResponse<Itinerary[]>> {
+    return this.http.get<ApiResponse<Itinerary[]>>(BASE_URL);
   }
 
-  getByCountry(country: string): Observable<Itinerary> {
-    return this.http.get<Itinerary>(`${BASE_URL}/${country}`);
+  getByCountry(country: string): Observable<ApiResponse<Itinerary>> {
+    return this.http.get<ApiResponse<Itinerary>>(`${BASE_URL}/${country}`);
   }
 
   create(data: ItineraryFormData): Observable<ApiResponse<Itinerary>> {

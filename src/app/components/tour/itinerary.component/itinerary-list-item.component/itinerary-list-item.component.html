@@ -1,1 +1,21 @@
-<mat-grid-tile>ITINERARY</mat-grid-tile>
+<li class="item">
+  <mat-card class="card">
+    <div class="card-header">
+      <img src="{{ itinerary.url }}" alt="Hotel img" class="img" />
+      <div class="overlay">
+        <mat-card-title class="title"
+          ><p>{{ itinerary.country }}</p>
+          <p>{{ itinerary.hotel }}</p></mat-card-title
+        >
+      </div>
+    </div>
+
+    <mat-card-content class="card-content">
+      <p><span class="content-item">Climate: </span> {{ itinerary.climate }}</p>
+      <p><span class="content-item">Duration: </span> {{ itinerary.duration }} weeks</p>
+      <p>
+        <span class="content-item">Price: </span><span class="price">{{ itinerary.price }}$</span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</li>
