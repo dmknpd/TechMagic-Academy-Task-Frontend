@@ -5,8 +5,9 @@
 .container .btn {
   position: absolute;
   top: 25px;
-  left: -20px;
+  left: 0px;
   background-color: var(--secondary-color);
+  transform: scale(0.8);
 }
 
 .icon {
