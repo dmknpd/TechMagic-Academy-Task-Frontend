@@ -9,6 +9,7 @@ import { ClientComponent } from './components/tour/client.component/client.compo
 import { ItineraryComponent } from './components/tour/itinerary.component/itinerary.component';
 import { ClientListComponent } from './components/client-list.component/client-list.component';
 import { CreateItineraryComponent } from './components/create-itinerary.component/create-itinerary.component';
+import { canDeactivateGuard } from './guard/can-deactivate.guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -20,6 +21,7 @@ export const routes: Routes = [
       { path: '', component: WelcomeComponent },
       {
         path: 'new-tour',
+        canDeactivate: [canDeactivateGuard],
         children: [
           { path: '', redirectTo: 'client', pathMatch: 'full' },
           { path: 'client', component: ClientComponent },

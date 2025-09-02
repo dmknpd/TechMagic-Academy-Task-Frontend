@@ -6,6 +6,9 @@
     <mat-horizontal-stepper class="stepper" linear #stepper>
       <!-- Step 1: Name -->
       <mat-step [stepControl]="clientFormName">
+        @if (message()) {
+        <div class="message">{{ message() }}</div>
+        }
         <form [formGroup]="clientFormName">
           <ng-template matStepLabel>Name</ng-template>
 
@@ -97,7 +100,7 @@
             <button
               mat-raised-button
               color="primary"
-              (click)="onCreate()"
+              (click)="onCreate(stepper)"
               [disabled]="clientFormContacts.invalid"
               matButton="filled"
             >

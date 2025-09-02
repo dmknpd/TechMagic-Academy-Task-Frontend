@@ -55,21 +55,25 @@ export class CreateItineraryComponent {
   });
 
   itineraryFormPrice = new FormGroup({
-    duration: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(3)]),
+    // duration: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(3)]),
     price: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
 
   onItineraryCreate(stepper: MatStepper) {
-    const combinedForm = new FormGroup({
-      ...this.itineraryFormCountry.controls,
-      ...this.itineraryFormHotel.controls,
-      ...this.itineraryFormPrice.controls,
-    });
+    this.formErrors.clearFormErrors(this.itineraryFormCountry.controls);
+    this.formErrors.clearFormErrors(this.itineraryFormHotel.controls);
+    this.formErrors.clearFormErrors(this.itineraryFormPrice.controls);
 
-    this.formErrors.clearFormErrors(combinedForm.controls);
     this.globalError.set(null);
-    if (combinedForm.invalid) {
-      combinedForm.markAllAsTouched();
+
+    if (
+      this.itineraryFormCountry.invalid ||
+      this.itineraryFormHotel.invalid ||
+      this.itineraryFormPrice.invalid
+    ) {
+      this.itineraryFormCountry.markAllAsTouched();
+      this.itineraryFormHotel.markAllAsTouched();
+      this.itineraryFormPrice.markAllAsTouched();
       return;
     }
     const formValue: ItineraryFormData = {
@@ -83,11 +87,11 @@ export class CreateItineraryComponent {
         if (response.success) {
           this.globalError.set(null);
 
+          stepper.reset();
+
           this.itineraryFormCountry.reset();
           this.itineraryFormHotel.reset();
           this.itineraryFormPrice.reset();
-
-          stepper.reset();
 
           this.message.set(response.message!);
 
@@ -97,7 +101,9 @@ export class CreateItineraryComponent {
       error: (err) => {
         console.error('error', err);
         if (err.error.errors) {
-          this.formErrors.setFormErrors(combinedForm.controls, err.error.errors);
+          this.formErrors.setFormErrors(this.itineraryFormCountry.controls, err.error.errors);
+          this.formErrors.setFormErrors(this.itineraryFormHotel.controls, err.error.errors);
+          this.formErrors.setFormErrors(this.itineraryFormPrice.controls, err.error.errors);
         } else if (err.error.message) {
           this.globalError.set(err.error.message);
           return;

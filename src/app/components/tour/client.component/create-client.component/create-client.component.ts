@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 
 import { ClientService } from '../../../../services/client.service';
 import { FormErrorsService } from '../../../../services/form-errors.service';
@@ -35,6 +35,7 @@ export class CreateClientComponent {
   private formErrors = inject(FormErrorsService);
 
   globalError = signal<string | null>(null);
+  message = signal<string | null>(null);
 
   clientFormName = new FormGroup({
     firstName: new FormControl('', [
@@ -64,18 +65,20 @@ export class CreateClientComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
-  onCreate() {
-    const combinedForm = new FormGroup({
-      ...this.clientFormName.controls,
-      ...this.clientFormContacts.controls,
-      ...this.clientFormAddress.controls,
-    });
-
-    this.formErrors.clearFormErrors(combinedForm.controls);
+  onCreate(stepper: MatStepper) {
+    this.formErrors.clearFormErrors(this.clientFormName.controls);
+    this.formErrors.clearFormErrors(this.clientFormAddress.controls);
+    this.formErrors.clearFormErrors(this.clientFormContacts.controls);
     this.globalError.set(null);
 
-    if (combinedForm.invalid) {
-      combinedForm.markAllAsTouched();
+    if (
+      this.clientFormName.invalid ||
+      this.clientFormAddress.invalid ||
+      this.clientFormContacts.invalid
+    ) {
+      this.clientFormName.markAllAsTouched();
+      this.clientFormAddress.markAllAsTouched();
+      this.clientFormContacts.markAllAsTouched();
       return;
     }
 
@@ -89,13 +92,24 @@ export class CreateClientComponent {
       next: (response) => {
         if (response.success && response.data) {
           this.globalError.set(null);
+
+          stepper.reset();
+
+          this.clientFormName.reset();
+          this.clientFormAddress.reset();
+          this.clientFormContacts.reset();
+
+          this.message.set(response.message!);
+
           this.tour.setClient(response.data);
           this.router.navigateByUrl('/new-tour/itinerary');
         }
       },
       error: (err) => {
         if (err.error.errors) {
-          this.formErrors.setFormErrors(combinedForm.controls, err.error.errors);
+          this.formErrors.setFormErrors(this.clientFormName.controls, err.error.errors);
+          this.formErrors.setFormErrors(this.clientFormAddress.controls, err.error.errors);
+          this.formErrors.setFormErrors(this.clientFormContacts.controls, err.error.errors);
         } else if (err.error.message) {
           this.globalError.set(err.error.message);
         }

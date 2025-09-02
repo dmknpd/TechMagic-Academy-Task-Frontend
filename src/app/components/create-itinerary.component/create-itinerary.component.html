@@ -1,62 +1,7 @@
-<!-- <div class="login-container">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title class="title">Create Itinerary</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form (submit)="onItineraryCreate()" [formGroup]="itineraryForm" class="login-form">
-        @if (globalError()) {
-        <mat-error class="global-error">{{ globalError() }}</mat-error>
-        }
-        <app-input
-          [control]="itineraryForm.controls['country']"
-          label="Country"
-          placeholder="Ukraine"
-        ></app-input>
-
-        <app-input
-          [control]="itineraryForm.controls['climate']"
-          label="Climate"
-          placeholder="temperate"
-        ></app-input>
-
-        <app-input
-          [control]="itineraryForm.controls['url']"
-          label="Image Url"
-          type="number"
-          placeholder="https://image.com/picture.jpg"
-        ></app-input>
-
-        <app-input
-          [control]="itineraryForm.controls['hotel']"
-          label="Hotel"
-          placeholder="Hotel Ukraine"
-        ></app-input>
-
-        <app-input
-          [control]="itineraryForm.controls['duration']"
-          label="Duration"
-          type="number"
-          placeholder="temperate"
-        ></app-input>
-
-        <app-input
-          [control]="itineraryForm.controls['price']"
-          label="Price"
-          type="number"
-          placeholder="100"
-        ></app-input>
-
-        <button type="submit" matButton="filled">Create</button>
-      </form>
-    </mat-card-content>
-  </mat-card>
-</div> -->
-
 <div class="itinerary">
   <div class="create-card">
     <div class="header">
-      <h3 class="title">Create New Client</h3>
+      <h3 class="title">Create New Itinerary</h3>
     </div>
     <div>
       <mat-horizontal-stepper class="stepper" linear #stepper>
@@ -136,12 +81,12 @@
             <mat-error class="global-error">{{ globalError() }}</mat-error>
             }
 
-            <app-input
+            <!-- <app-input
               [control]="itineraryFormPrice.controls['duration']"
               label="Duration"
               type="number"
               placeholder="temperate"
-            ></app-input>
+            ></app-input> -->
 
             <app-input
               [control]="itineraryFormPrice.controls['price']"
