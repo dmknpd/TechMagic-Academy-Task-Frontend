@@ -10,10 +10,9 @@ export interface Tour {
   __v: number;
 }
 
-export interface TourFormData {
+export interface TourInfoFormData {
   startDate: Date;
   duration: number;
   quantity: number;
-  discount: number;
-  clientId: string;
+  discount?: number[];
 }

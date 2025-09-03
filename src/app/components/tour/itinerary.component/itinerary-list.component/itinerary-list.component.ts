@@ -24,12 +24,6 @@ export class ItineraryListComponent {
     initialValue: [],
   });
 
-  constructor() {
-    effect(() => {
-      const list = this.itineraryDataList();
-    });
-  }
-
   selectItinerary(itinerary: Itinerary) {
     if (itinerary) {
       this.tour.setItinerary(itinerary);

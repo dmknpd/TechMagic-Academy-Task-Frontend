@@ -7,9 +7,6 @@
       <mat-horizontal-stepper class="stepper" linear #stepper>
         <!-- Step 1: Date -->
         <mat-step [stepControl]="tourFormDate">
-          @if (message()) {
-          <div class="message">{{ message() }}</div>
-          }
           <form [formGroup]="tourFormDate">
             <ng-template matStepLabel>Date</ng-template>
 
@@ -66,7 +63,7 @@
               <button
                 mat-button
                 matStepperNext
-                (click)="tourFormPricing.markAllAsTouched()"
+                (click)="assignTourInfo()"
                 [disabled]="tourFormPricing.invalid"
                 matButton="filled"
               >

@@ -10,6 +10,9 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { InputComponent } from '../../input.component/input.component';
 import { TourService } from '../../../services/tour.service';
 import { FormErrorsService } from '../../../services/form-errors.service';
+import { TourInfoFormData } from '../../../types/tour';
+import { duration, Moment } from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tour.component',
@@ -26,69 +29,47 @@ import { FormErrorsService } from '../../../services/form-errors.service';
   styleUrl: './tour.component.css',
 })
 export class TourComponent {
+  private router = inject(Router);
   private tour = inject(TourService);
-  private formErrors = inject(FormErrorsService);
-
-  globalError = signal<string | null>(null);
-  message = signal<string | null>(null);
 
   durationList = this.tour.getItineraryDurationList() ?? [];
 
   tourFormDate = new FormGroup({
-    startDate: new FormControl(null, [Validators.required]),
-    duration: new FormControl(null, [Validators.required]),
+    startDate: new FormControl<Moment | null>(null, [Validators.required]),
+    duration: new FormControl(1, [Validators.required]),
   });
 
   tourFormPricing = new FormGroup({
     quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
-    discount: new FormControl([]),
+    discount: new FormControl<number[] | null>(null),
   });
 
   allOptions = this.tour.getDiscountOptions();
 
-  // onItineraryCreate(stepper: MatStepper) {
-  //   this.formErrors.clearFormErrors(this.tourFormDate.controls);
-  //   this.formErrors.clearFormErrors(this.tourFormPricing.controls);
+  assignTourInfo() {
+    if (this.tourFormDate.invalid || this.tourFormPricing.invalid) {
+      this.tourFormDate.markAllAsTouched();
+      this.tourFormPricing.markAllAsTouched();
+      return;
+    }
 
-  //   this.globalError.set(null);
+    const startDate = this.tourFormDate.value.startDate!.toDate();
+    const duration = this.tourFormDate.value.duration!;
 
-  //   if (this.tourFormDate.invalid || this.tourFormPricing.invalid) {
-  //     this.tourFormDate.markAllAsTouched();
-  //     this.tourFormPricing.markAllAsTouched();
-  //     return;
-  //   }
-  //   const formValue: ItineraryFormData = {
-  //     ...this.tourFormDate.value,
-  //     ...this.tourFormPricing.value,
-  //   } as ItineraryFormData;
+    const quantity = this.tourFormPricing.value.quantity!;
+    const discount = this.tourFormPricing.value.discount;
 
-  //   this.itinerary.create(formValue).subscribe({
-  //     next: (response) => {
-  //       if (response.success) {
-  //         this.globalError.set(null);
+    const formValue: TourInfoFormData = {
+      startDate: startDate,
+      duration: duration,
+      quantity: quantity,
+    };
 
-  //         stepper.reset();
+    if (discount != null) {
+      formValue.discount = discount;
+    }
 
-  //         this.itineraryFormCountry.reset();
-  //         this.itineraryFormHotel.reset();
-  //         this.itineraryFormPrice.reset();
-
-  //         this.message.set(response.message!);
-
-  //         console.log(response);
-  //       }
-  //     },
-  //     error: (err) => {
-  //       console.error('error', err);
-  //       if (err.error.errors) {
-  //         this.formErrors.setFormErrors(this.itineraryFormCountry.controls, err.error.errors);
-  //         this.formErrors.setFormErrors(this.itineraryFormHotel.controls, err.error.errors);
-  //         this.formErrors.setFormErrors(this.itineraryFormPrice.controls, err.error.errors);
-  //       } else if (err.error.message) {
-  //         this.globalError.set(err.error.message);
-  //         return;
-  //       }
-  //     },
-  //   });
-  // }
+    this.tour.setTourInfo(formValue);
+    this.router.navigateByUrl('/new-tour/summary');
+  }
 }

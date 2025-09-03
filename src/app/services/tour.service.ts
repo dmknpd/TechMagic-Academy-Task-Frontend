@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Client } from '../types/client';
 import { Itinerary } from '../types/itinerary';
+import { TourInfoFormData } from '../types/tour';
 
 const BASE_URL = `${environment.backendHost}/api/tour`;
 
@@ -12,6 +13,7 @@ const BASE_URL = `${environment.backendHost}/api/tour`;
 export class TourService {
   private client = signal<Client | null>(null);
   private itinerary = signal<Itinerary | null>(null);
+  private tourInfo = signal<TourInfoFormData | null>(null);
 
   private discountOptions = [
     { name: '-5% Extra booking', value: 5 },
@@ -41,6 +43,10 @@ export class TourService {
 
   getDiscountOptions() {
     return this.discountOptions;
+  }
+
+  setTourInfo(tour: TourInfoFormData) {
+    this.tourInfo.set(tour);
   }
 
   // createSale(): Observable<ApiResponse> {
