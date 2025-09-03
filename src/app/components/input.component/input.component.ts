@@ -109,12 +109,6 @@ export class InputComponent {
 
   selectedOptions: ChipOption[] = [];
 
-  ngOnInit() {
-    this.selectedOptions = (this.control.value || [])
-      .map((v: any) => this.chips.find((c) => c.value === v))
-      .filter(Boolean) as ChipOption[];
-  }
-
   private syncControl() {
     this.control.setValue(this.selectedOptions.map((o) => o.value));
   }
