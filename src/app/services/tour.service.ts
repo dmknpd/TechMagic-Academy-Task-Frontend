@@ -13,7 +13,11 @@ export class TourService {
   private client = signal<Client | null>(null);
   private itinerary = signal<Itinerary | null>(null);
 
-  private discountOptions = ['-5% Extra booking', '-10% Hot deal', '-5% Long stay'];
+  private discountOptions = [
+    { name: '-5% Extra booking', value: 5 },
+    { name: '-10% Hot deal', value: 10 },
+    { name: '-5% Long stay', value: 5 },
+  ];
 
   setClient(client: Client): void {
     this.client.set(client);

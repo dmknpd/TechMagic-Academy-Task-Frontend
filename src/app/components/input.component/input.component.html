@@ -31,16 +31,16 @@
   <!-- chips -->
 
   @else if(type === 'chips'){
+
   <mat-chip-grid #chipGrid aria-label="Chip selection">
-    <mat-chip-row
-      *ngFor="let item of control.value || []; trackBy: trackByFn"
-      (removed)="remove(item)"
-    >
-      {{ item }}
-      <button matChipRemove [attr.aria-label]="'Remove ' + item">
+    @for(option of selectedOptions ; track option){
+    <mat-chip-row (removed)="remove($index)">
+      {{ option.name }}
+      <button matChipRemove [attr.aria-label]="'Remove ' + option.name">
         <mat-icon>cancel</mat-icon>
       </button>
     </mat-chip-row>
+    }
   </mat-chip-grid>
 
   <input
@@ -53,7 +53,11 @@
   />
 
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let option of filteredOptions()" [value]="option">{{ option }}</mat-option>
+    @for(option of filteredOptions(); track option.name){
+    <mat-option [value]="option.name">
+      {{ option.name }}
+    </mat-option>
+    }
   </mat-autocomplete>
   }
 

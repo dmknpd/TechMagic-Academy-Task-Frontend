@@ -29,6 +29,11 @@ const MY_DATE_FORMATS = {
   },
 };
 
+export interface ChipOption {
+  name: string;
+  value: number;
+}
+
 @Component({
   selector: 'app-input',
   imports: [
@@ -95,45 +100,59 @@ export class InputComponent {
   }
 
   // chips
-  @Input() chips: string[] = [];
+  @Input() chips: ChipOption[] = [];
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   readonly inputControl = new FormControl('');
 
   private announcer = inject(LiveAnnouncer);
 
+  selectedOptions: ChipOption[] = [];
+
+  ngOnInit() {
+    this.selectedOptions = (this.control.value || [])
+      .map((v: any) => this.chips.find((c) => c.value === v))
+      .filter(Boolean) as ChipOption[];
+  }
+
+  private syncControl() {
+    this.control.setValue(this.selectedOptions.map((o) => o.value));
+  }
+
   add(event: MatChipInputEvent) {
-    const value = (event.value || '').trim();
-    if (value && !this.control.value?.includes(value)) {
-      this.control.setValue([...(this.control.value || []), value]);
+    const input = (event.value || '').trim().toLowerCase();
+    if (!input) return;
+
+    const found = this.chips.find((c) => c.name.toLowerCase() === input);
+    if (found && !this.selectedOptions.some((o) => o.name === found.name)) {
+      this.selectedOptions.push(found);
+      this.syncControl();
     }
     this.inputControl.setValue('');
   }
 
-  remove(item: string) {
-    this.control.setValue((this.control.value || []).filter((i: any) => i !== item));
-    this.announcer.announce(`Removed ${item}`);
+  remove(index: number) {
+    this.selectedOptions.splice(index, 1);
+    this.syncControl();
+    this.announcer.announce(`Removed chip`);
   }
 
   selected(event: MatAutocompleteSelectedEvent) {
-    const value = event.option.viewValue;
-    if (!this.control.value?.includes(value)) {
-      this.control.setValue([...(this.control.value || []), value]);
+    const found = this.chips.find((c) => c.name === event.option.viewValue);
+    if (found && !this.selectedOptions.some((o) => o.name === found.name)) {
+      this.selectedOptions.push(found);
+      this.syncControl();
     }
     this.inputControl.setValue('');
     event.option.deselect();
   }
 
-  filteredOptions() {
+  filteredOptions(): ChipOption[] {
     const val = (this.inputControl.value || '').toLowerCase();
-    return val
-      ? this.chips.filter(
-          (c) => c.toLowerCase().includes(val) && !(this.control.value || []).includes(c)
-        )
-      : this.chips.filter((c) => !(this.control.value || []).includes(c));
-  }
+    const selectedNames = this.selectedOptions.map((o) => o.name);
 
-  trackByFn(index: number, item: string) {
-    return item;
+    return this.chips.filter(
+      (c) => !selectedNames.includes(c.name) && (!val || c.name.toLowerCase().includes(val))
+    );
   }
 }
