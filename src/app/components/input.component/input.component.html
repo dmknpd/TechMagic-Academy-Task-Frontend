@@ -3,14 +3,34 @@
   @if(isPhoneField){
   <span matTextPrefix>+&nbsp;</span>
 
-  <!-- input -->
+  <!-- datepicker -->
   } @if(type === 'date'){
-  <input matInput [matDatepicker]="picker" />
-  <mat-hint>MM/DD/YYYY</mat-hint>
+  <input
+    matInput
+    [matDatepicker]="picker"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    (click)="picker.open()"
+  />
   <mat-datepicker #picker></mat-datepicker>
 
-  <button matButton="elevated" (click)="picker.open()">Open</button>
-  }@else{
+  }
+
+  <!-- select -->
+
+  @else if (type === 'select') {
+
+  <mat-select [formControl]="control">
+    @for (item of selectList; track item) {
+    <mat-option [value]="item">{{ item }}</mat-option>
+    }
+  </mat-select>
+
+  }
+
+  <!-- input -->
+
+  @else{
   <input matInput [type]="type" [placeholder]="placeholder" [formControl]="control" />
   }
 

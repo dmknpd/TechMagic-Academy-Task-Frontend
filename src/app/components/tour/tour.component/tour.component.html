@@ -17,12 +17,14 @@
               [control]="tourFormDate.controls['startDate']"
               label="Start Date"
               type="date"
+              placeholder="DD/MM/YYYY"
             ></app-input>
 
             <app-input
               [control]="tourFormDate.controls['duration']"
               label="Duration"
-              placeholder="temperate"
+              type="select"
+              [selectList]="durationList"
             ></app-input>
 
             <div class="stepper-buttons">

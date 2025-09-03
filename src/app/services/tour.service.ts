@@ -29,6 +29,10 @@ export class TourService {
     return this.itinerary;
   }
 
+  getItineraryDurationList() {
+    return this.itinerary()?.duration;
+  }
+
   // createSale(): Observable<ApiResponse> {
   //   if (!this.client || !this.itinerary) throw new Error('Недостаточно данных');
   //   return this.http.post<ApiResponse>('/api/sales', {

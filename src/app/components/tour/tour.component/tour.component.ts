@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -32,13 +32,15 @@ export class TourComponent {
   globalError = signal<string | null>(null);
   message = signal<string | null>(null);
 
+  durationList = this.tour.getItineraryDurationList() ?? [];
+
   tourFormDate = new FormGroup({
-    startDate: new FormControl('', [Validators.required]),
-    duration: new FormControl(0, [Validators.required]),
+    startDate: new FormControl(null, [Validators.required]),
+    duration: new FormControl(null, [Validators.required]),
   });
 
   tourFormPricing = new FormGroup({
-    quantity: new FormControl(1, [Validators.required]),
+    quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
     discount: new FormControl(0, [Validators.required]),
   });
 
