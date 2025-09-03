@@ -11,6 +11,7 @@
   <div class="info-sidebar" [class.hidden]="isHidden">
     <h2 class="title">Tour Info</h2>
 
+    <!-- Client -->
     <div class="info_content">
       <div class="info_block">
         <h3 class="title">Client Info</h3>
@@ -61,30 +62,32 @@
         </div>
       </div>
 
+      <!-- Itinerary -->
+
       <div class="info_block">
         <h3 class="title">Itinerary Info</h3>
         <div class="field_block">
-          <div class="custom-form-field disabled">
+          <div class="custom-form-field disabled" title="{{ itineraryData()?.country }}">
             <label>Country</label>
-            <div class="field-value">Null</div>
+            <div class="field-value">{{ itineraryData()?.country ?? 'Null' }}</div>
           </div>
-          <div class="custom-form-field disabled">
+          <div class="custom-form-field disabled" title="{{ itineraryData()?.hotel }}">
             <label>Hotel</label>
-            <div class="field-value">Null</div>
+            <div class="field-value">{{ itineraryData()?.hotel ?? 'Null' }}</div>
           </div>
         </div>
 
         <div class="field_block">
-          <div class="custom-form-field disabled">
-            <label>Price</label>
-            <div class="field-value">Null</div>
-          </div>
-          <div class="custom-form-field disabled">
-            <label>Duration (week)</label>
-            <div class="field-value">Null</div>
+          <div class="custom-form-field disabled" title="{{ `${itineraryData()?.price}$` }}">
+            <label>Price (per week)</label>
+            <div class="field-value">
+              {{ itineraryData()?.price ? `${itineraryData()?.price}$` : 'Null' }}
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Tour -->
 
       <div class="info_block">
         <h3 class="title">Tour Info</h3>
@@ -94,12 +97,16 @@
             <div class="field-value">Null</div>
           </div>
           <div class="custom-form-field disabled">
-            <label>Quantity (person)</label>
+            <label>Duration (week)</label>
             <div class="field-value">Null</div>
           </div>
         </div>
 
         <div class="field_block">
+          <div class="custom-form-field disabled">
+            <label>Quantity (person)</label>
+            <div class="field-value">Null</div>
+          </div>
           <div class="custom-form-field disabled">
             <label>Discount</label>
             <div class="field-value">Null</div>

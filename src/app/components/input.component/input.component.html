@@ -2,12 +2,25 @@
   <mat-label>{{ label }}</mat-label>
   @if(isPhoneField){
   <span matTextPrefix>+&nbsp;</span>
-  }
-  <input matInput [type]="type" [placeholder]="placeholder" [formControl]="control" />
 
+  <!-- input -->
+  } @if(type === 'date'){
+  <input matInput [matDatepicker]="picker" />
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker #picker></mat-datepicker>
+
+  <button matButton="elevated" (click)="picker.open()">Open</button>
+  }@else{
+  <input matInput [type]="type" [placeholder]="placeholder" [formControl]="control" />
+  }
+
+  <!-- errors -->
   @for(key of errorKeys() ; track $index){
   <mat-error>{{ getErrorMessage(key, control.getError(key)) }}</mat-error>
-  } @if(isPasswordField){
+  }
+
+  <!-- password hide -->
+  @if(isPasswordField){
   <button
     type="button"
     mat-icon-button

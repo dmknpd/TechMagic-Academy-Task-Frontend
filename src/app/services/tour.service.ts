@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { Client } from '../types/client';
+import { Itinerary } from '../types/itinerary';
 
 const BASE_URL = `${environment.backendHost}/api/tour`;
 
 @Injectable({ providedIn: 'root' })
 export class TourService {
   private client = signal<Client | null>(null);
-  // private itinerary: Itinerary | null = null;
+  private itinerary = signal<Itinerary | null>(null);
 
   setClient(client: Client): void {
     this.client.set(client);
@@ -20,9 +21,14 @@ export class TourService {
     return this.client;
   }
 
-  // setItinerary(itinerary: Itinerary) {
-  //   this.itinerary = itinerary;
-  // }
+  setItinerary(itinerary: Itinerary) {
+    this.itinerary.set(itinerary);
+  }
+
+  getItinerary() {
+    return this.itinerary;
+  }
+
   // createSale(): Observable<ApiResponse> {
   //   if (!this.client || !this.itinerary) throw new Error('Недостаточно данных');
   //   return this.http.post<ApiResponse>('/api/sales', {

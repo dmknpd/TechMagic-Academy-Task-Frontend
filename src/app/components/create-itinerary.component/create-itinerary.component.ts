@@ -32,18 +32,6 @@ export class CreateItineraryComponent {
   globalError = signal<string | null>(null);
   message = signal<string | null>(null);
 
-  // itineraryForm = new FormGroup({
-  //   country: new FormControl('', [Validators.required]),
-  //   climate: new FormControl('', [Validators.required]),
-  //   hotel: new FormControl('', [Validators.required]),
-  //   url: new FormControl('', [
-  //     Validators.required,
-  //     Validators.pattern(/^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-]*)*(\?.*)?(#.*)?$/i),
-  //   ]),
-  //   duration: new FormControl(0, [Validators.required, Validators.pattern(/^[1-9]\d*$/)]),
-  //   price: new FormControl(0, [Validators.required, Validators.min(1)]),
-  // });
-
   itineraryFormCountry = new FormGroup({
     country: new FormControl('', [Validators.required]),
     climate: new FormControl('', [Validators.required]),

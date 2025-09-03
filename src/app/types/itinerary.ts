@@ -2,7 +2,7 @@ export interface Itinerary {
   _id: string;
   country: string;
   climate: string;
-  duration: number;
+  duration: [number];
   hotel: string;
   price: number;
   url: string;
@@ -13,7 +13,6 @@ export interface Itinerary {
 export interface ItineraryFormData {
   country: string;
   climate: string;
-  duration: number;
   hotel: string;
   price: number;
   url: string;

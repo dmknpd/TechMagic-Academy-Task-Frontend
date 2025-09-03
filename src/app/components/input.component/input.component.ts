@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-input',
@@ -14,8 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatDatepickerModule,
     ReactiveFormsModule,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
 })
@@ -23,7 +27,7 @@ export class InputComponent {
   @Input() control!: FormControl;
   @Input() label = '';
   @Input() placeholder = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' = 'text';
+  @Input() type: 'text' | 'email' | 'password' | 'number' | 'date' = 'text';
   @Input() isPasswordField = false;
   @Input() isPhoneField = false;
 

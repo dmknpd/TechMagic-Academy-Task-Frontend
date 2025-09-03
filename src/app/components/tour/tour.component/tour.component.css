@@ -1,0 +1,48 @@
+.tour {
+  max-width: 500px;
+  min-width: 100px;
+  margin: 0 auto;
+}
+
+.create-card {
+  margin-top: 10px;
+  padding: 40px 20px 20px 20px;
+  border-radius: 10px;
+  background-color: var(--main-color);
+}
+
+.stepper {
+  background-color: var(--main-color);
+}
+
+form {
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.stepper-buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.first_btn {
+  margin-left: auto;
+}
+
+.message {
+  color: #2a9b46;
+  margin-top: 4px;
+  text-align: center;
+}

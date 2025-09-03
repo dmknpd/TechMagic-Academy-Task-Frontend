@@ -1,0 +1,79 @@
+<div class="tour">
+  <div class="create-card">
+    <div class="header">
+      <h3 class="title">Tour Details</h3>
+    </div>
+    <div>
+      <mat-horizontal-stepper class="stepper" linear #stepper>
+        <!-- Step 1: Date -->
+        <mat-step [stepControl]="tourFormDate">
+          @if (message()) {
+          <div class="message">{{ message() }}</div>
+          }
+          <form [formGroup]="tourFormDate">
+            <ng-template matStepLabel>Date</ng-template>
+
+            <app-input
+              [control]="tourFormDate.controls['startDate']"
+              label="Start Date"
+              type="date"
+            ></app-input>
+
+            <app-input
+              [control]="tourFormDate.controls['duration']"
+              label="Duration"
+              placeholder="temperate"
+            ></app-input>
+
+            <div class="stepper-buttons">
+              <button
+                class="first_btn"
+                mat-button
+                matStepperNext
+                (click)="tourFormDate.markAllAsTouched()"
+                [disabled]="tourFormDate.invalid"
+                matButton="filled"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Step 2: Hotel -->
+        <mat-step [stepControl]="tourFormPricing">
+          <form [formGroup]="tourFormPricing">
+            <ng-template matStepLabel>Pricing</ng-template>
+
+            <app-input
+              [control]="tourFormPricing.controls['quantity']"
+              label="Quantity"
+              type="number"
+              placeholder="Hotel Ukraine"
+            ></app-input>
+
+            <app-input
+              [control]="tourFormPricing.controls['discount']"
+              label="Discount"
+              type="number"
+              placeholder="0"
+            ></app-input>
+
+            <div class="stepper-buttons">
+              <button mat-button matStepperPrevious matButton="tonal">Back</button>
+              <button
+                mat-button
+                matStepperNext
+                (click)="tourFormPricing.markAllAsTouched()"
+                [disabled]="tourFormPricing.invalid"
+                matButton="filled"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>

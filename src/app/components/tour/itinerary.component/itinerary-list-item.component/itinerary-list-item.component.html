@@ -1,4 +1,4 @@
-<li class="item">
+<div class="item">
   <mat-card class="card">
     <div class="card-header">
       <img src="{{ itinerary.url }}" alt="Hotel img" class="img" />
@@ -12,10 +12,10 @@
 
     <mat-card-content class="card-content">
       <p><span class="content-item">Climate: </span> {{ itinerary.climate }}</p>
-      <p><span class="content-item">Duration: </span> {{ itinerary.duration }} weeks</p>
+      <p><span class="content-item">Duration: </span> {{ itinerary.duration.join(', ') }} weeks</p>
       <p>
         <span class="content-item">Price: </span><span class="price">{{ itinerary.price }}$</span>
       </p>
     </mat-card-content>
   </mat-card>
-</li>
+</div>

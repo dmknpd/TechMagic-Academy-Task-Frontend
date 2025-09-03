@@ -1,7 +1,9 @@
 <div class="itinerary">
   <ul class="list">
     @for(itinerary of itineraryDataList(); track itinerary._id ){
-    <app-itinerary-list-item [itinerary]="itinerary" />
+    <li (click)="selectItinerary(itinerary)">
+      <app-itinerary-list-item [itinerary]="itinerary" />
+    </li>
     }
   </ul>
 </div>

@@ -17,4 +17,5 @@ export class TourInfoSidebarComponent {
   isHidden = false;
 
   clientData = this.tour.getClient();
+  itineraryData = this.tour.getItinerary();
 }
