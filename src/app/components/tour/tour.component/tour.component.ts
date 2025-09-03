@@ -41,8 +41,10 @@ export class TourComponent {
 
   tourFormPricing = new FormGroup({
     quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
-    discount: new FormControl(0, [Validators.required]),
+    discount: new FormControl([]),
   });
+
+  allOptions = this.tour.getDiscountOptions();
 
   // onItineraryCreate(stepper: MatStepper) {
   //   this.formErrors.clearFormErrors(this.tourFormDate.controls);

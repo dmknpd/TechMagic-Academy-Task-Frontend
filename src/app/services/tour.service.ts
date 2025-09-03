@@ -13,6 +13,8 @@ export class TourService {
   private client = signal<Client | null>(null);
   private itinerary = signal<Itinerary | null>(null);
 
+  private discountOptions = ['-5% Extra booking', '-10% Hot deal', '-5% Long stay'];
+
   setClient(client: Client): void {
     this.client.set(client);
   }
@@ -31,6 +33,10 @@ export class TourService {
 
   getItineraryDurationList() {
     return this.itinerary()?.duration;
+  }
+
+  getDiscountOptions() {
+    return this.discountOptions;
   }
 
   // createSale(): Observable<ApiResponse> {

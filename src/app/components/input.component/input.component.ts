@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, inject, Input, model, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,9 +6,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 const MY_DATE_FORMATS = {
   parse: {
@@ -32,6 +39,8 @@ const MY_DATE_FORMATS = {
     MatButtonModule,
     MatDatepickerModule,
     MatSelectModule,
+    MatAutocompleteModule,
+    MatChipsModule,
     ReactiveFormsModule,
   ],
   providers: [
@@ -45,7 +54,7 @@ export class InputComponent {
   @Input() control!: FormControl;
   @Input() label = '';
   @Input() placeholder = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' | 'date' | 'select' = 'text';
+  @Input() type: 'text' | 'email' | 'password' | 'number' | 'date' | 'select' | 'chips' = 'text';
   @Input() isPasswordField = false;
   @Input() isPhoneField = false;
   @Input() selectList: any[] = [];
@@ -83,5 +92,48 @@ export class InputComponent {
       default:
         return '';
     }
+  }
+
+  // chips
+  @Input() chips: string[] = [];
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly inputControl = new FormControl('');
+
+  private announcer = inject(LiveAnnouncer);
+
+  add(event: MatChipInputEvent) {
+    const value = (event.value || '').trim();
+    if (value && !this.control.value?.includes(value)) {
+      this.control.setValue([...(this.control.value || []), value]);
+    }
+    this.inputControl.setValue('');
+  }
+
+  remove(item: string) {
+    this.control.setValue((this.control.value || []).filter((i: any) => i !== item));
+    this.announcer.announce(`Removed ${item}`);
+  }
+
+  selected(event: MatAutocompleteSelectedEvent) {
+    const value = event.option.viewValue;
+    if (!this.control.value?.includes(value)) {
+      this.control.setValue([...(this.control.value || []), value]);
+    }
+    this.inputControl.setValue('');
+    event.option.deselect();
+  }
+
+  filteredOptions() {
+    const val = (this.inputControl.value || '').toLowerCase();
+    return val
+      ? this.chips.filter(
+          (c) => c.toLowerCase().includes(val) && !(this.control.value || []).includes(c)
+        )
+      : this.chips.filter((c) => !(this.control.value || []).includes(c));
+  }
+
+  trackByFn(index: number, item: string) {
+    return item;
   }
 }

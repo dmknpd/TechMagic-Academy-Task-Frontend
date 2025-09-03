@@ -42,7 +42,7 @@
           </form>
         </mat-step>
 
-        <!-- Step 2: Hotel -->
+        <!-- Step 2: Pricing -->
         <mat-step [stepControl]="tourFormPricing">
           <form [formGroup]="tourFormPricing">
             <ng-template matStepLabel>Pricing</ng-template>
@@ -57,8 +57,8 @@
             <app-input
               [control]="tourFormPricing.controls['discount']"
               label="Discount"
-              type="number"
-              placeholder="0"
+              type="chips"
+              [chips]="allOptions"
             ></app-input>
 
             <div class="stepper-buttons">
