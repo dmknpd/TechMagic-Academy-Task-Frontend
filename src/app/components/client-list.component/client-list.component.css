@@ -30,6 +30,8 @@ th {
 .row:hover {
   background-color: var(--accent-color);
   color: var(--main-color);
+
+  cursor: pointer;
 }
 
 td {

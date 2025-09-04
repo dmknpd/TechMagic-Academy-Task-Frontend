@@ -12,6 +12,7 @@ import { canDeactivateGuard } from './guard/can-deactivate.guard';
 import { ItineraryListComponent } from './components/tour/itinerary.component/itinerary-list.component/itinerary-list.component';
 import { TourComponent } from './components/tour/tour.component/tour.component';
 import { SummaryComponent } from './components/tour/summary.component/summary.component';
+import { TourListComponent } from './components/tour-list.component/tour-list.component';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -36,6 +37,10 @@ export const routes: Routes = [
       {
         path: 'client-list',
         component: ClientListComponent,
+      },
+      {
+        path: 'tour-list',
+        component: TourListComponent,
       },
     ],
   },

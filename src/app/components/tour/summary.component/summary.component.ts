@@ -7,6 +7,7 @@ import { ClientInfoComponent } from './info-block/client-info.component/client-i
 import { ItineraryInfoComponent } from './info-block/itinerary-info.component/itinerary-info.component';
 import { TourInfoComponent } from './info-block/tour-info.component/tour-info.component';
 import { TourService } from '../../../services/tour.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary.component',
@@ -22,6 +23,8 @@ import { TourService } from '../../../services/tour.service';
   styleUrl: './summary.component.css',
 })
 export class SummaryComponent {
+  private router = inject(Router);
+
   private tour = inject(TourService);
 
   tourInfoData = this.tour.getTourInfo();
@@ -34,17 +37,18 @@ export class SummaryComponent {
     const confirmed = window.confirm('Are you sure you want to confirm?');
     if (!confirmed) return;
 
-    this.tour.createTour().subscribe({
-      next: (response) => {
-        if (response.success) {
-          // this.router.navigateByUrl('/tours');
-          console.log(response);
-          this.tour.reset();
-        }
-      },
-      error: (err) => {
-        console.error('error', err);
-      },
-    });
+    this.router.navigateByUrl('/tour-list', { state: { msg: `Tour successfully created!` } });
+    //   this.tour.createTour().subscribe({
+    //     next: (response) => {
+    //       if (response.success) {
+    //         console.log(response);
+    //         this.tour.reset();
+    //         this.router.navigateByUrl('/tours', { state: { msg: `Tour successfully created!` } });
+    //       }
+    //     },
+    //     error: (err) => {
+    //       console.error('error', err);
+    //     },
+    //   });
   }
 }

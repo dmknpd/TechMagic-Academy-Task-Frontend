@@ -82,9 +82,12 @@ export class TourService {
     return price - (price * discount) / 100;
   });
 
+  //Fields checked
   allDataFilled = computed(() => {
     return !!this.client() && !!this.itinerary() && !!this.tourInfo();
   });
+
+  //API
 
   createTour(): Observable<ApiResponse<Tour>> {
     if (!this.client()) throw new Error('Client is not set');
