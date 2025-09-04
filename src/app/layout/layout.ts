@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AuthService } from '../services/auth.service';
 import { Sidenav } from './sidenav/sidenav';
-import { TourInfoSidebarComponent } from '../components/tour/tour-info-sidebar.component/tour-info-sidebar.component';
+import { SummarySidebarComponent } from '../components/tour/summary.component/summary-sidebar.component/summary-sidebar.component';
 
 @Component({
   selector: 'app-layout',
@@ -16,7 +16,7 @@ import { TourInfoSidebarComponent } from '../components/tour/tour-info-sidebar.c
     RouterOutlet,
     MatSidenavModule,
     Sidenav,
-    TourInfoSidebarComponent,
+    SummarySidebarComponent,
   ],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
@@ -31,7 +31,8 @@ export class Layout {
   constructor() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isTourPages = event.urlAfterRedirects.startsWith('/new-tour');
+        const url = event.urlAfterRedirects;
+        this.isTourPages = url.startsWith('/new-tour') && !url.startsWith('/new-tour/summary');
       }
     });
   }

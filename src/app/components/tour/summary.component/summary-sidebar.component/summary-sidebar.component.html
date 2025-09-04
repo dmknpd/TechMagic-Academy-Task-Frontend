@@ -1,0 +1,25 @@
+<div class="container">
+  <button
+    class="btn"
+    [class.base]="isHidden"
+    matIconButton
+    (click)="this.isHidden = !this.isHidden"
+  >
+    <mat-icon class="icon">{{ isHidden ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+  </button>
+
+  <div class="info-sidebar" [class.hidden]="isHidden">
+    <h2 class="title">Summary</h2>
+
+    <div class="info_content">
+      <!-- Client -->
+      <app-client-info />
+
+      <!-- Itinerary -->
+      <app-itinerary-info />
+
+      <!-- Tour -->
+      <app-tour-info />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="info_block">
+  <h3 class="title">Itinerary Info</h3>
+  <div class="field_block">
+    <div class="custom-form-field disabled" title="{{ itineraryData()?.country }}">
+      <label>Country</label>
+      <div class="field-value">{{ itineraryData()?.country ?? 'Null' }}</div>
+    </div>
+    <div class="custom-form-field disabled" title="{{ itineraryData()?.hotel }}">
+      <label>Hotel</label>
+      <div class="field-value">{{ itineraryData()?.hotel ?? 'Null' }}</div>
+    </div>
+  </div>
+
+  <div class="field_block">
+    <div class="custom-form-field disabled" title="{{ `${itineraryData()?.price}$` }}">
+      <label>Price (per week)</label>
+      <div class="field-value">
+        {{ itineraryData()?.price ? `${itineraryData()?.price}$` : 'Null' }}
+      </div>
+    </div>
+  </div>
+</div>
