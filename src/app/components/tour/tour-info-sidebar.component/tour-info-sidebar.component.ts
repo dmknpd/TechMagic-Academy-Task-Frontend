@@ -18,4 +18,6 @@ export class TourInfoSidebarComponent {
 
   clientData = this.tour.getClient();
   itineraryData = this.tour.getItinerary();
+  tourInfoData = this.tour.getTourInfo();
+  discountSum = this.tour.discountSum;
 }

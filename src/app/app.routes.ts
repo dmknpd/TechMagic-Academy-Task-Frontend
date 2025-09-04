@@ -11,6 +11,7 @@ import { CreateItineraryComponent } from './components/create-itinerary.componen
 import { canDeactivateGuard } from './guard/can-deactivate.guard';
 import { ItineraryListComponent } from './components/tour/itinerary.component/itinerary-list.component/itinerary-list.component';
 import { TourComponent } from './components/tour/tour.component/tour.component';
+import { SummaryComponent } from './components/tour/summary.component/summary.component';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -29,6 +30,7 @@ export const routes: Routes = [
           { path: 'itinerary', component: ItineraryListComponent },
           { path: 'itinerary/create', component: CreateItineraryComponent },
           { path: 'tour', component: TourComponent },
+          { path: 'summary', component: SummaryComponent },
         ],
       },
       {

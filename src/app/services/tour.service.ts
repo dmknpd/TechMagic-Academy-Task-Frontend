@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -21,6 +21,7 @@ export class TourService {
     { name: '-5% Long stay', value: 5 },
   ];
 
+  //client
   setClient(client: Client): void {
     this.client.set(client);
   }
@@ -29,6 +30,7 @@ export class TourService {
     return this.client;
   }
 
+  //itinerary
   setItinerary(itinerary: Itinerary) {
     this.itinerary.set(itinerary);
   }
@@ -41,13 +43,24 @@ export class TourService {
     return this.itinerary()?.duration;
   }
 
+  //tourInfo
+  setTourInfo(tour: TourInfoFormData) {
+    this.tourInfo.set(tour);
+  }
+
+  getTourInfo() {
+    return this.tourInfo;
+  }
+
+  //discount
   getDiscountOptions() {
     return this.discountOptions;
   }
 
-  setTourInfo(tour: TourInfoFormData) {
-    this.tourInfo.set(tour);
-  }
+  discountSum = computed(() => {
+    const discounts = this.tourInfo()?.discount ?? [];
+    return discounts.reduce((acc, num) => acc + num, 0);
+  });
 
   // createSale(): Observable<ApiResponse> {
   //   if (!this.client || !this.itinerary) throw new Error('Недостаточно данных');
