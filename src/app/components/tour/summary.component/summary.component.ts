@@ -29,4 +29,22 @@ export class SummaryComponent {
   priceSum = this.tour.priceSum;
   discountSum = this.tour.discountSum;
   totalSum = this.tour.priceTotal;
+
+  onConfirm() {
+    const confirmed = window.confirm('Are you sure you want to confirm?');
+    if (!confirmed) return;
+
+    this.tour.createTour().subscribe({
+      next: (response) => {
+        if (response.success) {
+          // this.router.navigateByUrl('/tours');
+          console.log(response);
+          this.tour.reset();
+        }
+      },
+      error: (err) => {
+        console.error('error', err);
+      },
+    });
+  }
 }

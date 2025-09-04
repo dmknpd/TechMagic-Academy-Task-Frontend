@@ -12,7 +12,7 @@
   </div>
 
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ `${itineraryData()?.price}$` }}">
+    <div class="custom-form-field disabled" title="{{ itineraryData()?.price }}">
       <label>Price (per week)</label>
       <div class="field-value">
         {{ itineraryData()?.price ? `${itineraryData()?.price}$` : 'Null' }}

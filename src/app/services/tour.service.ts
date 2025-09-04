@@ -5,12 +5,15 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Client } from '../types/client';
 import { Itinerary } from '../types/itinerary';
-import { TourInfoFormData } from '../types/tour';
+import { Tour, TourInfoFormData } from '../types/tour';
+import { ApiResponse } from '../types/res';
 
-const BASE_URL = `${environment.backendHost}/api/tour`;
+const BASE_URL = `${environment.backendHost}/api/tours`;
 
 @Injectable({ providedIn: 'root' })
 export class TourService {
+  private http = inject(HttpClient);
+
   private client = signal<Client | null>(null);
   private itinerary = signal<Itinerary | null>(null);
   private tourInfo = signal<TourInfoFormData | null>(null);
@@ -83,11 +86,24 @@ export class TourService {
     return !!this.client() && !!this.itinerary() && !!this.tourInfo();
   });
 
-  // createSale(): Observable<ApiResponse> {
-  //   if (!this.client || !this.itinerary) throw new Error('Недостаточно данных');
-  //   return this.http.post<ApiResponse>('/api/sales', {
-  //     client: this.client,
-  //     itinerary: this.itinerary
-  //   });
-  // }
+  createTour(): Observable<ApiResponse<Tour>> {
+    if (!this.client()) throw new Error('Client is not set');
+    if (!this.itinerary()) throw new Error('Itinerary is not set');
+    if (!this.tourInfo()) throw new Error('Tour info is not set');
+
+    return this.http.post<ApiResponse<Tour>>(`${BASE_URL}/create`, {
+      itineraryId: this.itinerary()?._id,
+      clientId: this.client()?._id,
+      startDate: this.tourInfo()?.startDate,
+      duration: this.tourInfo()?.duration,
+      quantity: this.tourInfo()?.quantity,
+      discount: this.discountSum(),
+    });
+  }
+
+  reset() {
+    this.client.set(null);
+    this.itinerary.set(null);
+    this.tourInfo.set(null);
+  }
 }
