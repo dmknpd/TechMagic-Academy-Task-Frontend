@@ -64,6 +64,7 @@ export class InputComponent {
   @Input() isPhoneField = false;
   @Input() selectList: any[] = [];
 
+  minDate: Date = new Date();
   hidePassword = true;
 
   togglePassword() {
