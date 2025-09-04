@@ -62,6 +62,27 @@ export class TourService {
     return discounts.reduce((acc, num) => acc + num, 0);
   });
 
+  //price
+
+  priceSum = computed(() => {
+    const price = this.itinerary()?.price ?? 0;
+    const duration = this.tourInfo()?.duration ?? 1;
+    const quantity = this.tourInfo()?.quantity ?? 1;
+
+    return price * duration * quantity;
+  });
+
+  priceTotal = computed(() => {
+    const price = this.priceSum();
+    const discount = this.discountSum();
+
+    return price - (price * discount) / 100;
+  });
+
+  allDataFilled = computed(() => {
+    return !!this.client() && !!this.itinerary() && !!this.tourInfo();
+  });
+
   // createSale(): Observable<ApiResponse> {
   //   if (!this.client || !this.itinerary) throw new Error('Недостаточно данных');
   //   return this.http.post<ApiResponse>('/api/sales', {

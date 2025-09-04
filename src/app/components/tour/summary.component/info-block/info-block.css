@@ -37,7 +37,6 @@
 label {
   display: block;
   font-size: 14px;
-  color: #757575;
   margin-bottom: 4px;
 }
 
@@ -52,7 +51,6 @@ label {
 }
 
 .custom-form-field.disabled .field-value {
-  color: #9e9e9e;
   background-color: #f5f5f5;
   border-bottom: 1px solid #bdbdbd;
 }

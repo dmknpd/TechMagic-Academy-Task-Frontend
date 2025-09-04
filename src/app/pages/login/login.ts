@@ -22,10 +22,6 @@ import { FormErrorsService } from '../../services/form-errors.service';
   imports: [
     MatCardModule,
     MatFormFieldModule,
-    MatCheckboxModule,
-    MatDividerModule,
-    MatIconModule,
-    MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
     InputComponent,

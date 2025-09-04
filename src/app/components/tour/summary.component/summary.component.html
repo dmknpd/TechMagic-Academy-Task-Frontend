@@ -1,1 +1,35 @@
-<p>summary.component works!</p>
+<div class="card_container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title class="title"><h2>Summary</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <!-- client -->
+      <app-client-info />
+      <!-- itinerary -->
+      <app-itinerary-info />
+      <!-- tour -->
+      <app-tour-info />
+
+      <mat-divider></mat-divider>
+      <div class="price">
+        <div class="price_row">
+          <p>Price:</p>
+          <p>{{ priceSum() }}$</p>
+        </div>
+        <div class="price_row">
+          <p>Discount:</p>
+          <p>{{ discountSum() }}%</p>
+        </div>
+        <div class="price_row total">
+          <p>TOTAL:</p>
+          <p>{{ totalSum() }}$</p>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions class="actions">
+      <button class="btn" matButton="filled">Confirm</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

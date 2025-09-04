@@ -20,6 +20,10 @@
 
       <!-- Tour -->
       <app-tour-info />
+
+      @if(isAllDataFiled()){
+      <a class="link" matButton="filled" [routerLink]="['/new-tour/summary']">Summary</a>
+      }
     </div>
   </div>
 </div>
