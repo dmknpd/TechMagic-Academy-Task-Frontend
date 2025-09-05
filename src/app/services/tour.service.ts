@@ -60,11 +60,6 @@ export class TourService {
     return this.discountOptions;
   }
 
-  // discountSum = computed(() => {
-  //   const discounts = this.tourInfo()?.discount ?? [];
-  //   return discounts.reduce((acc, num) => acc + num, 0);
-  // });
-
   //price
 
   priceSum = computed(() => {

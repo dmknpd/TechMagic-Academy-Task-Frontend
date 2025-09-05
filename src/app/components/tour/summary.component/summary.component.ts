@@ -37,21 +37,20 @@ export class SummaryComponent {
   onConfirm() {
     const confirmed = window.confirm('Are you sure you want to confirm?');
     if (!confirmed) return;
-    console.log(this.clientData(), this.itineraryData(), this.tourInfoData());
 
-    // this.router.navigateByUrl('/tour-list', { state: { msg: `Tour successfully created!` } });
-    //   this.tour.createTour().subscribe({
-    //     next: (response) => {
-    //       if (response.success) {
-    //         console.log(response);
-    //         this.tour.reset();
-    //         this.router.navigateByUrl('/tours', { state: { msg: `Tour successfully created!` } });
-    //       }
-    //     },
-    //     error: (err) => {
-    //       console.error('error', err);
-    //     },
-    //   });
+    this.tour.createTour().subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.router.navigateByUrl(`/clients/${this.clientData()?._id}`, {
+            state: { message: `Tour successfully created!` },
+          });
+          this.tour.reset();
+        }
+      },
+      error: (err) => {
+        console.error('error', err);
+      },
+    });
   }
 
   onCancel() {
