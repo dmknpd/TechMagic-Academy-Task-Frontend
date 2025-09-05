@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-
-import { Client } from '../../types/client';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { RouterModule } from '@angular/router';
 
-import { ClientService } from '../../services/client.service';
+import { Client } from '../../../types/client';
+import { ClientService } from '../../../services/client.service';
 
 @Component({
   selector: 'app-client-list.component',
-  imports: [CommonModule, MatTableModule, MatCardModule, MatDividerModule],
+  imports: [CommonModule, MatTableModule, MatCardModule, MatDividerModule, RouterModule],
   templateUrl: './client-list.component.html',
   styleUrl: './client-list.component.css',
 })

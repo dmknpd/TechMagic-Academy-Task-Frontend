@@ -47,7 +47,12 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr
+        [routerLink]="[`/clients/${row._id}`]"
+        class="row"
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
     </table>
     <mat-divider></mat-divider>
   </mat-card-content>
