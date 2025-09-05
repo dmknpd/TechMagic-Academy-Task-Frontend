@@ -60,10 +60,10 @@ export class TourService {
     return this.discountOptions;
   }
 
-  discountSum = computed(() => {
-    const discounts = this.tourInfo()?.discount ?? [];
-    return discounts.reduce((acc, num) => acc + num, 0);
-  });
+  // discountSum = computed(() => {
+  //   const discounts = this.tourInfo()?.discount ?? [];
+  //   return discounts.reduce((acc, num) => acc + num, 0);
+  // });
 
   //price
 
@@ -77,7 +77,7 @@ export class TourService {
 
   priceTotal = computed(() => {
     const price = this.priceSum();
-    const discount = this.discountSum();
+    const discount = this.tourInfo()?.discount ?? 0;
 
     return price - (price * discount) / 100;
   });
@@ -100,7 +100,7 @@ export class TourService {
       startDate: this.tourInfo()?.startDate,
       duration: this.tourInfo()?.duration,
       quantity: this.tourInfo()?.quantity,
-      discount: this.discountSum(),
+      discount: this.tourInfo()?.discount,
     });
   }
 

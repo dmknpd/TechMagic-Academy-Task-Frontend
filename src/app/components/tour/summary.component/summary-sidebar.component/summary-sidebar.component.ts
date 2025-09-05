@@ -25,6 +25,10 @@ import { TourService } from '../../../../services/tour.service';
 export class SummarySidebarComponent {
   private tour = inject(TourService);
 
+  clientData = this.tour.getClient();
+  itineraryData = this.tour.getItinerary();
+  tourInfoData = this.tour.getTourInfo();
+
   isHidden = false;
 
   isAllDataFiled = this.tour.allDataFilled;

@@ -27,10 +27,11 @@ export class SummaryComponent {
 
   private tour = inject(TourService);
 
+  clientData = this.tour.getClient();
+  itineraryData = this.tour.getItinerary();
   tourInfoData = this.tour.getTourInfo();
 
   priceSum = this.tour.priceSum;
-  discountSum = this.tour.discountSum;
   totalSum = this.tour.priceTotal;
 
   onConfirm() {

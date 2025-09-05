@@ -13,13 +13,13 @@
 
     <div class="info_content">
       <!-- Client -->
-      <app-client-info />
+      <app-client-info [clientData]="clientData" />
 
       <!-- Itinerary -->
-      <app-itinerary-info />
+      <app-itinerary-info [itineraryData]="itineraryData" />
 
       <!-- Tour -->
-      <app-tour-info />
+      <app-tour-info [tourInfoData]="tourInfoData" />
 
       @if(isAllDataFiled()){
       <a class="link" matButton="filled" [routerLink]="['/new-tour/summary']">Summary</a>

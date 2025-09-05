@@ -14,5 +14,5 @@ export interface TourInfoFormData {
   startDate: Date;
   duration: number;
   quantity: number;
-  discount?: number[];
+  discount?: number;
 }

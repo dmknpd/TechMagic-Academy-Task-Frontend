@@ -4,12 +4,14 @@
       <mat-card-title class="title"><h2>Summary</h2></mat-card-title>
     </mat-card-header>
     <mat-card-content class="content">
-      <!-- client -->
-      <app-client-info />
-      <!-- itinerary -->
-      <app-itinerary-info />
-      <!-- tour -->
-      <app-tour-info />
+      <!-- Client -->
+      <app-client-info [clientData]="clientData" />
+
+      <!-- Itinerary -->
+      <app-itinerary-info [itineraryData]="itineraryData" />
+
+      <!-- Tour -->
+      <app-tour-info [tourInfoData]="tourInfoData" />
 
       <mat-divider></mat-divider>
       <div class="price">
@@ -19,7 +21,7 @@
         </div>
         <div class="price_row">
           <p>Discount:</p>
-          <p>{{ discountSum() }}%</p>
+          <p>{{ tourInfoData()?.discount || 0 }}%</p>
         </div>
         <div class="price_row total">
           <p>TOTAL:</p>

@@ -28,6 +28,10 @@
   overflow-y: auto;
 }
 
+.title {
+  margin-bottom: 10px;
+}
+
 .info-sidebar.hidden {
   width: 0px;
 }
@@ -42,7 +46,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 .link {

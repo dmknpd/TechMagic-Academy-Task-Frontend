@@ -57,7 +57,7 @@ export class TourComponent {
     const duration = this.tourFormDate.value.duration!;
 
     const quantity = this.tourFormPricing.value.quantity!;
-    const discount = this.tourFormPricing.value.discount;
+    const discountArray = this.tourFormPricing.value.discount;
 
     const formValue: TourInfoFormData = {
       startDate: startDate,
@@ -65,7 +65,8 @@ export class TourComponent {
       quantity: quantity,
     };
 
-    if (discount != null) {
+    if (discountArray != null) {
+      let discount = discountArray.reduce((sum, val) => sum + val, 0);
       formValue.discount = discount;
     }
 
