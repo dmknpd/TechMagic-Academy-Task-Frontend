@@ -59,18 +59,25 @@ export class InputComponent {
   @Input() control!: FormControl;
   @Input() label = '';
   @Input() placeholder = '';
-  @Input() type: 'text' | 'email' | 'password' | 'number' | 'date' | 'select' | 'chips' = 'text';
-  @Input() isPasswordField = false;
-  @Input() isPhoneField = false;
+  @Input() type: 'text' | 'email' | 'password' | 'tel' | 'number' | 'date' | 'select' | 'chips' =
+    'text';
   @Input() selectList: any[] = [];
 
+  isPasswordField = false;
   minDate: Date = new Date();
   hidePassword = true;
+
+  //password visibility
+  ngOnInit(): void {
+    this.isPasswordField = this.type === 'password';
+  }
 
   togglePassword() {
     this.hidePassword = !this.hidePassword;
     this.type = this.hidePassword ? 'password' : 'text';
   }
+
+  //errors
 
   errorKeys(): string[] {
     if (!this.control || !this.control.errors) return [];

@@ -1,29 +1,35 @@
 <div class="info_block">
   <h3 class="title">Tour Info</h3>
   <div class="field_block">
-    <div
-      class="custom-form-field disabled"
-      title="{{ tourInfoData()?.startDate?.toLocaleDateString() }}"
-    >
-      <label>Start Date</label>
-      <div class="field-value">
-        {{ tourInfoData()?.startDate?.toLocaleDateString() ?? 'Null' }}
-      </div>
+    <div class="half">
+      <app-input
+        [control]="tourForm.controls['startDate']"
+        label="Start Date"
+        type="date"
+        placeholder="DD/MM/YYYY"
+      />
     </div>
-    <div class="custom-form-field disabled" title="{{ tourInfoData()?.duration }}">
-      <label>Duration (week)</label>
-      <div class="field-value">{{ tourInfoData()?.duration ?? 'Null' }}</div>
+    <div class="half">
+      <app-input [control]="tourForm.controls['duration']" label="Duration (week)" />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ tourInfoData()?.quantity }}">
-      <label>Quantity (person)</label>
-      <div class="field-value">{{ tourInfoData()?.quantity ?? 'Null' }}</div>
+    <div class="half">
+      <app-input
+        [control]="tourForm.controls['quantity']"
+        label="Quantity (person)"
+        type="number"
+        placeholder="1"
+      />
     </div>
-    <div class="custom-form-field disabled" title="{{ discountSum() }}">
-      <label>Discount</label>
-      <div class="field-value">{{ discountSum() }}%</div>
+    <div class="half">
+      <app-input
+        [control]="tourForm.controls['discount']"
+        label="Discount (%)"
+        type="number"
+        placeholder="1"
+      />
     </div>
   </div>
 </div>

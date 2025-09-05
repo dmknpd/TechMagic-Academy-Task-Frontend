@@ -1,22 +1,30 @@
 <div class="info_block">
   <h3 class="title">Itinerary Info</h3>
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ itineraryData()?.country }}">
-      <label>Country</label>
-      <div class="field-value">{{ itineraryData()?.country ?? 'Null' }}</div>
+    <div class="half">
+      <app-input
+        [control]="itineraryForm.controls['country']"
+        label="Country"
+        placeholder="Ukraine"
+      />
     </div>
-    <div class="custom-form-field disabled" title="{{ itineraryData()?.hotel }}">
-      <label>Hotel</label>
-      <div class="field-value">{{ itineraryData()?.hotel ?? 'Null' }}</div>
+    <div class="half">
+      <app-input
+        [control]="itineraryForm.controls['hotel']"
+        label="Hotel"
+        placeholder="Hotel Ukraine"
+      />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ itineraryData()?.price }}">
-      <label>Price (per week)</label>
-      <div class="field-value">
-        {{ itineraryData()?.price ? `${itineraryData()?.price}$` : 'Null' }}
-      </div>
+    <div class="full">
+      <app-input
+        [control]="itineraryForm.controls['price']"
+        label="Price ($/per week)"
+        type="number"
+        placeholder="1000"
+      />
     </div>
   </div>
 </div>

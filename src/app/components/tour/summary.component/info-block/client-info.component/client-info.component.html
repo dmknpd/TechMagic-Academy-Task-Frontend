@@ -1,48 +1,52 @@
 <div class="info_block">
   <h3 class="title">Client Info</h3>
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ clientData()?.firstName }}">
-      <label>First Name</label>
-      <div class="field-value">{{ clientData()?.firstName ?? 'Null' }}</div>
+    <div class="half">
+      <app-input
+        [control]="clientForm.controls['firstName']"
+        label="First Name"
+        placeholder="John"
+      />
     </div>
-    <div class="custom-form-field disabled" title="{{ clientData()?.lastName }}">
-      <label>Last Name</label>
-      <div class="field-value">{{ clientData()?.lastName ?? 'Null' }}</div>
-    </div>
-  </div>
-
-  <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ clientData()?.middleName }}">
-      <label>Middle Name</label>
-      <div class="field-value half-field">
-        {{ clientData()?.middleName ?? 'Null' }}
-      </div>
+    <div class="half">
+      <app-input [control]="clientForm.controls['lastName']" label="Last Name" placeholder="John" />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ clientData()?.address?.country }}">
-      <label>Country</label>
-      <div class="field-value">{{ clientData()?.address?.country ?? 'Null' }}</div>
-    </div>
-    <div class="custom-form-field disabled" title="{{ clientData()?.address?.city }}">
-      <label>City</label>
-      <div class="field-value">
-        {{ clientData()?.address?.city ?? 'Null' }}
-      </div>
+    <div class="full">
+      <app-input
+        [control]="clientForm.controls['middleName']"
+        label="Middle Name"
+        placeholder="John"
+      />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="custom-form-field disabled" title="{{ clientData()?.phone }}">
-      <label>Phone</label>
-      <div class="field-value">
-        {{ clientData()?.phone ? `+${clientData()?.phone}` : 'Null' }}
-      </div>
+    <div class="half">
+      <app-input [control]="clientForm.controls['country']" label="Country" placeholder="Ukraine" />
     </div>
-    <div class="custom-form-field disabled" title="{{ clientData()?.email }}">
-      <label>Email</label>
-      <div class="field-value">{{ clientData()?.email ?? 'Null' }}</div>
+    <div class="half">
+      <app-input [control]="clientForm.controls['city']" label="City" placeholder="Kyiv" />
+    </div>
+  </div>
+
+  <div class="field_block">
+    <div class="half">
+      <app-input
+        [control]="clientForm.controls['phone']"
+        label="Phone"
+        placeholder="380501234567"
+      />
+    </div>
+    <div class="half">
+      <app-input
+        [control]="clientForm.controls['email']"
+        label="Email"
+        placeholder="myemail@mail.com"
+        type="email"
+      />
     </div>
   </div>
 </div>

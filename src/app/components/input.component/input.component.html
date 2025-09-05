@@ -1,10 +1,13 @@
 <mat-form-field class="full-width-input" appearance="fill">
   <mat-label>{{ label }}</mat-label>
-  @if(isPhoneField){
+
+  <!-- phone prefix -->
+  @if(type === 'tel'){
   <span matTextPrefix>+&nbsp;</span>
+  }
 
   <!-- datepicker -->
-  } @if(type === 'date'){
+  @if(type === 'date'){
   <input
     matInput
     [matDatepicker]="picker"
@@ -63,7 +66,6 @@
   }
 
   <!-- input -->
-
   @else{
   <input matInput [type]="type" [placeholder]="placeholder" [formControl]="control" />
   }
