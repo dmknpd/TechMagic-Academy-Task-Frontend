@@ -37,8 +37,9 @@ export class SummaryComponent {
   onConfirm() {
     const confirmed = window.confirm('Are you sure you want to confirm?');
     if (!confirmed) return;
+    console.log(this.clientData(), this.itineraryData(), this.tourInfoData());
 
-    this.router.navigateByUrl('/tour-list', { state: { msg: `Tour successfully created!` } });
+    // this.router.navigateByUrl('/tour-list', { state: { msg: `Tour successfully created!` } });
     //   this.tour.createTour().subscribe({
     //     next: (response) => {
     //       if (response.success) {
@@ -51,5 +52,13 @@ export class SummaryComponent {
     //       console.error('error', err);
     //     },
     //   });
+  }
+
+  onCancel() {
+    const confirmed = window.confirm('Are you sure you want to cancel?');
+    if (!confirmed) return;
+
+    this.tour.reset();
+    this.router.navigateByUrl('/');
   }
 }

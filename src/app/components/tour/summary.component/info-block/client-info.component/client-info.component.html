@@ -1,46 +1,46 @@
 <div class="info_block">
   <h3 class="title">Client Info</h3>
   <div class="field_block">
-    <div class="half">
+    <div class="half" title="{{ clientForm.controls['firstName'].getRawValue() }}">
       <app-input
         [control]="clientForm.controls['firstName']"
         label="First Name"
         placeholder="John"
       />
     </div>
-    <div class="half">
-      <app-input [control]="clientForm.controls['lastName']" label="Last Name" placeholder="John" />
+    <div class="half" title="{{ clientForm.controls['lastName'].getRawValue() }}">
+      <app-input [control]="clientForm.controls['lastName']" label="Last Name" placeholder="Doe" />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="full">
+    <div class="full" title="{{ clientForm.controls['middleName'].getRawValue() }}">
       <app-input
         [control]="clientForm.controls['middleName']"
         label="Middle Name"
-        placeholder="John"
+        placeholder="Mykolaiovych"
       />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="half">
+    <div class="half" title="{{ clientForm.controls['country'].getRawValue() }}">
       <app-input [control]="clientForm.controls['country']" label="Country" placeholder="Ukraine" />
     </div>
-    <div class="half">
+    <div class="half" title="{{ clientForm.controls['city'].getRawValue() }}">
       <app-input [control]="clientForm.controls['city']" label="City" placeholder="Kyiv" />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="half">
+    <div class="half" title="{{ clientForm.controls['phone'].getRawValue() }}">
       <app-input
         [control]="clientForm.controls['phone']"
         label="Phone"
         placeholder="380501234567"
       />
     </div>
-    <div class="half">
+    <div class="half" title="{{ clientForm.controls['email'].getRawValue() }}">
       <app-input
         [control]="clientForm.controls['email']"
         label="Email"

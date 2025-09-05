@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { ItineraryListItemComponent } from '../itinerary-list-item.component/itinerary-list-item.component';
@@ -20,9 +20,16 @@ export class ItineraryListComponent {
   private itinerary = inject(ItineraryService);
   private tour = inject(TourService);
 
-  itineraryDataList = toSignal(this.itinerary.getAll().pipe(map((res) => res.data ?? [])), {
-    initialValue: [],
-  });
+  itineraryDataList = toSignal(
+    this.itinerary.getAll().pipe(
+      map((response) => response.data ?? []),
+      catchError((err) => {
+        console.error('Error fetching itineraries:', err);
+        return of([]);
+      })
+    ),
+    { initialValue: [] }
+  );
 
   selectItinerary(itinerary: Itinerary) {
     if (itinerary) {

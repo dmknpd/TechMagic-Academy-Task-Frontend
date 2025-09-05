@@ -1,7 +1,7 @@
 <div class="info_block">
   <h3 class="title">Tour Info</h3>
   <div class="field_block">
-    <div class="half">
+    <div class="half" title="{{ tourForm.controls['startDate'].getRawValue() }}">
       <app-input
         [control]="tourForm.controls['startDate']"
         label="Start Date"
@@ -9,13 +9,13 @@
         placeholder="DD/MM/YYYY"
       />
     </div>
-    <div class="half">
+    <div class="half" title="{{ tourForm.controls['duration'].getRawValue() }}">
       <app-input [control]="tourForm.controls['duration']" label="Duration (week)" />
     </div>
   </div>
 
   <div class="field_block">
-    <div class="half">
+    <div class="half" title="{{ tourForm.controls['quantity'].getRawValue() }}">
       <app-input
         [control]="tourForm.controls['quantity']"
         label="Quantity (person)"
@@ -23,7 +23,7 @@
         placeholder="1"
       />
     </div>
-    <div class="half">
+    <div class="half" title="{{ tourForm.controls['discount'].getRawValue() }}">
       <app-input
         [control]="tourForm.controls['discount']"
         label="Discount (%)"

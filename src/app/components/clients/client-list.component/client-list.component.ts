@@ -4,11 +4,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 
 import { Client } from '../../../types/client';
 import { ClientService } from '../../../services/client.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-client-list.component',
@@ -19,26 +20,16 @@ import { ClientService } from '../../../services/client.service';
 export class ClientListComponent {
   private client = inject(ClientService);
 
-  clients: Client[] = [];
   displayedColumns = ['lastName', 'firstName', 'middleName', 'phone', 'email', 'country', 'city'];
 
-  constructor() {
-    this.fetchAllClients();
-  }
-
-  fetchAllClients() {
-    this.client
-      .getAllClients()
-      .pipe(
-        catchError((err) => {
-          console.error('Error fetching clients:', err);
-          return of([]);
-        })
-      )
-      .subscribe((response: any) => {
-        if (response.success && response.data) {
-          this.clients = response.data;
-        }
-      });
-  }
+  clients = toSignal(
+    this.client.getAllClients().pipe(
+      map((response) => response.data ?? []),
+      catchError((err) => {
+        console.error('Error fetching clients:', err);
+        return of([]);
+      })
+    ),
+    { initialValue: [] }
+  );
 }

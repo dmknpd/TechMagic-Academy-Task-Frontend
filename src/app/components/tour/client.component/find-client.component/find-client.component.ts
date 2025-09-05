@@ -52,7 +52,7 @@ export class FindClientComponent {
       distinctUntilChanged(),
       filter(() => this.phoneControl.valid),
       switchMap((phone) =>
-        this.client.searchByPhone(phone).pipe(
+        this.client.getClientByPhone(phone).pipe(
           catchError(() => of(null)),
           map((res) => (res?.success && res.data ? res.data : null))
         )

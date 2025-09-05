@@ -1,0 +1,48 @@
+.card_container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.price {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.actions {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+}

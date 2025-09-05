@@ -1,1 +1,14 @@
-<p>client-details.component works!</p>
+<div class="card_container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title class="title"><h4>Client</h4></mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="content">
+      <app-client-info [clientData]="clientData" />
+      <!-- <mat-divider></mat-divider> -->
+    </mat-card-content>
+    <!-- <mat-card-actions class="actions">
+      <button class="btn" matButton="filled">Confirm</button>
+    </mat-card-actions> -->
+  </mat-card>
+</div>
