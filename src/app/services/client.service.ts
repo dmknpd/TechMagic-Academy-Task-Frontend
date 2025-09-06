@@ -29,4 +29,12 @@ export class ClientService {
   create(data: ClientFormData): Observable<ApiResponse<Client>> {
     return this.http.post<ApiResponse<Client>>(`${BASE_URL}/create`, data);
   }
+
+  update(id: string, data: ClientFormData): Observable<ApiResponse<Client>> {
+    return this.http.put<ApiResponse<Client>>(`${BASE_URL}/${id}/edit`, data);
+  }
+
+  delete(id: string): Observable<ApiResponse<{ id: string }>> {
+    return this.http.delete<ApiResponse<{ id: string }>>(`${BASE_URL}/${id}/delete`);
+  }
 }

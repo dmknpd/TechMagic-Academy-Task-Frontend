@@ -44,6 +44,11 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
+}
+
+.logo_link {
+  text-decoration: none;
 }
 
 .icon_text_block {
@@ -60,7 +65,7 @@ nav {
 
 .list_item {
   font-size: 18px;
-  padding: 10px;
+
   border-radius: 10px;
   cursor: pointer;
   width: 200px;

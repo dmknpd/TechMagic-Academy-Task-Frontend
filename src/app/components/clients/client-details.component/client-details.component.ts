@@ -10,7 +10,6 @@ import { MatTableModule } from '@angular/material/table';
 import { ClientInfoComponent } from '../../tour/summary.component/info-block/client-info.component/client-info.component';
 import { ClientService } from '../../../services/client.service';
 import { CommonModule } from '@angular/common';
-import { Tour } from '../../../types/tour';
 
 @Component({
   selector: 'app-client-details.component',

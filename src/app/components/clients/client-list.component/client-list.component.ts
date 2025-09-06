@@ -31,4 +31,10 @@ export class ClientListComponent {
     ),
     { initialValue: [] }
   );
+
+  message = history.state.message;
+
+  constructor() {
+    history.replaceState({}, '');
+  }
 }

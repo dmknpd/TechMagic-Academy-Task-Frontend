@@ -23,3 +23,15 @@
   color: #292929;
   margin-bottom: 20px;
 }
+
+.btn_block {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.message {
+  color: #2a9b46;
+  text-align: center;
+  margin-bottom: 10px;
+}

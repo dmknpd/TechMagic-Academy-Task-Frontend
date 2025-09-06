@@ -82,6 +82,13 @@ export class TourService {
     return !!this.client() && !!this.itinerary() && !!this.tourInfo();
   });
 
+  //Reset
+  reset() {
+    this.client.set(null);
+    this.itinerary.set(null);
+    this.tourInfo.set(null);
+  }
+
   //API
 
   createTour(): Observable<ApiResponse<Tour>> {
@@ -97,11 +104,5 @@ export class TourService {
       quantity: this.tourInfo()?.quantity,
       discount: this.tourInfo()?.discount,
     });
-  }
-
-  reset() {
-    this.client.set(null);
-    this.itinerary.set(null);
-    this.tourInfo.set(null);
   }
 }

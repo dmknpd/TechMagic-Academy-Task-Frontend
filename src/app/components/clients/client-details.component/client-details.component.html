@@ -5,11 +5,12 @@
     </mat-card-header>
     <mat-card-content class="content">
       <div class="client">
-        <app-client-info [clientData]="clientData" />
+        <app-client-info [clientData]="clientData" [withControl]="true" />
       </div>
-      <h3 class="title">Tours</h3>
-      <mat-divider></mat-divider>
+
       <div class="table_container">
+        <h3 class="title">Tours</h3>
+        <mat-divider></mat-divider>
         @if(message){
         <div class="message">{{ message }}</div>
         }
@@ -74,8 +75,5 @@
         </table>
       </div>
     </mat-card-content>
-    <!-- <mat-card-actions class="actions">
-      <button class="btn" matButton="filled">Confirm</button>
-    </mat-card-actions> -->
   </mat-card>
 </div>

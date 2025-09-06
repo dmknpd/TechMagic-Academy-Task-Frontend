@@ -48,3 +48,8 @@ mat-card-footer {
 mat-divider {
   border-top-color: #74777f;
 }
+
+.message {
+  color: #2a9b46;
+  text-align: center;
+}
