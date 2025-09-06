@@ -8,11 +8,9 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ClientComponent } from './components/tour/client.component/client.component';
 import { ClientListComponent } from './components/clients/client-list.component/client-list.component';
 import { CreateItineraryComponent } from './components/create-itinerary.component/create-itinerary.component';
-import { canDeactivateGuard } from './guard/can-deactivate.guard';
 import { ItineraryListComponent } from './components/tour/itinerary.component/itinerary-list.component/itinerary-list.component';
 import { TourComponent } from './components/tour/tour.component/tour.component';
 import { SummaryComponent } from './components/tour/summary.component/summary.component';
-import { TourListComponent } from './components/tour-list.component/tour-list.component';
 import { ClientDetailsComponent } from './components/clients/client-details.component/client-details.component';
 import { Registration } from './components/auth/registration/registration';
 import { adminGuard } from './guard/admin.guard';
@@ -34,14 +32,12 @@ export const routes: Routes = [
           { path: '', redirectTo: 'client', pathMatch: 'full' },
           { path: 'client', component: ClientComponent },
           { path: 'itinerary', component: ItineraryListComponent },
-          { path: 'itinerary/create', component: CreateItineraryComponent },
           { path: 'tour', component: TourComponent },
           { path: 'summary', component: SummaryComponent },
         ],
       },
 
       //clients
-
       {
         path: 'clients',
         children: [
@@ -50,9 +46,13 @@ export const routes: Routes = [
         ],
       },
 
+      // itinerary
       {
-        path: 'tour-list',
-        component: TourListComponent,
+        path: 'itinerary',
+        children: [
+          { path: '', component: ItineraryListComponent },
+          { path: 'create', component: CreateItineraryComponent, canActivate: [adminGuard] },
+        ],
       },
     ],
   },

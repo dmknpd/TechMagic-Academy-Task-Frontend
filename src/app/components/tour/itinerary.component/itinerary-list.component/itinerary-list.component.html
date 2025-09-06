@@ -7,8 +7,9 @@
     }
 
     <!-- Add Itinerary -->
+    @if(showAddItinerary()){
     <li class="item">
-      <a [routerLink]="['/new-tour/itinerary/create']">
+      <a [routerLink]="['/itinerary/create']">
         <mat-card class="card">
           <mat-card-content class="card_content">
             <mat-icon class="icon">add</mat-icon>
@@ -16,5 +17,6 @@
         </mat-card>
       </a>
     </li>
+    }
   </ul>
 </div>

@@ -75,7 +75,7 @@ export class CreateItineraryComponent {
 
           this.message.set(response.message!);
 
-          this.router.navigateByUrl('/new-tour/itinerary');
+          this.router.navigateByUrl('/itinerary');
         }
       },
       error: (err) => {

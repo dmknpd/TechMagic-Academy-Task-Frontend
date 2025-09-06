@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -10,6 +10,7 @@ import { ItineraryListItemComponent } from '../itinerary-list-item.component/iti
 import { ItineraryService } from '../../../../services/itinerary.service';
 import { Itinerary } from '../../../../types/itinerary';
 import { TourService } from '../../../../services/tour.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-itinerary-list',
@@ -25,6 +26,7 @@ import { TourService } from '../../../../services/tour.service';
 })
 export class ItineraryListComponent {
   private router = inject(Router);
+  private auth = inject(AuthService);
   private itinerary = inject(ItineraryService);
   private tour = inject(TourService);
 
@@ -45,4 +47,11 @@ export class ItineraryListComponent {
       this.router.navigateByUrl('/new-tour/tour');
     }
   }
+
+  userRole = computed(() => this.auth.getUserRole());
+  currentPath = computed(() => this.router.url);
+
+  showAddItinerary = computed(() => {
+    return this.userRole() === 'admin' && this.currentPath().startsWith('/itinerary');
+  });
 }
