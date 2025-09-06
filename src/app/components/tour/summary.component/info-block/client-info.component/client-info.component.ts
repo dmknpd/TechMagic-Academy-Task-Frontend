@@ -15,28 +15,28 @@ export class ClientInfoComponent {
   @Input() clientData!: Signal<Client | null>;
 
   clientForm = new FormGroup({
-    firstName: new FormControl({ value: '', disabled: true }, [
+    firstName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
     ]),
-    lastName: new FormControl({ value: '', disabled: true }, [
+    lastName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
     ]),
-    middleName: new FormControl({ value: '', disabled: true }, [
+    middleName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
     ]),
-    country: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    city: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    phone: new FormControl({ value: '', disabled: true }, [
+    country: new FormControl({ value: '-', disabled: true }, [Validators.required]),
+    city: new FormControl({ value: '-', disabled: true }, [Validators.required]),
+    phone: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.pattern(/^\d{12}$/),
     ]),
-    email: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email]),
+    email: new FormControl({ value: '-', disabled: true }, [Validators.required, Validators.email]),
   });
 
   constructor() {

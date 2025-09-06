@@ -11,6 +11,46 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
   justify-items: stretch;
-
   padding: 20px;
+}
+
+/* add */
+
+.item {
+  height: 300px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.card_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.icon {
+  transform: scale(5);
+  color: #d9dadf;
+  transition: all 0.3s ease;
+}
+
+.card:hover .icon {
+  transform: scale(6);
 }

@@ -1,9 +1,20 @@
 <div class="itinerary">
   <ul class="list">
     @for(itinerary of itineraryDataList(); track itinerary._id ){
-    <li (click)="selectItinerary(itinerary)">
+    <li (click)="selectItinerary(itinerary)" class="item">
       <app-itinerary-list-item [itinerary]="itinerary" />
     </li>
     }
+
+    <!-- Add Itinerary -->
+    <li class="item">
+      <a [routerLink]="['/new-tour/itinerary/create']">
+        <mat-card class="card">
+          <mat-card-content class="card_content">
+            <mat-icon class="icon">add</mat-icon>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </li>
   </ul>
 </div>

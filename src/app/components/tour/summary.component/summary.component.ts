@@ -10,7 +10,7 @@ import { TourService } from '../../../services/tour.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-summary.component',
+  selector: 'app-summary',
   imports: [
     MatCardModule,
     MatButtonModule,

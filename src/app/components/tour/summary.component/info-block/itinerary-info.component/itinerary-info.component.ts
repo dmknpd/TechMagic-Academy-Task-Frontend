@@ -14,8 +14,8 @@ export class ItineraryInfoComponent {
   @Input() itineraryData!: Signal<Itinerary | null>;
 
   itineraryForm = new FormGroup({
-    country: new FormControl({ value: '', disabled: true }, [Validators.required]),
-    hotel: new FormControl({ value: '', disabled: true }, [Validators.required]),
+    country: new FormControl({ value: '-', disabled: true }, [Validators.required]),
+    hotel: new FormControl({ value: '-', disabled: true }, [Validators.required]),
     price: new FormControl({ value: 0, disabled: true }, [Validators.required]),
   });
 

@@ -17,13 +17,13 @@
               [control]="itineraryFormCountry.controls['country']"
               label="Country"
               placeholder="Ukraine"
-            ></app-input>
+            />
 
             <app-input
               [control]="itineraryFormCountry.controls['climate']"
               label="Climate"
               placeholder="temperate"
-            ></app-input>
+            />
 
             <div class="stepper-buttons">
               <button
@@ -49,52 +49,29 @@
               [control]="itineraryFormHotel.controls['hotel']"
               label="Hotel"
               placeholder="Hotel Ukraine"
-            ></app-input>
+            />
 
             <app-input
               [control]="itineraryFormHotel.controls['url']"
               label="Image Url"
               placeholder="https://image.com/picture.jpg"
-            ></app-input>
-
-            <div class="stepper-buttons">
-              <button mat-button matStepperPrevious matButton="tonal">Back</button>
-              <button
-                mat-button
-                matStepperNext
-                (click)="itineraryFormHotel.markAllAsTouched()"
-                [disabled]="itineraryFormHotel.invalid"
-                matButton="filled"
-              >
-                Next
-              </button>
-            </div>
-          </form>
-        </mat-step>
-
-        <!-- Step 3: Price -->
-        <mat-step [stepControl]="itineraryFormPrice">
-          <form [formGroup]="itineraryFormPrice">
-            <ng-template matStepLabel>Price</ng-template>
-
-            @if (globalError()) {
-            <mat-error class="global-error">{{ globalError() }}</mat-error>
-            }
+            />
 
             <app-input
-              [control]="itineraryFormPrice.controls['price']"
-              label="Price"
+              [control]="itineraryFormHotel.controls['price']"
+              label="Price ($/per week)"
               type="number"
               placeholder="100"
-            ></app-input>
+            />
 
             <div class="stepper-buttons">
               <button mat-button matStepperPrevious matButton="tonal">Back</button>
+
               <button
                 mat-raised-button
                 color="primary"
                 (click)="onItineraryCreate(stepper)"
-                [disabled]="itineraryFormPrice.invalid"
+                [disabled]="itineraryFormHotel.invalid"
                 matButton="filled"
               >
                 Create

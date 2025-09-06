@@ -1,8 +1,10 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ItineraryListItemComponent } from '../itinerary-list-item.component/itinerary-list-item.component';
 import { ItineraryService } from '../../../../services/itinerary.service';
@@ -11,7 +13,13 @@ import { TourService } from '../../../../services/tour.service';
 
 @Component({
   selector: 'app-itinerary-list',
-  imports: [MatGridListModule, ItineraryListItemComponent],
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    MatGridListModule,
+    ItineraryListItemComponent,
+    RouterModule,
+  ],
   templateUrl: './itinerary-list.component.html',
   styleUrl: './itinerary-list.component.css',
 })

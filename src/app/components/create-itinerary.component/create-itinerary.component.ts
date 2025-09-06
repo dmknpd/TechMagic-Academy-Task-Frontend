@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { InputComponent } from '../input.component/input.component';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-itinerary.component',
@@ -26,6 +27,8 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
   styleUrl: './create-itinerary.component.css',
 })
 export class CreateItineraryComponent {
+  private router = inject(Router);
+
   private itinerary = inject(ItineraryService);
   private formErrors = inject(FormErrorsService);
 
@@ -40,34 +43,24 @@ export class CreateItineraryComponent {
   itineraryFormHotel = new FormGroup({
     hotel: new FormControl('', [Validators.required]),
     url: new FormControl('', [Validators.required]),
-  });
-
-  itineraryFormPrice = new FormGroup({
-    // duration: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(3)]),
     price: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
 
   onItineraryCreate(stepper: MatStepper) {
     this.formErrors.clearFormErrors(this.itineraryFormCountry.controls);
     this.formErrors.clearFormErrors(this.itineraryFormHotel.controls);
-    this.formErrors.clearFormErrors(this.itineraryFormPrice.controls);
 
     this.globalError.set(null);
 
-    if (
-      this.itineraryFormCountry.invalid ||
-      this.itineraryFormHotel.invalid ||
-      this.itineraryFormPrice.invalid
-    ) {
+    if (this.itineraryFormCountry.invalid || this.itineraryFormHotel.invalid) {
       this.itineraryFormCountry.markAllAsTouched();
       this.itineraryFormHotel.markAllAsTouched();
-      this.itineraryFormPrice.markAllAsTouched();
+
       return;
     }
     const formValue: ItineraryFormData = {
       ...this.itineraryFormCountry.value,
       ...this.itineraryFormHotel.value,
-      ...this.itineraryFormPrice.value,
     } as ItineraryFormData;
 
     this.itinerary.create(formValue).subscribe({
@@ -79,11 +72,10 @@ export class CreateItineraryComponent {
 
           this.itineraryFormCountry.reset();
           this.itineraryFormHotel.reset();
-          this.itineraryFormPrice.reset();
 
           this.message.set(response.message!);
 
-          console.log(response);
+          this.router.navigateByUrl('/new-tour/itinerary');
         }
       },
       error: (err) => {
@@ -91,7 +83,6 @@ export class CreateItineraryComponent {
         if (err.error.errors) {
           this.formErrors.setFormErrors(this.itineraryFormCountry.controls, err.error.errors);
           this.formErrors.setFormErrors(this.itineraryFormHotel.controls, err.error.errors);
-          this.formErrors.setFormErrors(this.itineraryFormPrice.controls, err.error.errors);
         } else if (err.error.message) {
           this.globalError.set(err.error.message);
           return;

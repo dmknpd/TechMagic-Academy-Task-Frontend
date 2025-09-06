@@ -15,7 +15,7 @@ import { duration, Moment } from 'moment';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tour.component',
+  selector: 'app-tour',
   imports: [
     MatCardModule,
     MatFormFieldModule,
