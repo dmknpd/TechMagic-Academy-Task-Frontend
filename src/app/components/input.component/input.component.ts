@@ -81,6 +81,7 @@ export class InputComponent {
 
   errorKeys(): string[] {
     if (!this.control || !this.control.errors) return [];
+    if (!this.control.touched && !this.control.dirty) return [];
     return Object.keys(this.control.errors);
   }
 
@@ -100,6 +101,8 @@ export class InputComponent {
         return `Enter a valid email`;
       case 'pattern':
         return `Enter valid ${this.label}`;
+      case 'passwordMismatch':
+        return `Passwords do not match`;
       case 'serverError':
         return Array.isArray(error) ? error.join(', ') : String(error);
       default:

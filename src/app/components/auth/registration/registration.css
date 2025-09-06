@@ -1,18 +1,11 @@
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: var(--secondary-color);
-}
-
-.login-card {
-  width: 450px;
+.card {
+  width: 500px;
   padding: 25px;
   text-align: center;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 }
 
 mat-card-header {
@@ -22,15 +15,26 @@ mat-card-header {
 .title {
   font-size: 24px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.login-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.full-width-input {
+.message {
+  color: #2a9b46;
+  text-align: center;
+}
+
+.field_block {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.half {
+  width: 48%;
 }

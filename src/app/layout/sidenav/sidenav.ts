@@ -17,6 +17,7 @@ export class Sidenav {
   private router = inject(Router);
 
   userEmail = this.auth.getUserEmail();
+  userRole = this.auth.getUserRole();
 
   onLogout() {
     this.auth.logout().subscribe({

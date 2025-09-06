@@ -7,10 +7,10 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 
-import { AuthService } from '../../services/auth.service';
-import { LoginData } from '../../types/auth';
-import { InputComponent } from '../../components/input.component/input.component';
-import { FormErrorsService } from '../../services/form-errors.service';
+import { AuthService } from '../../../services/auth.service';
+import { LoginData } from '../../../types/auth';
+import { InputComponent } from '../../input.component/input.component';
+import { FormErrorsService } from '../../../services/form-errors.service';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +34,7 @@ export class Login {
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    password: new FormControl('', [Validators.required]),
   });
 
   onLogin() {

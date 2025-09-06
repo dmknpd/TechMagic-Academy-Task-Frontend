@@ -18,11 +18,13 @@
           <span>Itinerary List</span> <mat-icon>keyboard_arrow_right</mat-icon></a
         >
       </li>
+      @if(userRole === 'admin'){
       <li class="list_item">
-        <a [routerLink]="['/']" class="link">
-          <span>Hotels</span> <mat-icon>keyboard_arrow_right</mat-icon></a
+        <a [routerLink]="['/registration']" class="link">
+          <span>Register User</span> <mat-icon>keyboard_arrow_right</mat-icon></a
         >
       </li>
+      }
     </ul>
 
     <ul class="list">

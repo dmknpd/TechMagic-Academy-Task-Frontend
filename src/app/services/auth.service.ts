@@ -12,6 +12,7 @@ const BASE_URL = `${environment.backendHost}/api/auth`;
 interface JwtPayload {
   userId: string;
   email: string;
+  role: 'user' | 'admin';
   iat: number;
   exp: number;
 }
@@ -24,6 +25,7 @@ export class AuthService {
 
   private accessToken = signal<string | null>(null);
   private userEmail = signal<string | null>(null);
+  private userRole = signal<'user' | 'admin' | null>(null);
 
   private isRefreshing = false;
 
@@ -33,6 +35,7 @@ export class AuthService {
     const decoded = this.decodeToken(token);
     if (decoded) {
       this.userEmail.set(decoded.email);
+      this.userRole.set(decoded.role);
     }
   }
 
@@ -42,6 +45,10 @@ export class AuthService {
 
   getUserEmail(): string | null {
     return this.userEmail();
+  }
+
+  getUserRole(): 'user' | 'admin' | null {
+    return this.userRole();
   }
 
   isTokenRefreshing(): boolean {
