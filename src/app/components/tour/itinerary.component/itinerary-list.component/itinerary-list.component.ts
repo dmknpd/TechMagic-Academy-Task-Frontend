@@ -42,6 +42,7 @@ export class ItineraryListComponent {
   );
 
   selectItinerary(itinerary: Itinerary) {
+    if (this.isItineraryPage()) return;
     if (itinerary) {
       this.tour.setItinerary(itinerary);
       this.router.navigateByUrl('/new-tour/tour');
@@ -49,9 +50,9 @@ export class ItineraryListComponent {
   }
 
   userRole = computed(() => this.auth.getUserRole());
-  currentPath = computed(() => this.router.url);
+  isItineraryPage = computed(() => this.router.url.startsWith('/itinerary'));
 
   showAddItinerary = computed(() => {
-    return this.userRole() === 'admin' && this.currentPath().startsWith('/itinerary');
+    return this.userRole() === 'admin' && this.isItineraryPage();
   });
 }
