@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { Login } from './components/auth/login/login';
 import { Layout } from './layout/layout';
 import { authGuard } from './guard/auth.guard';
-import { noAuthGuard } from './guard/noAuth.guard';
+import { noAuthGuard } from './guard/no-auth.guard';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { ClientComponent } from './components/tour/client.component/client.component';
 import { ClientListComponent } from './components/clients/client-list.component/client-list.component';
@@ -14,6 +14,9 @@ import { SummaryComponent } from './components/tour/summary.component/summary.co
 import { ClientDetailsComponent } from './components/clients/client-details.component/client-details.component';
 import { Registration } from './components/auth/registration/registration';
 import { adminGuard } from './guard/admin.guard';
+import { itineraryGuard } from './guard/itinerary.guard';
+import { tourInfoGuard } from './guard/tour-info.guard';
+import { summaryGuard } from './guard/summary.guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -31,9 +34,9 @@ export const routes: Routes = [
         children: [
           { path: '', redirectTo: 'client', pathMatch: 'full' },
           { path: 'client', component: ClientComponent },
-          { path: 'itinerary', component: ItineraryListComponent },
-          { path: 'tour', component: TourComponent },
-          { path: 'summary', component: SummaryComponent },
+          { path: 'itinerary', component: ItineraryListComponent, canActivate: [itineraryGuard] },
+          { path: 'tour', component: TourComponent, canActivate: [tourInfoGuard] },
+          { path: 'summary', component: SummaryComponent, canActivate: [summaryGuard] },
         ],
       },
 
