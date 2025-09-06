@@ -54,3 +54,9 @@
 .card:hover .icon {
   transform: scale(6);
 }
+
+.message {
+  color: #2a9b46;
+  text-align: center;
+  margin: 10px 0;
+}

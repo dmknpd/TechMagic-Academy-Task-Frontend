@@ -1,9 +1,12 @@
 import { Component, effect, inject, Input, signal, Signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from '../../../../input.component/input.component';
-import { Itinerary } from '../../../../../types/itinerary';
+import { Itinerary, ItineraryFormData } from '../../../../../types/itinerary';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { FormErrorsService } from '../../../../../services/form-errors.service';
+import { ItineraryService } from '../../../../../services/itinerary.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-itinerary-info',
@@ -14,13 +17,34 @@ import { MatButtonModule } from '@angular/material/button';
 export class ItineraryInfoComponent {
   @Input() itineraryData!: Signal<Itinerary | null>;
   @Input() withControl: boolean = false;
+  @Input() detailsPage: boolean = false;
+
+  private router = inject(Router);
+  private formErrors = inject(FormErrorsService);
+
+  private itinerary = inject(ItineraryService);
 
   globalError = signal<string | null>(null);
+  message = signal<string | null>(null);
 
   itineraryForm = new FormGroup({
-    country: new FormControl({ value: '-', disabled: true }, [Validators.required]),
-    hotel: new FormControl({ value: '-', disabled: true }, [Validators.required]),
+    country: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(12),
+    ]),
+    hotel: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(18),
+    ]),
+    climate: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(18),
+    ]),
     price: new FormControl({ value: 0, disabled: true }, [Validators.required]),
+    url: new FormControl({ value: '-', disabled: true }, [Validators.required, Validators.min(1)]),
   });
 
   isEditEnabled = false;
@@ -36,92 +60,77 @@ export class ItineraryInfoComponent {
   }
 
   onEdit() {
-    // this.formErrors.clearFormErrors(this.clientForm.controls);
-    // this.globalError.set(null);
-    // if (this.clientForm.invalid) {
-    //   this.clientForm.markAllAsTouched();
-    //   return;
-    // }
-    // const clientId = this.clientData()?._id;
-    // if (!clientId) return;
-    // const formValue = this.clientForm.value;
-    // const data: ClientFormData = {
-    //   firstName: formValue.firstName!,
-    //   lastName: formValue.lastName!,
-    //   middleName: formValue.middleName!,
-    //   phone: formValue.phone!,
-    //   email: formValue.email!,
-    //   address: {
-    //     country: formValue.country!,
-    //     city: formValue.city!,
-    //   },
-    // };
-    // const client = this.clientData();
-    // if (
-    //   client &&
-    //   client.firstName === data.firstName &&
-    //   client.lastName === data.lastName &&
-    //   client.middleName === data.middleName &&
-    //   client.phone === data.phone &&
-    //   client.email === data.email &&
-    //   client.address?.country === data.address.country &&
-    //   client.address?.city === data.address.city
-    // ) {
-    //   this.disableForm();
-    //   return;
-    // }
-    // this.client.update(clientId, data as ClientFormData).subscribe({
-    //   next: (response) => {
-    //     if (response.success) {
-    //       this.globalError.set(null);
-    //       this.message.set(response.message!);
-    //       this.disableForm();
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error('error', err);
-    //     if (err.error.errors) {
-    //       this.formErrors.setFormErrors(this.clientForm.controls, err.error.errors);
-    //     } else if (err.error.message) {
-    //       this.globalError.set(err.error.message);
-    //       return;
-    //     }
-    //   },
-    // });
+    this.formErrors.clearFormErrors(this.itineraryForm.controls);
+    this.globalError.set(null);
+    if (this.itineraryForm.invalid) {
+      this.itineraryForm.markAllAsTouched();
+      return;
+    }
+    const clientId = this.itineraryData()?._id;
+    if (!clientId) return;
+    const formValue = this.itineraryForm.value;
+    const itinerary = this.itineraryData();
+    if (
+      itinerary &&
+      itinerary.country === formValue.country &&
+      itinerary.hotel === formValue.hotel &&
+      itinerary.price === formValue.price
+    ) {
+      this.disableForm();
+      return;
+    }
+    this.itinerary.update(clientId, formValue as ItineraryFormData).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.globalError.set(null);
+          this.message.set(response.message!);
+          this.disableForm();
+        }
+      },
+      error: (err) => {
+        console.error('error', err);
+        if (err.error.errors) {
+          this.formErrors.setFormErrors(this.itineraryForm.controls, err.error.errors);
+        } else if (err.error.message) {
+          this.globalError.set(err.error.message);
+          return;
+        }
+      },
+    });
   }
 
   onDelete() {
-    // const clientId = this.clientData()?._id;
-    // if (!clientId) return;
-    // const confirmDelete = confirm('Are you sure you want to delete this client?');
-    // if (!confirmDelete) return;
-    // this.client.delete(clientId).subscribe({
-    //   next: (response) => {
-    //     if (response.success) {
-    //       this.message.set(response.message!);
-    //       this.router.navigateByUrl('/clients', {
-    //         state: { message: `Client ${clientId} successfully deleted!` },
-    //       });
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error('delete error', err);
-    //     if (err.error.message) {
-    //       this.globalError.set(err.error.message);
-    //     }
-    //   },
-    // });
+    const itineraryId = this.itineraryData()?._id;
+    if (!itineraryId) return;
+    const confirmDelete = confirm('Are you sure you want to delete this itinerary?');
+    if (!confirmDelete) return;
+    this.itinerary.delete(itineraryId).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.router.navigateByUrl('/itineraries', {
+            state: { message: `Itinerary ${itineraryId} successfully deleted!` },
+          });
+        }
+      },
+      error: (err) => {
+        console.error('delete error', err);
+        if (err.error.message) {
+          this.globalError.set(err.error.message);
+        }
+      },
+    });
   }
 
   constructor() {
     effect(() => {
       const itinerary = this.itineraryData();
-      console.log(itinerary);
 
       if (itinerary) {
         this.itineraryForm.patchValue({
           country: itinerary.country,
           hotel: itinerary.hotel,
+          climate: itinerary.climate,
+          url: itinerary.url,
           price: itinerary.price,
         });
       }

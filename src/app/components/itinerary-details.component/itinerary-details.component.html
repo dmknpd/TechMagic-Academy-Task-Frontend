@@ -8,7 +8,11 @@
       <div class="message">{{ message }}</div>
       }
       <div class="itinerary">
-        <app-itinerary-info [itineraryData]="itineraryData" [withControl]="true" />
+        <app-itinerary-info
+          [itineraryData]="itineraryData"
+          [withControl]="true"
+          [detailsPage]="true"
+        />
       </div>
     </mat-card-content>
   </mat-card>

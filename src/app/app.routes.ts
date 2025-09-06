@@ -52,11 +52,11 @@ export const routes: Routes = [
 
       // itinerary
       {
-        path: 'itinerary',
+        path: 'itineraries',
         children: [
           { path: '', component: ItineraryListComponent },
-          { path: ':id', component: ItineraryDetailsComponent },
           { path: 'create', component: CreateItineraryComponent, canActivate: [adminGuard] },
+          { path: ':id', component: ItineraryDetailsComponent },
         ],
       },
     ],

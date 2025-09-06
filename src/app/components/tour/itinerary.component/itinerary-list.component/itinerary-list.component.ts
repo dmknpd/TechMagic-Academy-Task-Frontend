@@ -45,7 +45,7 @@ export class ItineraryListComponent {
     if (!itinerary) return;
 
     if (this.isItineraryPage()) {
-      this.router.navigateByUrl(`/itinerary/${itinerary._id}`);
+      this.router.navigateByUrl(`/itineraries/${itinerary._id}`);
     } else {
       this.tour.setItinerary(itinerary);
       this.router.navigateByUrl('/new-tour/tour');
@@ -53,9 +53,15 @@ export class ItineraryListComponent {
   }
 
   userRole = computed(() => this.auth.getUserRole());
-  isItineraryPage = computed(() => this.router.url.startsWith('/itinerary'));
+  isItineraryPage = computed(() => this.router.url.startsWith('/itineraries'));
 
   showAddItinerary = computed(() => {
     return this.userRole() === 'admin' && this.isItineraryPage();
   });
+
+  message = history.state.message;
+
+  constructor() {
+    history.replaceState({}, '');
+  }
 }

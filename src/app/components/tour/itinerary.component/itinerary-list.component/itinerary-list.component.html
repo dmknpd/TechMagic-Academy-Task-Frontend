@@ -1,4 +1,7 @@
 <div class="itinerary">
+  @if(message){
+  <div class="message">{{ message }}</div>
+  }
   <ul class="list">
     @for(itinerary of itineraryDataList(); track itinerary._id ){
     <li (click)="selectItinerary(itinerary)" class="item">
@@ -9,7 +12,7 @@
     <!-- Add Itinerary -->
     @if(showAddItinerary()){
     <li class="item">
-      <a [routerLink]="['/itinerary/create']">
+      <a [routerLink]="['/itineraries/create']">
         <mat-card class="card">
           <mat-card-content class="card_content">
             <mat-icon class="icon">add</mat-icon>

@@ -23,4 +23,12 @@ export class ItineraryService {
   create(data: ItineraryFormData): Observable<ApiResponse<Itinerary>> {
     return this.http.post<ApiResponse<Itinerary>>(`${BASE_URL}/create`, data);
   }
+
+  update(id: string, data: ItineraryFormData): Observable<ApiResponse<Itinerary>> {
+    return this.http.put<ApiResponse<Itinerary>>(`${BASE_URL}/${id}/edit`, data);
+  }
+
+  delete(id: string): Observable<ApiResponse<{ id: string }>> {
+    return this.http.delete<ApiResponse<{ id: string }>>(`${BASE_URL}/${id}/delete`);
+  }
 }

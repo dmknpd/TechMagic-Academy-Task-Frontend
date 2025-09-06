@@ -36,12 +36,24 @@ export class CreateItineraryComponent {
   message = signal<string | null>(null);
 
   itineraryFormCountry = new FormGroup({
-    country: new FormControl('', [Validators.required]),
-    climate: new FormControl('', [Validators.required]),
+    country: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(12),
+    ]),
+    climate: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(18),
+    ]),
   });
 
   itineraryFormHotel = new FormGroup({
-    hotel: new FormControl('', [Validators.required]),
+    hotel: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(18),
+    ]),
     url: new FormControl('', [Validators.required]),
     price: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
@@ -75,7 +87,9 @@ export class CreateItineraryComponent {
 
           this.message.set(response.message!);
 
-          this.router.navigateByUrl('/itinerary');
+          this.router.navigateByUrl('/itineraries', {
+            state: { message: `Itinerary ${response.data?._id} successfully deleted!` },
+          });
         }
       },
       error: (err) => {
