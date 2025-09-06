@@ -8,9 +8,20 @@
   position: relative;
 }
 
-.logo {
+.logo_container {
   cursor: pointer;
   color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo_icon {
+  transform: scale(1.4);
+}
+
+.logo {
+  font-size: 30px;
 }
 
 nav {
@@ -32,6 +43,13 @@ nav {
   color: var(--text-secondary);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.icon_text_block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .logout {
