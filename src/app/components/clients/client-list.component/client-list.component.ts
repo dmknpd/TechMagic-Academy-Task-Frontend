@@ -7,7 +7,6 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 
-import { Client } from '../../../types/client';
 import { ClientService } from '../../../services/client.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 

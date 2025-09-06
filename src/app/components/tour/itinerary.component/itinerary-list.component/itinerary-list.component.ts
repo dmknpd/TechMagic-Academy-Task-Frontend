@@ -2,7 +2,7 @@ import { Component, computed, inject } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
-import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 

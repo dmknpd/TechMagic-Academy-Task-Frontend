@@ -6,8 +6,9 @@ import {
   HttpErrorResponse,
   HttpEvent,
 } from '@angular/common/http';
-import { catchError, switchMap, throwError, Observable } from 'rxjs';
+import { catchError, switchMap, throwError, Observable, finalize } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { LoadingService } from '../services/loading.service';
 
 const cloneRequestWithToken = (
   req: HttpRequest<unknown>,
@@ -25,10 +26,13 @@ export const jwtInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> => {
+  const loading = inject(LoadingService);
   const auth = inject(AuthService);
 
   const token = auth.getAccessToken();
   const clonedReq = cloneRequestWithToken(req, token);
+
+  loading.show();
 
   return next(clonedReq).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -42,6 +46,7 @@ export const jwtInterceptor: HttpInterceptorFn = (
         );
       }
       return throwError(() => error);
-    })
+    }),
+    finalize(() => loading.hide())
   );
 };
