@@ -17,6 +17,7 @@ import { adminGuard } from './guard/admin.guard';
 import { itineraryGuard } from './guard/itinerary.guard';
 import { tourInfoGuard } from './guard/tour-info.guard';
 import { summaryGuard } from './guard/summary.guard';
+import { ItineraryDetailsComponent } from './components/itinerary-details.component/itinerary-details.component';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -54,6 +55,7 @@ export const routes: Routes = [
         path: 'itinerary',
         children: [
           { path: '', component: ItineraryListComponent },
+          { path: ':id', component: ItineraryDetailsComponent },
           { path: 'create', component: CreateItineraryComponent, canActivate: [adminGuard] },
         ],
       },

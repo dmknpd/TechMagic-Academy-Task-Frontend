@@ -16,8 +16,8 @@ export class ItineraryService {
     return this.http.get<ApiResponse<Itinerary[]>>(BASE_URL);
   }
 
-  getByCountry(country: string): Observable<ApiResponse<Itinerary>> {
-    return this.http.get<ApiResponse<Itinerary>>(`${BASE_URL}/${country}`);
+  getItineraryById(id: string): Observable<ApiResponse<Itinerary>> {
+    return this.http.get<ApiResponse<Itinerary>>(`${BASE_URL}/${id}`);
   }
 
   create(data: ItineraryFormData): Observable<ApiResponse<Itinerary>> {

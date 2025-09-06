@@ -12,7 +12,7 @@ import { ClientService } from '../../../services/client.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-client-details.component',
+  selector: 'app-client-details',
   imports: [
     CommonModule,
     MatCardModule,

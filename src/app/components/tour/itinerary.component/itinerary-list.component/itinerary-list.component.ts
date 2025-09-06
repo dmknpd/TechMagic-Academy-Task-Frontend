@@ -42,8 +42,11 @@ export class ItineraryListComponent {
   );
 
   selectItinerary(itinerary: Itinerary) {
-    if (this.isItineraryPage()) return;
-    if (itinerary) {
+    if (!itinerary) return;
+
+    if (this.isItineraryPage()) {
+      this.router.navigateByUrl(`/itinerary/${itinerary._id}`);
+    } else {
       this.tour.setItinerary(itinerary);
       this.router.navigateByUrl('/new-tour/tour');
     }

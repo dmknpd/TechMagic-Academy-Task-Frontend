@@ -1,30 +1,47 @@
 <div class="info_block">
   <h3 class="title">Itinerary Info</h3>
-  <div class="field_block">
-    <div class="half" title="{{ itineraryForm.controls['country'].getRawValue() }}">
-      <app-input
-        [control]="itineraryForm.controls['country']"
-        label="Country"
-        placeholder="Ukraine"
-      />
+  <form class="full" [formGroup]="itineraryForm">
+    @if (globalError()) {
+    <mat-error class="global-error">{{ globalError() }}</mat-error>
+    }
+    <div class="field_block">
+      <div class="half" title="{{ itineraryForm.controls['country'].getRawValue() }}">
+        <app-input
+          [control]="itineraryForm.controls['country']"
+          label="Country"
+          placeholder="Ukraine"
+        />
+      </div>
+      <div class="half" title="{{ itineraryForm.controls['hotel'].getRawValue() }}">
+        <app-input
+          [control]="itineraryForm.controls['hotel']"
+          label="Hotel"
+          placeholder="Hotel Ukraine"
+        />
+      </div>
     </div>
-    <div class="half" title="{{ itineraryForm.controls['hotel'].getRawValue() }}">
-      <app-input
-        [control]="itineraryForm.controls['hotel']"
-        label="Hotel"
-        placeholder="Hotel Ukraine"
-      />
-    </div>
-  </div>
 
-  <div class="field_block" title="{{ itineraryForm.controls['price'].getRawValue() }}">
-    <div class="full">
-      <app-input
-        [control]="itineraryForm.controls['price']"
-        label="Price ($/per week)"
-        type="number"
-        placeholder="1000"
-      />
+    <div class="field_block" title="{{ itineraryForm.controls['price'].getRawValue() }}">
+      <div class="full">
+        <app-input
+          [control]="itineraryForm.controls['price']"
+          label="Price ($/per week)"
+          type="number"
+          placeholder="1000"
+        />
+      </div>
     </div>
-  </div>
+
+    @if(withControl && !isEditEnabled){
+    <div class="btn_block">
+      <button matButton="tonal" (click)="onDelete()">Delete</button>
+      <button matButton="filled" (click)="enableForm()">Edit</button>
+    </div>
+    } @if(withControl && isEditEnabled){
+    <div class="btn_block">
+      <button matButton="tonal" (click)="disableForm()">Cancel</button>
+      <button matButton="filled" (click)="onEdit()">Confirm</button>
+    </div>
+    }
+  </form>
 </div>
