@@ -2,10 +2,8 @@ import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
 
-import { AuthService } from '../services/auth.service';
 import { Sidenav } from './sidenav/sidenav';
 import { SummarySidebarComponent } from '../components/tour/summary.component/summary-sidebar.component/summary-sidebar.component';
 import { LoadingService } from '../services/loading.service';
@@ -16,11 +14,9 @@ import { LoaderComponent } from '../components/loader.component/loader.component
   imports: [
     MatSidenavModule,
     MatIconModule,
-    MatIconModule,
     RouterOutlet,
     MatSidenavModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
+    MatButtonModule,
     Sidenav,
     SummarySidebarComponent,
     LoaderComponent,

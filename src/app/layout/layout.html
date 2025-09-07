@@ -1,9 +1,9 @@
 <div class="container">
-  <!-- <button matIconButton class="btn" [class.closed]="!isOpen" (click)="isOpen = !isOpen">
-    <mat-icon>menu</mat-icon>
-  </button> -->
+  <button matIconButton class="btn" [class.closed]="!isOpen" (click)="isOpen = !isOpen">
+    <mat-icon class="icon">menu</mat-icon>
+  </button>
   <mat-sidenav-container>
-    <mat-sidenav #snav [opened]="true" mode="side" class="sidenav" [class.open]="isOpen">
+    <mat-sidenav #snav [opened]="isOpen" mode="side" class="sidenav" [class.open]="isOpen">
       <app-sidenav />
     </mat-sidenav>
 
