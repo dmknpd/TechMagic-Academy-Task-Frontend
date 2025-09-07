@@ -17,9 +17,13 @@
       <!-- Tour -->
       <app-tour-info [tourInfoData]="tourInfoData" />
 
-      @if(isAllDataFiled()){
-      <a class="link" matButton="filled" [routerLink]="['/new-tour/summary']">Summary</a>
-      }
+      <div class="actions">
+        @if(isAllDataFiled()){
+        <a class="link" matButton="filled" [routerLink]="['/new-tour/summary']">Summary</a>
+        }
+
+        <button matButton="outlined" (click)="onCancel()">Cancel</button>
+      </div>
     </div>
   </div>
 </div>

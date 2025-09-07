@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { InputComponent } from '../../input.component/input.component';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { noWhitespaceValidator } from '../../../validators/no-whitespace.validator';
 
 @Component({
   selector: 'app-create-itinerary.component',
@@ -40,11 +41,13 @@ export class CreateItineraryComponent {
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
     climate: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(18),
+      noWhitespaceValidator(),
     ]),
   });
 
@@ -53,8 +56,9 @@ export class CreateItineraryComponent {
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(18),
+      noWhitespaceValidator(),
     ]),
-    url: new FormControl('', [Validators.required]),
+    url: new FormControl('', [Validators.required, noWhitespaceValidator()]),
     price: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
 

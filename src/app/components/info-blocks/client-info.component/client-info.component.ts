@@ -8,6 +8,7 @@ import { InputComponent } from '../../input.component/input.component';
 import { Client, ClientFormData } from '../../../types/client';
 import { ClientService } from '../../../services/client.service';
 import { FormErrorsService } from '../../../services/form-errors.service';
+import { noWhitespaceValidator } from '../../../validators/no-whitespace.validator';
 
 @Component({
   selector: 'app-client-info',
@@ -31,19 +32,32 @@ export class ClientInfoComponent {
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
     lastName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
     middleName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
-    country: new FormControl({ value: '-', disabled: true }, [Validators.required]),
-    city: new FormControl({ value: '-', disabled: true }, [Validators.required]),
+    country: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(12),
+      noWhitespaceValidator(),
+    ]),
+    city: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(12),
+      noWhitespaceValidator(),
+    ]),
     phone: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.pattern(/^\d{12}$/),

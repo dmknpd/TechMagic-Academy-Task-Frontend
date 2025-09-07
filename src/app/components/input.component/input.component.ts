@@ -103,6 +103,8 @@ export class InputComponent {
         return `Enter valid ${this.label}`;
       case 'passwordMismatch':
         return `Passwords do not match`;
+      case 'whitespace':
+        return `${this.label} cannot be spaces only`;
       case 'serverError':
         return Array.isArray(error) ? error.join(', ') : String(error);
       default:

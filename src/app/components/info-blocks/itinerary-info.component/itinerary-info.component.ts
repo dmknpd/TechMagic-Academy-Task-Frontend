@@ -8,6 +8,7 @@ import { InputComponent } from '../../input.component/input.component';
 import { Itinerary, ItineraryFormData } from '../../../types/itinerary';
 import { FormErrorsService } from '../../../services/form-errors.service';
 import { ItineraryService } from '../../../services/itinerary.service';
+import { noWhitespaceValidator } from '../../../validators/no-whitespace.validator';
 
 @Component({
   selector: 'app-itinerary-info',
@@ -33,19 +34,26 @@ export class ItineraryInfoComponent {
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
     hotel: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(18),
+      noWhitespaceValidator(),
     ]),
     climate: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(18),
+      noWhitespaceValidator(),
     ]),
     price: new FormControl({ value: 0, disabled: true }, [Validators.required]),
-    url: new FormControl({ value: '-', disabled: true }, [Validators.required, Validators.min(1)]),
+    url: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.min(1),
+      noWhitespaceValidator(),
+    ]),
   });
 
   isEditEnabled = false;

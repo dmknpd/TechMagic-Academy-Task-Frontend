@@ -12,6 +12,7 @@ import { FormErrorsService } from '../../../../services/form-errors.service';
 import { ClientFormData } from '../../../../types/client';
 import { InputComponent } from '../../../input.component/input.component';
 import { TourService } from '../../../../services/tour.service';
+import { noWhitespaceValidator } from '../../../../validators/no-whitespace.validator';
 
 @Component({
   selector: 'app-create-client',
@@ -42,22 +43,35 @@ export class CreateClientComponent {
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
     lastName: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
     middleName: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(12),
+      noWhitespaceValidator(),
     ]),
   });
 
   clientFormAddress = new FormGroup({
-    country: new FormControl('', [Validators.required]),
-    city: new FormControl('', [Validators.required]),
+    country: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(12),
+      noWhitespaceValidator(),
+    ]),
+    city: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(12),
+      noWhitespaceValidator(),
+    ]),
   });
 
   clientFormContacts = new FormGroup({
