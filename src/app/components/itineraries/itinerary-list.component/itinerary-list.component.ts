@@ -7,10 +7,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 import { ItineraryListItemComponent } from '../itinerary-list-item.component/itinerary-list-item.component';
-import { ItineraryService } from '../../../../services/itinerary.service';
-import { Itinerary } from '../../../../types/itinerary';
-import { TourService } from '../../../../services/tour.service';
-import { AuthService } from '../../../../services/auth.service';
+import { ItineraryService } from '../../../services/itinerary.service';
+import { Itinerary } from '../../../types/itinerary';
+import { TourService } from '../../../services/tour.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-itinerary-list',

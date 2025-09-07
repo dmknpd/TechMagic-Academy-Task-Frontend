@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { Sidenav } from './sidenav/sidenav';
-import { SummarySidebarComponent } from '../components/tour/summary.component/summary-sidebar.component/summary-sidebar.component';
+import { SummarySidebarComponent } from '../components/tour/summary-sidebar.component/summary-sidebar.component';
 import { LoadingService } from '../services/loading.service';
 import { LoaderComponent } from '../components/loader.component/loader.component';
 

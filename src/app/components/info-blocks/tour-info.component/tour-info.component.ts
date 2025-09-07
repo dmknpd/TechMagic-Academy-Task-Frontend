@@ -1,9 +1,8 @@
 import { Component, effect, inject, Input, Signal } from '@angular/core';
-import { TourService } from '../../../../../services/tour.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Moment } from 'moment';
-import { InputComponent } from '../../../../input.component/input.component';
-import { TourInfoFormData } from '../../../../../types/tour';
+
+import { InputComponent } from '../../input.component/input.component';
+import { TourInfoFormData } from '../../../types/tour';
 
 @Component({
   selector: 'app-tour-info',

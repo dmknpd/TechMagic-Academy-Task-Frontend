@@ -1,13 +1,13 @@
 import { Component, effect, inject, Input, signal, Signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputComponent } from '../../../../input.component/input.component';
-import { Client, ClientFormData } from '../../../../../types/client';
-import { ClientService } from '../../../../../services/client.service';
-import { FormErrorsService } from '../../../../../services/form-errors.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+
+import { InputComponent } from '../../input.component/input.component';
+import { Client, ClientFormData } from '../../../types/client';
+import { ClientService } from '../../../services/client.service';
+import { FormErrorsService } from '../../../services/form-errors.service';
 
 @Component({
   selector: 'app-client-info',

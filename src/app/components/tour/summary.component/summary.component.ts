@@ -3,9 +3,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 
-import { ClientInfoComponent } from './info-block/client-info.component/client-info.component';
-import { ItineraryInfoComponent } from './info-block/itinerary-info.component/itinerary-info.component';
-import { TourInfoComponent } from './info-block/tour-info.component/tour-info.component';
+import { ClientInfoComponent } from '../../info-blocks/client-info.component/client-info.component';
+import { ItineraryInfoComponent } from '../../info-blocks/itinerary-info.component/itinerary-info.component';
+import { TourInfoComponent } from '../../info-blocks/tour-info.component/tour-info.component';
 import { TourService } from '../../../services/tour.service';
 import { Router } from '@angular/router';
 

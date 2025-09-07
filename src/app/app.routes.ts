@@ -5,10 +5,10 @@ import { Layout } from './layout/layout';
 import { authGuard } from './guard/auth.guard';
 import { noAuthGuard } from './guard/no-auth.guard';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { ClientComponent } from './components/tour/client.component/client.component';
+import { ClientComponent } from './components/clients/client.component/client.component';
 import { ClientListComponent } from './components/clients/client-list.component/client-list.component';
-import { CreateItineraryComponent } from './components/create-itinerary.component/create-itinerary.component';
-import { ItineraryListComponent } from './components/tour/itinerary.component/itinerary-list.component/itinerary-list.component';
+import { CreateItineraryComponent } from './components/itineraries/create-itinerary.component/create-itinerary.component';
+import { ItineraryListComponent } from './components/itineraries/itinerary-list.component/itinerary-list.component';
 import { TourComponent } from './components/tour/tour.component/tour.component';
 import { SummaryComponent } from './components/tour/summary.component/summary.component';
 import { ClientDetailsComponent } from './components/clients/client-details.component/client-details.component';
@@ -17,7 +17,7 @@ import { adminGuard } from './guard/admin.guard';
 import { itineraryGuard } from './guard/itinerary.guard';
 import { tourInfoGuard } from './guard/tour-info.guard';
 import { summaryGuard } from './guard/summary.guard';
-import { ItineraryDetailsComponent } from './components/itinerary-details.component/itinerary-details.component';
+import { ItineraryDetailsComponent } from './components/itineraries/itinerary-details.component/itinerary-details.component';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },

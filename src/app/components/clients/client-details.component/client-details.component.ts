@@ -3,17 +3,15 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { catchError, map, of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-
-import { ClientInfoComponent } from '../../tour/summary.component/info-block/client-info.component/client-info.component';
-import { ClientService } from '../../../services/client.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
+
+import { ClientInfoComponent } from '../../info-blocks/client-info.component/client-info.component';
+import { ClientService } from '../../../services/client.service';
 import { Tour } from '../../../types/tour';
 import { TourService } from '../../../services/tour.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClientFullInfo } from '../../../types/client';
 
 @Component({

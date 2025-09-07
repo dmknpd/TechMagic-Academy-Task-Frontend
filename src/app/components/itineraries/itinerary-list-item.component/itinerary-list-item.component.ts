@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
-import { Itinerary } from '../../../../types/itinerary';
+import { Itinerary } from '../../../types/itinerary';
 
 @Component({
   selector: 'app-itinerary-list-item',

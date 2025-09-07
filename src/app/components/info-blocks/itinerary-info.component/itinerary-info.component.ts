@@ -1,12 +1,13 @@
 import { Component, effect, inject, Input, signal, Signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputComponent } from '../../../../input.component/input.component';
-import { Itinerary, ItineraryFormData } from '../../../../../types/itinerary';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { FormErrorsService } from '../../../../../services/form-errors.service';
-import { ItineraryService } from '../../../../../services/itinerary.service';
 import { Router } from '@angular/router';
+
+import { InputComponent } from '../../input.component/input.component';
+import { Itinerary, ItineraryFormData } from '../../../types/itinerary';
+import { FormErrorsService } from '../../../services/form-errors.service';
+import { ItineraryService } from '../../../services/itinerary.service';
 
 @Component({
   selector: 'app-itinerary-info',

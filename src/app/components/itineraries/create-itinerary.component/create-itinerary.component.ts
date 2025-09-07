@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { FormErrorsService } from '../../services/form-errors.service';
-import { ItineraryService } from '../../services/itinerary.service';
-import { ItineraryFormData } from '../../types/itinerary';
+import { FormErrorsService } from '../../../services/form-errors.service';
+import { ItineraryService } from '../../../services/itinerary.service';
+import { ItineraryFormData } from '../../../types/itinerary';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { InputComponent } from '../input.component/input.component';
+import { InputComponent } from '../../input.component/input.component';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 
