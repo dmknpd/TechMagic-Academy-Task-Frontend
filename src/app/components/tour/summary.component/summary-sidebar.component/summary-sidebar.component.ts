@@ -29,7 +29,7 @@ export class SummarySidebarComponent {
   itineraryData = this.tour.getItinerary();
   tourInfoData = this.tour.getTourInfo();
 
-  isHidden = false;
+  isOpened = true;
 
   isAllDataFiled = this.tour.allDataFilled;
 }

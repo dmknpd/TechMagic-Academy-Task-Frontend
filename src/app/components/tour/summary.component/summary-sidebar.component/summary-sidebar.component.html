@@ -1,14 +1,14 @@
 <div class="container">
   <button
     class="btn"
-    [class.base]="isHidden"
+    [class.base]="!isOpened"
     matIconButton
-    (click)="this.isHidden = !this.isHidden"
+    (click)="this.isOpened = !this.isOpened"
   >
-    <mat-icon class="icon">{{ isHidden ? 'chevron_left' : 'chevron_right' }}</mat-icon>
+    <mat-icon class="icon">{{ !isOpened ? 'chevron_left' : 'chevron_right' }}</mat-icon>
   </button>
 
-  <div class="info-sidebar" [class.hidden]="isHidden">
+  <div class="info-sidebar" [class.hidden]="!isOpened">
     <h2 class="title">Summary</h2>
 
     <div class="info_content">

@@ -3,11 +3,14 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 20px;
+  background-color: var(--secondary-color);
   background-color: var(--secondary-color);
 }
 
 .card {
-  width: 450px;
+  width: 100%;
+  max-width: 500px;
   padding: 25px;
   text-align: center;
   border-radius: 8px;
@@ -22,11 +25,26 @@ mat-card-header {
 .title {
   font-size: 24px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+}
+
+.message {
+  color: #2a9b46;
+  text-align: center;
+}
+
+.field_block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.half {
+  width: 48%;
 }
