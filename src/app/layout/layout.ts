@@ -28,7 +28,7 @@ export class Layout {
   private router = inject(Router);
   private loading = inject(LoadingService);
 
-  isOpen = true;
+  isOpen = window.innerWidth >= 1500;
   isTourPages = false;
 
   isLoading = this.loading.getLoading();

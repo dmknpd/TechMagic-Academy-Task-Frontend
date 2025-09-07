@@ -1,9 +1,7 @@
-import { Component, inject, signal } from '@angular/core';
-
+import { Component, HostListener, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-
 import { ClientInfoComponent } from '../info-block/client-info.component/client-info.component';
 import { ItineraryInfoComponent } from '../info-block/itinerary-info.component/itinerary-info.component';
 import { TourInfoComponent } from '../info-block/tour-info.component/tour-info.component';
@@ -29,7 +27,12 @@ export class SummarySidebarComponent {
   itineraryData = this.tour.getItinerary();
   tourInfoData = this.tour.getTourInfo();
 
-  isOpened = true;
+  isOpen = window.innerWidth >= 1000;
 
   isAllDataFiled = this.tour.allDataFilled;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isOpen = window.innerWidth >= 1000;
+  }
 }
