@@ -1,6 +1,9 @@
 <div class="itinerary">
   @if(message){
   <div class="message">{{ message }}</div>
+  } @if(!isItineraryPage()){
+  <h2 class="title">Select Itinerary</h2>
+
   }
   <ul class="list">
     @for(itinerary of itineraryDataList(); track itinerary._id ){
