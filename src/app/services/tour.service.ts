@@ -105,4 +105,8 @@ export class TourService {
       discount: this.tourInfo()?.discount,
     });
   }
+
+  delete(id: string): Observable<ApiResponse<{ id: string }>> {
+    return this.http.delete<ApiResponse<{ id: string }>>(`${BASE_URL}/${id}/delete`);
+  }
 }

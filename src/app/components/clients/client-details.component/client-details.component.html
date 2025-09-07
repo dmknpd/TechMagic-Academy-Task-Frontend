@@ -13,9 +13,11 @@
         <mat-divider></mat-divider>
         @if(message){
         <div class="message">{{ message }}</div>
+        } @if (globalError()) {
+        <mat-error class="global-error">{{ globalError() }}</mat-error>
         }
 
-        <table mat-table [dataSource]="clientData()?.tours" class="table">
+        <table mat-table [dataSource]="clientData()?.tours ?? []" class="table">
           <!-- Country -->
           <ng-container matColumnDef="country">
             <th mat-header-cell *matHeaderCellDef>Country</th>
@@ -67,6 +69,16 @@
             <th mat-header-cell *matHeaderCellDef>Total Price</th>
             <td mat-cell *matCellDef="let tour">
               {{ getTotalPrice(tour) | currency : 'USD' }}
+            </td>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let tour">
+              <button mat-icon-button (click)="onDelete(tour)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </td>
           </ng-container>
 

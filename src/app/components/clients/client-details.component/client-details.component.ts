@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
@@ -6,10 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 import { ClientInfoComponent } from '../../tour/summary.component/info-block/client-info.component/client-info.component';
 import { ClientService } from '../../../services/client.service';
 import { CommonModule } from '@angular/common';
+import { Tour } from '../../../types/tour';
+import { TourService } from '../../../services/tour.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ClientFullInfo } from '../../../types/client';
 
 @Component({
   selector: 'app-client-details',
@@ -17,8 +22,10 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     MatCardModule,
     MatTableModule,
+    MatIconModule,
     MatButtonModule,
     MatDividerModule,
+    MatFormFieldModule,
     ClientInfoComponent,
   ],
   templateUrl: './client-details.component.html',
@@ -28,19 +35,11 @@ export class ClientDetailsComponent {
   private route = inject(ActivatedRoute);
 
   private client = inject(ClientService);
+  private tour = inject(TourService);
 
   private clientId = this.route.snapshot.paramMap.get('id');
 
-  clientData = toSignal(
-    this.client.getClientFullInfo(this.clientId!).pipe(
-      map((response) => response.data ?? null),
-      catchError((err) => {
-        console.error('Error fetching client:', err);
-        return of(null);
-      })
-    ),
-    { initialValue: null }
-  );
+  clientData = signal<ClientFullInfo | null>(null);
 
   displayedColumns = [
     'country',
@@ -51,12 +50,25 @@ export class ClientDetailsComponent {
     'price',
     'quantity',
     'totalPrice',
+    'actions',
   ];
 
   message = history.state.message;
+  globalError = signal<string | null>(null);
 
   constructor() {
+    this.refreshClientData();
     history.replaceState({}, '');
+  }
+
+  refreshClientData() {
+    this.client.getClientFullInfo(this.clientId!).subscribe({
+      next: (response) => this.clientData.set(response.data ?? null),
+      error: (err) => {
+        console.error(err);
+        this.clientData.set(null);
+      },
+    });
   }
 
   getTotalPrice(tour: any) {
@@ -71,5 +83,35 @@ export class ClientDetailsComponent {
 
   formateDate(date: string) {
     return new Date(date).toLocaleDateString();
+  }
+
+  onDelete(tour: Tour) {
+    const tourId = tour._id;
+    if (!tourId) return;
+
+    if (!confirm('Are you sure you want to delete this tour?')) return;
+
+    this.tour.delete(tourId).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.message = response.message;
+
+          const client = this.clientData();
+          if (client) {
+            const updated = {
+              ...client,
+              tours: client.tours.filter((t: Tour) => t._id !== tourId),
+            };
+            this.clientData.set(updated);
+          }
+        }
+      },
+      error: (err) => {
+        console.error('delete error', err);
+        if (err.error.message) {
+          this.globalError.set(err.error.message);
+        }
+      },
+    });
   }
 }
