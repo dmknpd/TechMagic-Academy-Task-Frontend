@@ -7,12 +7,22 @@ import { of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
 
-import { ClientService } from '../../../services/client.service';
+import { ClientService } from '../../../services/api-service/client.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-client-list.component',
-  imports: [CommonModule, MatTableModule, MatCardModule, MatDividerModule, RouterModule],
+  selector: 'app-client-list',
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatCardModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterModule,
+  ],
   templateUrl: './client-list.component.html',
   styleUrl: './client-list.component.css',
 })
@@ -22,7 +32,7 @@ export class ClientListComponent {
   displayedColumns = ['lastName', 'firstName', 'middleName', 'phone', 'email', 'country', 'city'];
 
   clients = toSignal(
-    this.client.getAllClients().pipe(
+    this.client.getAll().pipe(
       map((response) => response.data ?? []),
       catchError((err) => {
         console.error('Error fetching clients:', err);

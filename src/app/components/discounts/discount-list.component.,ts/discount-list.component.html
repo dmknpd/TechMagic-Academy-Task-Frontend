@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header class="header">
+    <mat-card-title><h3 class="title">All Discounts</h3> </mat-card-title>
+    @if(userRole === 'admin'){
+    <a class="link" matButton="filled" [routerLink]="['/discounts/create']">Create Discount</a>
+
+    }
+  </mat-card-header>
+  <mat-card-content>
+    @if(message){
+    <div class="message">{{ message }}</div>
+    }
+    <table mat-table [dataSource]="discountsData() ?? []" class="table">
+      <!-- Name -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let discount">{{ discount.name }}</td>
+      </ng-container>
+
+      <!-- Value -->
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef>Value (%)</th>
+        <td mat-cell *matCellDef="let discount">{{ discount.value }}</td>
+      </ng-container>
+
+      <!-- Description -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let discount">{{ discount.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let discount">
+          <button mat-icon-button (click)="onDelete(discount)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="row" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+
+  <mat-card-footer>
+    <p>Total: {{ discountsData()?.length }}</p>
+  </mat-card-footer>
+</mat-card>

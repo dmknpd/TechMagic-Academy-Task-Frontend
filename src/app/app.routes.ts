@@ -18,6 +18,9 @@ import { itineraryGuard } from './guard/itinerary.guard';
 import { tourInfoGuard } from './guard/tour-info.guard';
 import { summaryGuard } from './guard/summary.guard';
 import { ItineraryDetailsComponent } from './components/itineraries/itinerary-details.component/itinerary-details.component';
+import { CreateClientComponent } from './components/clients/client.component/create-client.component/create-client.component';
+import { DiscountListComponent } from './components/discounts/discount-list.component.,ts/discount-list.component';
+import { CreateDiscountComponent } from './components/discounts/create-discount.component/create-discount.component';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -46,6 +49,7 @@ export const routes: Routes = [
         path: 'clients',
         children: [
           { path: '', component: ClientListComponent },
+          { path: 'create', component: CreateClientComponent },
           { path: ':id', component: ClientDetailsComponent },
         ],
       },
@@ -57,6 +61,15 @@ export const routes: Routes = [
           { path: '', component: ItineraryListComponent },
           { path: 'create', component: CreateItineraryComponent, canActivate: [adminGuard] },
           { path: ':id', component: ItineraryDetailsComponent },
+        ],
+      },
+
+      //discounts
+      {
+        path: 'discounts',
+        children: [
+          { path: '', component: DiscountListComponent },
+          { path: 'create', component: CreateDiscountComponent, canActivate: [adminGuard] },
         ],
       },
     ],

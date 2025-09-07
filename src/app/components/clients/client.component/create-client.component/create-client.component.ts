@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 
-import { ClientService } from '../../../../services/client.service';
+import { ClientService } from '../../../../services/api-service/client.service';
 import { FormErrorsService } from '../../../../services/form-errors.service';
 import { ClientFormData } from '../../../../types/client';
 import { InputComponent } from '../../../input.component/input.component';

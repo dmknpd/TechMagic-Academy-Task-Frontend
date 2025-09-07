@@ -1,7 +1,7 @@
 <div class="client">
   <mat-tab-group dynamicHeight>
-    <mat-tab label="Find Client">
-      <app-find-client (switchTab)="switchToCreateClientTab()" />
+    <mat-tab label="Find Client" class="tab">
+      <app-find-client (switchTab)="switchToCreateClientTab()" class="tab_content" />
     </mat-tab>
     <mat-tab label="Create Client">
       <app-create-client />

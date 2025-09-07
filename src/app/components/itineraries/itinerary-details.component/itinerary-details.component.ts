@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ItineraryInfoComponent } from '../../info-blocks/itinerary-info.component/itinerary-info.component';
-import { ItineraryService } from '../../../services/itinerary.service';
+import { ItineraryService } from '../../../services/api-service/itinerary.service';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { catchError, map, of } from 'rxjs';
@@ -22,7 +22,7 @@ export class ItineraryDetailsComponent {
   private itineraryId = this.route.snapshot.paramMap.get('id');
 
   itineraryData = toSignal(
-    this.client.getItineraryById(this.itineraryId!).pipe(
+    this.client.getById(this.itineraryId!).pipe(
       map((response) => response.data ?? null),
       catchError((err) => {
         console.error('Error fetching itinerary:', err);

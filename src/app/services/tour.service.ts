@@ -18,12 +18,6 @@ export class TourService {
   private itinerary = signal<Itinerary | null>(null);
   private tourInfo = signal<TourInfoFormData | null>(null);
 
-  private discountOptions = [
-    { name: '-5% Extra booking', value: 5 },
-    { name: '-10% Hot deal', value: 10 },
-    { name: '-5% Long stay', value: 5 },
-  ];
-
   //client
   setClient(client: Client): void {
     this.client.set(client);
@@ -53,11 +47,6 @@ export class TourService {
 
   getTourInfo() {
     return this.tourInfo;
-  }
-
-  //discount
-  getDiscountOptions() {
-    return this.discountOptions;
   }
 
   //price

@@ -9,7 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 
 import { ClientInfoComponent } from '../../info-blocks/client-info.component/client-info.component';
-import { ClientService } from '../../../services/client.service';
+import { ClientService } from '../../../services/api-service/client.service';
 import { Tour } from '../../../types/tour';
 import { TourService } from '../../../services/tour.service';
 import { ClientFullInfo } from '../../../types/client';
@@ -60,7 +60,7 @@ export class ClientDetailsComponent {
   }
 
   refreshClientData() {
-    this.client.getClientFullInfo(this.clientId!).subscribe({
+    this.client.getFullInfo(this.clientId!).subscribe({
       next: (response) => this.clientData.set(response.data ?? null),
       error: (err) => {
         console.error(err);

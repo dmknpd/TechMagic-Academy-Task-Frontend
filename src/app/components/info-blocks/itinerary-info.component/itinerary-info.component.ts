@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { InputComponent } from '../../input.component/input.component';
 import { Itinerary, ItineraryFormData } from '../../../types/itinerary';
 import { FormErrorsService } from '../../../services/form-errors.service';
-import { ItineraryService } from '../../../services/itinerary.service';
+import { ItineraryService } from '../../../services/api-service/itinerary.service';
 import { noWhitespaceValidator } from '../../../validators/no-whitespace.validator';
 
 @Component({

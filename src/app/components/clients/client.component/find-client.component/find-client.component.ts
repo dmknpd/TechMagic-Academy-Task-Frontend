@@ -9,7 +9,7 @@ import { catchError, debounceTime, distinctUntilChanged, filter, map, of, switch
 import { Router, RouterModule } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { ClientService } from '../../../../services/client.service';
+import { ClientService } from '../../../../services/api-service/client.service';
 import { InputComponent } from '../../../input.component/input.component';
 import { TourService } from '../../../../services/tour.service';
 import { Client } from '../../../../types/client';
@@ -52,7 +52,7 @@ export class FindClientComponent {
       distinctUntilChanged(),
       filter(() => this.phoneControl.valid),
       switchMap((phone) =>
-        this.client.getClientByPhone(phone).pipe(
+        this.client.getByPhone(phone).pipe(
           catchError(() => of(null)),
           map((res) => (res?.success && res.data ? res.data : null))
         )

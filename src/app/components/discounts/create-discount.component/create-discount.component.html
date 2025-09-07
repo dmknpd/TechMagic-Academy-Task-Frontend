@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title class="title">Create Discount</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="onRegistration()" [formGroup]="discountForm" class="form">
+        @if (message()) {
+        <div class="message">{{ message() }}</div>
+        } @if (globalError()) {
+        <mat-error class="global-error">{{ globalError() }}</mat-error>
+        }
+
+        <app-input
+          [control]="discountForm.controls['name']"
+          label="Name"
+          type="text"
+          placeholder="-10% Hot Deal"
+        />
+
+        <app-input [control]="discountForm.controls['value']" label="Value (%)" type="number" />
+
+        <app-input
+          [control]="discountForm.controls['description']"
+          label="Desription"
+          type="text"
+          placeholder="Time-Limited Sale"
+        />
+
+        <button type="submit" matButton="filled">Create</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

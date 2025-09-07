@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { InputComponent } from '../../input.component/input.component';
 import { Client, ClientFormData } from '../../../types/client';
-import { ClientService } from '../../../services/client.service';
+import { ClientService } from '../../../services/api-service/client.service';
 import { FormErrorsService } from '../../../services/form-errors.service';
 import { noWhitespaceValidator } from '../../../validators/no-whitespace.validator';
 

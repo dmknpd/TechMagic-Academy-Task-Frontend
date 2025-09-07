@@ -40,13 +40,6 @@ th {
   padding: 10px 30px;
 }
 
-.row:hover {
-  background-color: var(--accent-color);
-  color: var(--main-color);
-
-  cursor: pointer;
-}
-
 td {
   font-weight: 500;
   padding: 10px 30px;

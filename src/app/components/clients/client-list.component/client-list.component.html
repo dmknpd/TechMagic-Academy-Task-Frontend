@@ -1,6 +1,7 @@
 <mat-card>
   <mat-card-header class="header">
-    <mat-card-title><h3 class="title">All Clients</h3></mat-card-title>
+    <mat-card-title><h3 class="title">All Clients</h3> </mat-card-title
+    ><a class="link" matButton="filled" [routerLink]="['/clients/create']">Create Client</a>
   </mat-card-header>
   <mat-card-content>
     @if(message){

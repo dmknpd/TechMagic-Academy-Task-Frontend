@@ -9,10 +9,12 @@ import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 
 import { InputComponent } from '../../input.component/input.component';
 import { TourService } from '../../../services/tour.service';
-import { FormErrorsService } from '../../../services/form-errors.service';
 import { TourInfoFormData } from '../../../types/tour';
-import { duration, Moment } from 'moment';
+import { Moment } from 'moment';
 import { Router } from '@angular/router';
+import { DiscountService } from '../../../services/api-service/discount.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { catchError, map, of } from 'rxjs';
 
 @Component({
   selector: 'app-tour',
@@ -30,7 +32,9 @@ import { Router } from '@angular/router';
 })
 export class TourComponent {
   private router = inject(Router);
+
   private tour = inject(TourService);
+  private discount = inject(DiscountService);
 
   durationList = this.tour.getItineraryDurationList() ?? [];
 
@@ -44,7 +48,16 @@ export class TourComponent {
     discount: new FormControl<number[] | null>(null),
   });
 
-  allOptions = this.tour.getDiscountOptions();
+  allDiscountOptions = toSignal(
+    this.discount.getAll().pipe(
+      map((response) => response.data ?? []),
+      catchError((err) => {
+        console.error('Error fetching discounts:', err);
+        return of([]);
+      })
+    ),
+    { initialValue: [] }
+  );
 
   assignTourInfo() {
     if (this.tourFormDate.invalid || this.tourFormPricing.invalid) {

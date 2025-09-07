@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { FormErrorsService } from '../../../services/form-errors.service';
-import { ItineraryService } from '../../../services/itinerary.service';
+import { ItineraryService } from '../../../services/api-service/itinerary.service';
 import { ItineraryFormData } from '../../../types/itinerary';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
