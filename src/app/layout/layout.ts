@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,14 @@ export class Layout {
   isTourPages = false;
 
   isLoading = this.loading.getLoading();
+
+  mode: 'side' | 'over' = window.innerWidth >= 1500 ? 'side' : 'over';
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.mode = window.innerWidth >= 1500 ? 'side' : 'over';
+    this.isOpen = window.innerWidth >= 1500;
+  }
 
   constructor() {
     this.router.events.subscribe((event) => {
