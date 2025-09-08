@@ -40,11 +40,11 @@ export class TourComponent {
 
   tourFormDate = new FormGroup({
     startDate: new FormControl<Moment | null>(null, [Validators.required]),
-    duration: new FormControl(1, [Validators.required]),
+    duration: new FormControl(1, [Validators.required, Validators.min(1), Validators.max(4)]),
   });
 
   tourFormPricing = new FormGroup({
-    quantity: new FormControl(1, [Validators.required, Validators.min(1)]),
+    quantity: new FormControl(1, [Validators.required, Validators.min(1), Validators.max(100)]),
     discount: new FormControl<number[] | null>(null),
   });
 

@@ -39,12 +39,14 @@ export class CreateDiscountComponent {
     name: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     value: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(99)]),
     description: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
+      Validators.maxLength(100),
       noWhitespaceValidator(),
     ]),
   });

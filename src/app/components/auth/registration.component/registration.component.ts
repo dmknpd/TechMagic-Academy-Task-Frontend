@@ -37,17 +37,20 @@ export class RegistrationComponent {
     firstName: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     lastName: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     confirmPassword: new FormControl('', [

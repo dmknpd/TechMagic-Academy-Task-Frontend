@@ -33,25 +33,26 @@ export class ItineraryInfoComponent {
     country: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(12),
+      Validators.maxLength(56),
       noWhitespaceValidator(),
     ]),
     hotel: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(18),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     climate: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(18),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
-    price: new FormControl({ value: 0, disabled: true }, [Validators.required]),
+    price: new FormControl({ value: 0, disabled: true }, [Validators.required, Validators.min(1)]),
     url: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
-      Validators.min(1),
+      Validators.minLength(5),
+      Validators.maxLength(255),
       noWhitespaceValidator(),
     ]),
   });

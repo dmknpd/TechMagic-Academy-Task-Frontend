@@ -15,10 +15,15 @@ export class TourInfoComponent {
 
   tourForm = new FormGroup({
     startDate: new FormControl({ value: new Date(), disabled: true }, [Validators.required]),
-    duration: new FormControl({ value: 0, disabled: true }, [Validators.required]),
+    duration: new FormControl({ value: 0, disabled: true }, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(4),
+    ]),
     quantity: new FormControl({ value: 0, disabled: true }, [
       Validators.required,
       Validators.min(1),
+      Validators.max(100),
     ]),
     discount: new FormControl({ value: 0, disabled: true }),
   });

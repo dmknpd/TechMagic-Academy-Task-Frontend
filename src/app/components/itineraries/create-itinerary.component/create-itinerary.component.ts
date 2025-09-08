@@ -40,13 +40,13 @@ export class CreateItineraryComponent {
     country: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(12),
+      Validators.maxLength(56),
       noWhitespaceValidator(),
     ]),
     climate: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(18),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
   });
@@ -55,10 +55,15 @@ export class CreateItineraryComponent {
     hotel: new FormControl('', [
       Validators.required,
       Validators.minLength(2),
-      Validators.maxLength(18),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
-    url: new FormControl('', [Validators.required, noWhitespaceValidator()]),
+    url: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(255),
+      noWhitespaceValidator(),
+    ]),
     price: new FormControl(0, [Validators.required, Validators.min(1)]),
   });
 

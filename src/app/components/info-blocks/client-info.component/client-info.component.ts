@@ -30,39 +30,44 @@ export class ClientInfoComponent {
   clientForm = new FormGroup({
     firstName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     lastName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     middleName: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     country: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(56),
       noWhitespaceValidator(),
     ]),
     city: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(85),
       noWhitespaceValidator(),
     ]),
     phone: new FormControl({ value: '-', disabled: true }, [
       Validators.required,
       Validators.pattern(/^\d{12}$/),
     ]),
-    email: new FormControl({ value: '-', disabled: true }, [Validators.required, Validators.email]),
+    email: new FormControl({ value: '-', disabled: true }, [
+      Validators.required,
+      Validators.email,
+      Validators.minLength(5),
+      Validators.maxLength(100),
+    ]),
   });
 
   isEditEnabled = false;

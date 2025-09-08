@@ -41,20 +41,20 @@ export class CreateClientComponent {
   clientFormName = new FormGroup({
     firstName: new FormControl('', [
       Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
     middleName: new FormControl('', [
       Validators.required,
-      Validators.minLength(4),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(50),
       noWhitespaceValidator(),
     ]),
   });
@@ -62,21 +62,26 @@ export class CreateClientComponent {
   clientFormAddress = new FormGroup({
     country: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(56),
       noWhitespaceValidator(),
     ]),
     city: new FormControl('', [
       Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(12),
+      Validators.minLength(2),
+      Validators.maxLength(85),
       noWhitespaceValidator(),
     ]),
   });
 
   clientFormContacts = new FormGroup({
     phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{12}$/)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.minLength(5),
+      Validators.maxLength(100),
+    ]),
   });
 
   onCreate(stepper: MatStepper) {
