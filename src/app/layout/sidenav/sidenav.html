@@ -8,26 +8,26 @@
   <nav>
     <ul class="list">
       <li class="list_item">
-        <a [routerLink]="['/new-tour']" class="link"
+        <a [routerLink]="['/new-tour']" routerLinkActive="active" class="link"
           ><div class="icon_text_block"><mat-icon>assignment_add</mat-icon>New Tour</div>
           <mat-icon>keyboard_arrow_right</mat-icon></a
         >
       </li>
       <li class="list_item">
-        <a [routerLink]="['/clients']" class="link">
+        <a [routerLink]="['/clients']" routerLinkActive="active" class="link">
           <div class="icon_text_block"><mat-icon>group</mat-icon>Client List</div>
 
           <mat-icon>keyboard_arrow_right</mat-icon>
         </a>
       </li>
       <li class="list_item">
-        <a [routerLink]="['/itineraries']" class="link">
+        <a [routerLink]="['/itineraries']" routerLinkActive="active" class="link">
           <div class="icon_text_block"><mat-icon>map</mat-icon>Itinerary List</div>
           <mat-icon>keyboard_arrow_right</mat-icon></a
         >
       </li>
       <li class="list_item">
-        <a [routerLink]="['/discounts']" class="link">
+        <a [routerLink]="['/discounts']" routerLinkActive="active" class="link">
           <div class="icon_text_block"><mat-icon>percent_discount</mat-icon>Discount List</div>
           <mat-icon>keyboard_arrow_right</mat-icon></a
         >
@@ -35,7 +35,7 @@
 
       @if(userRole === 'admin'){
       <li class="list_item">
-        <a [routerLink]="['/registration']" class="link">
+        <a [routerLink]="['/registration']" routerLinkActive="active" class="link">
           <div class="icon_text_block"><mat-icon>person_add</mat-icon>Register User</div>
           <mat-icon>keyboard_arrow_right</mat-icon></a
         >

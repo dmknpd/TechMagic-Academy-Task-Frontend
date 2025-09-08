@@ -45,6 +45,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
 .logo_link {
@@ -69,15 +70,16 @@ nav {
   border-radius: 10px;
   cursor: pointer;
   width: 100%;
-  padding: 10px;
 }
 
-.list_item:hover {
+.list_item:hover,
+.list_item:has(.link.active) {
   background-color: var(--accent-color);
   color: var(--main-color);
 }
 
-.list_item:hover .link {
+.list_item:hover .link,
+.link.active {
   color: var(--main-color);
 }
 
