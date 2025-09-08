@@ -1,3 +1,14 @@
+## 🔐 Test Accounts
+
+### 👑 Admin
+- **Login:** `admin@mail.com`  
+- **Password:** `1234`  
+
+### 👤 User
+- **Login:** `12@mail.com`  
+- **Password:** `1234`  
+
+
 # Client
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
