@@ -17,7 +17,7 @@ export abstract class ApiService<ModelData, FormData> {
   }
 
   create(data: FormData): Observable<ApiResponse<ModelData>> {
-    return this.http.post<ApiResponse<ModelData>>(`${this.baseUrl}/create`, data);
+    return this.http.post<ApiResponse<ModelData>>(`${this.baseUrl}/`, data);
   }
 
   update(id: string, data: FormData): Observable<ApiResponse<ModelData>> {

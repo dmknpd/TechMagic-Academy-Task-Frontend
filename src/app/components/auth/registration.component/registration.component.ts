@@ -73,13 +73,7 @@ export class RegistrationComponent {
 
           this.message.set(response.message!);
 
-          this.registrationForm.reset({
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-          });
+          this.registrationForm.reset();
         }
 
         setTimeout(() => {

@@ -85,7 +85,7 @@ export class TourService {
     if (!this.itinerary()) throw new Error('Itinerary is not set');
     if (!this.tourInfo()) throw new Error('Tour info is not set');
 
-    return this.http.post<ApiResponse<Tour>>(`${BASE_URL}/create`, {
+    return this.http.post<ApiResponse<Tour>>(`${BASE_URL}/`, {
       itineraryId: this.itinerary()?._id,
       clientId: this.client()?._id,
       startDate: this.tourInfo()?.startDate,

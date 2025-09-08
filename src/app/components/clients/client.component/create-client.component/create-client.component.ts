@@ -107,16 +107,18 @@ export class CreateClientComponent {
         if (response.success && response.data) {
           this.globalError.set(null);
 
-          stepper.reset();
+          if (this.router.url === '/new-tour/client') {
+            this.tour.setClient(response.data);
+            this.router.navigateByUrl('/new-tour/itinerary');
+          } else {
+            stepper.reset();
 
-          this.clientFormName.reset();
-          this.clientFormAddress.reset();
-          this.clientFormContacts.reset();
+            this.clientFormName.reset();
+            this.clientFormAddress.reset();
+            this.clientFormContacts.reset();
 
-          this.message.set(response.message!);
-
-          this.tour.setClient(response.data);
-          this.router.navigateByUrl('/new-tour/itinerary');
+            this.message.set(response.message!);
+          }
         }
       },
       error: (err) => {
