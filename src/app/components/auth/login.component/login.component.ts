@@ -22,10 +22,10 @@ import { FormErrorsService } from '../../../services/form-errors.service';
     ReactiveFormsModule,
     InputComponent,
   ],
-  templateUrl: './login.html',
-  styleUrl: './login.css',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
 })
-export class Login {
+export class LoginComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
   private formErrors = inject(FormErrorsService);

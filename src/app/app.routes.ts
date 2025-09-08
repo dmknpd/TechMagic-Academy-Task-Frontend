@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { Login } from './components/auth/login/login';
+import { LoginComponent } from './components/auth/login.component/login.component';
 import { Layout } from './layout/layout';
 import { authGuard } from './guard/auth.guard';
 import { noAuthGuard } from './guard/no-auth.guard';
@@ -12,7 +12,7 @@ import { ItineraryListComponent } from './components/itineraries/itinerary-list.
 import { TourComponent } from './components/tour/tour.component/tour.component';
 import { SummaryComponent } from './components/tour/summary.component/summary.component';
 import { ClientDetailsComponent } from './components/clients/client-details.component/client-details.component';
-import { Registration } from './components/auth/registration/registration';
+import { RegistrationComponent } from './components/auth/registration.component/registration.component';
 import { adminGuard } from './guard/admin.guard';
 import { itineraryGuard } from './guard/itinerary.guard';
 import { tourInfoGuard } from './guard/tour-info.guard';
@@ -23,7 +23,7 @@ import { DiscountListComponent } from './components/discounts/discount-list.comp
 import { CreateDiscountComponent } from './components/discounts/create-discount.component/create-discount.component';
 
 export const routes: Routes = [
-  { path: 'login', component: Login, canActivate: [noAuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] },
 
   {
     path: '',
@@ -31,7 +31,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: '', component: WelcomeComponent },
-      { path: 'registration', component: Registration, canActivate: [adminGuard] },
+      { path: 'registration', component: RegistrationComponent, canActivate: [adminGuard] },
       // new-tour
       {
         path: 'new-tour',

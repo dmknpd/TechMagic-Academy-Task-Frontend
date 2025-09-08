@@ -23,10 +23,10 @@ import { noWhitespaceValidator } from '../../../validators/no-whitespace.validat
     ReactiveFormsModule,
     InputComponent,
   ],
-  templateUrl: './registration.html',
-  styleUrl: './registration.css',
+  templateUrl: './registration.component.html',
+  styleUrl: './registration.component.css',
 })
-export class Registration {
+export class RegistrationComponent {
   private auth = inject(AuthService);
   private formErrors = inject(FormErrorsService);
 
